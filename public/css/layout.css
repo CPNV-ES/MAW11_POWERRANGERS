@@ -1,0 +1,27 @@
+:root {
+
+    --purple: #9b4dca;
+    --orange: #e0a458;
+    --green: #419d78;
+    --gray: #606c76;
+}
+
+.bg-purple{
+    background-color: var(--purple);
+}
+
+.bg-orange{
+    background-color: var(--orange);
+}
+
+.bg-green{
+    background-color: var(--green);
+}
+
+nav div, .container {
+    width: 67.5rem;
+}
+
+.pt-nav{
+    padding-top: 70px;
+}
