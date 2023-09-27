@@ -63,7 +63,7 @@ class Router
     /**
      * @return Routes
      */
-    public function getRoutes(): \model\class\Routes
+    public function getRoutes(): Routes
     {
         return $this->routes;
     }
