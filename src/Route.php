@@ -2,7 +2,6 @@
 
 namespace model\class;
 
-require_once dirname(__FILE__).'/../vendor/autoload.php';
 
 class Route
 {
