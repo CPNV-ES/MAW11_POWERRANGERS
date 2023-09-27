@@ -6,13 +6,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <link rel="icon" href='/public/images/logo.png' type="image/x-icon"/>
+    <link rel="icon" href='/images/logo.png' type="image/x-icon"/>
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel='stylesheet' href='/public/css/layout.css'>
+    <link rel='stylesheet' href='./css/layout.css'>
     <?=$style?>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -33,7 +33,7 @@
 <nav class="fixed-top bg-purple">
     <div class="m-auto">
         <a href="#">
-            <img src="/public/images/logo.png" width="50" height="50" alt="Exercise looper">
+            <img src="images/logo.png" width="50" height="50" alt="Exercise looper">
         </a>
     </div>
 </nav>
