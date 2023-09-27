@@ -2,28 +2,57 @@
 
 namespace model\class;
 
+use Exception;
+
+require_once dirname(__FILE__).'/../vendor/autoload.php';
+require_once dirname(__FILE__).'/../src/Routes.php';
+
 class Router
 {
-    private string $layout = "views/layout";
-    private array $routes = [];
+    // Attributes
+    private Routes $routes;
     private string $handler;
     private int $status_code;
 
-
-    public function add(string $route, string $method, string $handler, int $status_code = 200) : void
+    /**
+     * Router constructor.
+     */
+    public function __construct()
     {
-        $this->routes[] = [
-            "route" => $route,
-            "method" => $method,
-            "handler" => $handler
-        ];
+        $this->routes = new Routes();
     }
 
+    /**
+     * @param string $route
+     * @param string $method
+     * @param string $handler
+     * @param int $status_code
+     * @throws Exception
+     */
+    public function add(string $route, string $method, string $handler, int $status_code = 200) : void
+    {
+        $routeRequest = $route;
+        $methodRequest = $method;
+
+        foreach ($this->routes->getRoutes() as $route) {
+            if ($route->getRoute() == $routeRequest && $route->getMethod() == $methodRequest) {
+                throw new Exception("Route already exists");
+            }
+        }
+        $route = new Route($route, $method, $handler, $status_code);
+        $this->routes->add($route);
+    }
+
+    /**
+     * @param string $routeRequest
+     * @param string $methodRequest
+     */
     public function run(string $routeRequest, string $methodRequest) : void
     {
-        foreach ($this->routes as $route) {
-            if ($route["route"] === $routeRequest && $route["method"] === $methodRequest) {
-                $this->handler = $route["handler"];
+        foreach ($this->routes->getRoutes() as $route) {
+            if ($route->getRoute() === $routeRequest && $route->getMethod() === $methodRequest) {
+                $this->handler = $route->getHandler();
+                $this->status_code = $route->getStatusCode();
             }
         }
         if (!isset($this->handler)) {
@@ -32,26 +61,27 @@ class Router
         }
     }
 
-    public function getRoutes(): array
+    /**
+     * @return Routes
+     */
+    public function getRoutes(): \model\class\Routes
     {
         return $this->routes;
     }
 
+    /**
+     * @return string
+     */
     public function getHandler(): string
     {
         return $this->handler;
     }
 
+    /**
+     * @return int
+     */
     public function getStatusCode(): int
     {
         return $this->status_code;
     }
-
-    public function getLayout(): string
-    {
-        return $this->layout;
-    }
-
-
-
 }
