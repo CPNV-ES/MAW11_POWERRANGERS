@@ -6,17 +6,26 @@ use Exception;
 
 class Handler
 {
+    // attributes
     private int $status_code;
     private string $handler;
     private string $render;
 
+    /**
+     * Handler constructor.
+     * @param string $handler
+     * @param string $status_code
+     * @throws Exception
+     */
     public function __construct(string $handler, string $status_code)
     {
         $this->status_code = $status_code;
         $this->handler = $handler;
     }
 
-
+    /**
+     * @throws Exception
+     */
     public function handle() : void
     {
 
@@ -37,11 +46,17 @@ class Handler
         }
     }
 
+    /**
+     * @return string
+     */
     public function getRender() : string
     {
         return $this->render;
     }
 
+    /**
+     * @return int
+     */
     public function getStatusCode() : int
     {
         return $this->status_code;
