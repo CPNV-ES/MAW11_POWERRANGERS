@@ -1,0 +1,49 @@
+<?php
+
+namespace model\class;
+
+use Exception;
+
+class Handler
+{
+    private int $status_code;
+    private string $handler;
+    private string $render;
+
+    public function __construct(string $handler, string $status_code)
+    {
+        $this->status_code = $status_code;
+        $this->handler = $handler;
+    }
+
+
+    public function handle() : void
+    {
+
+        if ($this->status_code == 200 && file_exists(dirname(__FILE__) . '/' . $this->handler . '.php'))
+        {
+            $this->render = require dirname(__FILE__) . '/' . $this->handler . '.php';
+        }
+
+        elseif (file_exists(dirname(__FILE__) . '/' . $this->handler . "/" . $this->status_code . ".php"))
+        {
+            $this->render = require dirname(__FILE__) . '/' . $this->handler . "/" . $this->status_code . ".php";
+        }
+
+        else
+        {
+            $this->status_code = 500;
+            $this->render = include dirname(__FILE__) . $this->handler . "/" . $this->status_code . ".php";
+        }
+    }
+
+    public function getRender() : string
+    {
+        return $this->render;
+    }
+
+    public function getStatusCode() : int
+    {
+        return $this->status_code;
+    }
+}
