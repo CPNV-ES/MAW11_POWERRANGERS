@@ -38,7 +38,7 @@ class Router
                 throw new Exception("Route already exists");
             }
         }
-        $route = new Route($route, $method, $handler, $status_code);
+        $route = new Route($routeRequest, $method, $handler, $status_code);
         $this->routes->add($route);
     }
 

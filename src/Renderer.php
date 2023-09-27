@@ -31,6 +31,6 @@ class Renderer
     {
         //TODO : Add header on the response.
         http_response_code($this->httpResponse);
-        echo($this->render);
+        require $this->render;
     }
 }

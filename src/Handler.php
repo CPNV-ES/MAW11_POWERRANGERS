@@ -31,18 +31,18 @@ class Handler
 
         if ($this->status_code == 200 && file_exists(dirname(__FILE__) . '/' . $this->handler . '.php'))
         {
-            $this->render = require dirname(__FILE__) . '/' . $this->handler . '.php';
+            $this->render = dirname(__FILE__) . '/' . $this->handler . '.php';
         }
 
         elseif (file_exists(dirname(__FILE__) . '/' . $this->handler . "/" . $this->status_code . ".php"))
         {
-            $this->render = require dirname(__FILE__) . '/' . $this->handler . "/" . $this->status_code . ".php";
+            $this->render = dirname(__FILE__) . '/' . $this->handler . "/" . $this->status_code . ".php";
         }
 
         else
         {
             $this->status_code = 500;
-            $this->render = include dirname(__FILE__) . $this->handler . "/" . $this->status_code . ".php";
+            $this->render = dirname(__FILE__) . $this->handler . "/" . $this->status_code . ".php";
         }
     }
 
