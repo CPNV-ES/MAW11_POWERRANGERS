@@ -7,7 +7,7 @@ class Router
     private string $layout = "views/layout";
     private array $routes = [];
     private string $handler;
-    private string $status_code;
+    private int $status_code;
 
 
     public function add(string $route, string $method, string $handler, string $status_code = "200") : void
@@ -27,7 +27,7 @@ class Router
             }
         }
         if (!isset($this->handler)) {
-            $this->handler = "views/error";
+            $this->handler = "view/error";
             $this->status_code = "404";
         }
     }
@@ -42,7 +42,7 @@ class Router
         return $this->handler;
     }
 
-    public function getStatusCode(): string
+    public function getStatusCode(): int
     {
         return $this->status_code;
     }
