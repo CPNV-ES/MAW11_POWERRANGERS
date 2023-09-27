@@ -10,8 +10,6 @@ ob_start();
 ?>
 
 <?php array_map('card', $exercises)?>
-<?php echo dirname(__FILE__)?>
-
 
 <?php
 $content = ob_get_clean();
