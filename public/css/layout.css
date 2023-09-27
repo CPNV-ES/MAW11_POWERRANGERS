@@ -1,0 +1,53 @@
+:root {
+    --purple: #9b4dca;
+    --orange: #e0a458;
+    --green: #419d78;
+    --gray: #606c76;
+}
+
+body{
+    color: #606c76;
+}
+
+.bg-purple {
+    background-color: var(--purple);
+}
+
+.bg-orange {
+    background-color: var(--orange);
+}
+
+.bg-green {
+    background-color: var(--green);
+}
+
+nav div {
+    width: 67.5rem;
+}
+
+.page-container {
+    width: 68.75rem;
+}
+
+.pt-nav {
+    padding-top: 70px;
+}
+
+.btn {
+    color: white;
+    font-weight: 700;
+    font-size: 0.675rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    color: white;
+    background-color: var(--gray);
+}
+
+.btn:focus{
+    box-shadow: none;
+    background-color: var(--gray);
+}
