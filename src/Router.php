@@ -10,7 +10,7 @@ class Router
     private int $status_code;
 
 
-    public function add(string $route, string $method, string $handler, string $status_code = "200") : void
+    public function add(string $route, string $method, string $handler, int $status_code = 200) : void
     {
         $this->routes[] = [
             "route" => $route,
@@ -28,7 +28,7 @@ class Router
         }
         if (!isset($this->handler)) {
             $this->handler = "view/error";
-            $this->status_code = "404";
+            $this->status_code = 404;
         }
     }
 
