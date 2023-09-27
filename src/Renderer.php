@@ -14,7 +14,7 @@ class Renderer
      * This constructor allow to create a new renderer object
      *
      * @param string $render the content of the view
-     * @param string $httpResponse the http response (actually only the code response)
+     * @param string $httpResponse the http response (actually the code response)
      */
     public function __construct(string $render, string $httpResponse)
     {
@@ -30,7 +30,7 @@ class Renderer
     public function send(): void
     {
         //TODO : Add header on the response.
-        header(' ', false, $this->httpResponse);
+        http_response_code($this->httpResponse);
         echo($this->render);
     }
 }
