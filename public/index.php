@@ -10,9 +10,10 @@ require_once dirname(__FILE__).'/../src/Handler.php';
 require_once dirname(__FILE__).'/../src/Renderer.php';
 
 // Load environment variable
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "../..");
 $dotenv->load();
 
+// Get requested route
 $route = $_SERVER["REQUEST_URI"];
 if (!empty($_SERVER["QUERY_STRING"])) {
     $route = substr($route, 0, strlen($_SERVER["REQUEST_URI"])-strlen($_SERVER["QUERY_STRING"])-1);
