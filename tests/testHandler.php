@@ -47,7 +47,7 @@ class TestHandler extends TestCase
      */
     public function testGetRenderErrorCodesSuccess()
     {
-        $handler = new Handler("view/error", 404);
+        $handler = new Handler("view/errors", 404);
         $handler->handle();
         $this->assertEquals(404, $handler->getStatusCode());
     }

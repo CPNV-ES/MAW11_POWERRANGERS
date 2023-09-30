@@ -75,9 +75,9 @@ class TestRouter extends TestCase
     {
         $router = new Router();
         $router->add("/", "GET", "views/exercise");
-        $router->run("/error", "GET");
+        $router->run("/errors", "GET");
 
-        $this->assertEquals("view/error", $router->getHandler());
+        $this->assertEquals("view/errors", $router->getHandler());
         $this->assertEquals("404", $router->getStatusCode());
     }
 
