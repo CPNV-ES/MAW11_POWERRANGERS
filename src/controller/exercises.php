@@ -1,6 +1,7 @@
 <?php
 
-function exercises() {
+require_once "src/model/exercises.php";
 
-    require_once
-}
+$exercises = getAllExercises();
+
+require_once "src/view/pages/exercises.php";

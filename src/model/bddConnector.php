@@ -1,19 +1,20 @@
 <?php
 
-function dbConnector() {
+function dbConnector(){
 
-    $connexion = new mysqli(
-        $_ENV['DATABASE_HOST'],
-        $_ENV['DATABASE_USERNAME'],
-        $_ENV['DATABASE_PASSWORD'],
-        $_ENV['DATABASE_NAME'],
-        $_ENV['DATABASE_PORT']
+
+    $dbHost = $_ENV['DATABASE_HOST'];
+    $dbName = $_ENV['DATABASE_NAME'];
+    $dbUser = $_ENV['DATABASE_USERNAME'];
+    $dbPass = $_ENV['DATABASE_PASSWORD'];
+
+    $connexion = new PDO(
+        "mysql:host=$dbHost;dbname=$dbName;charset=utf8",
+        $dbUser,
+        $dbPass
     );
 
-    if ($connexion->connect_error) {
-        die("Connection failed: " . $connexion->connect_error);
-    }
-    echo "Connected successfully";
+    return $connexion;
 
 }
 

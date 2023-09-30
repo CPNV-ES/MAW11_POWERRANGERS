@@ -55,7 +55,7 @@ class Router
             }
         }
         if (!isset($this->handler)) {
-            $this->handler = "view/error";
+            $this->handler = "view/errors";
             $this->status_code = 404;
         }
     }
