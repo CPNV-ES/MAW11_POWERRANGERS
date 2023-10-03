@@ -21,4 +21,8 @@
     letter-spacing: 0.2px;
 }
 
-
+@media (max-width: 1100px){
+    .card {
+        border-radius: 0;
+    }
+}
