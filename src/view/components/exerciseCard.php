@@ -4,10 +4,10 @@ function card($title) : void
 {
     ?>
 
-    <div class='card'>
+    <li class='card'>
         <span class='title'><?= $title ?></span>
         <button class='btn bg-purple'>take it</button>
-    </div>
+    </li>
 
     <?php
 }

@@ -11,6 +11,11 @@ body{
     color: #606c76;
 }
 
+ul,
+li {
+    all: unset;
+}
+
 .bg-purple {
     background-color: var(--purple);
 }
