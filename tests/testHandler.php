@@ -9,7 +9,7 @@ require_once dirname(__FILE__).'/../vendor/autoload.php';
 class TestHandler extends TestCase
 {
     // attributes
-    private $handler = "controller/testController";
+    private $handler = "controller/exercises";
     private $status_code = 200;
 
     /**
