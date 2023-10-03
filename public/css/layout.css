@@ -23,13 +23,13 @@ body{
     background-color: var(--green);
 }
 
-nav div {
-    width: var(--screen-lg);
-    padding: 0 10px;
-}
-
+nav div,
 .page-container {
     width: var(--screen-lg);
+}
+
+nav div{
+    padding: 0 10px;
 }
 
 .pt-nav {
@@ -56,11 +56,8 @@ nav div {
 }
 
 @media (max-width: 1100px){
+    nav div,
     .page-container {
-        width: 100%;
-    }
-
-    nav div {
         width: 100%;
     }
 }
