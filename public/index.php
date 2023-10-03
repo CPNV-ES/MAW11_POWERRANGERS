@@ -25,7 +25,7 @@ $router = new Router();
 //----------------------------------------//
 // Add your routes here
 
-$router->add("/exercises", "GET", "view/pages/exercises");
+$router->add("/exercises", "GET", "controller/exercises");
 
 //----------------------------------------//
 

@@ -1,13 +1,15 @@
 <?php
 
-require_once "src/model/bddConnector.php";
+use model\class\DbConnector;
+
+require_once __DIR__ . "/DbConnector.php";
 
 function getAllExercises() {
-    $bd = dbConnector();
+    $bd = new DbConnector($_ENV['DATABASE_HOST'], $_ENV['DATABASE_NAME'], $_ENV['DATABASE_USERNAME'], $_ENV['DATABASE_PASSWORD']);
 
-    $querry = "SELECT name FROM exercises";
-    $result = $bd->query($querry);
-
+    $resultQuery = $bd->Query("SELECT name FROM exercises;");
+    foreach ($resultQuery as $exercise) {
+        $result[] = $exercise->name;
+    }
     return $result;
-
 }
