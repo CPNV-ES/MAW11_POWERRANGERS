@@ -1,6 +1,6 @@
 <?php
 
-function card($title)
+function card($title) : void
 {
     ?>
 
