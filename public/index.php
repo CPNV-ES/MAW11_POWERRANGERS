@@ -4,10 +4,10 @@ use model\class\Router;
 use model\class\Handler;
 use model\class\Renderer;
 
-require_once dirname(__FILE__).'/../vendor/autoload.php';
-require_once dirname(__FILE__).'/../src/Router.php';
-require_once dirname(__FILE__).'/../src/Handler.php';
-require_once dirname(__FILE__).'/../src/Renderer.php';
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../src/Router.php';
+require_once __DIR__.'/../src/Handler.php';
+require_once __DIR__.'/../src/Renderer.php';
 
 // Load environment variable
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "../..");
