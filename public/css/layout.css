@@ -3,6 +3,8 @@
     --orange: #e0a458;
     --green: #419d78;
     --gray: #606c76;
+
+    --screen-lg: 1100px;
 }
 
 body{
@@ -22,12 +24,12 @@ body{
 }
 
 nav div {
-    width: 1100px;
+    width: var(--screen-lg);
     padding: 0 10px;
 }
 
 .page-container {
-    width: 68.75rem;
+    width: var(--screen-lg);
 }
 
 .pt-nav {
