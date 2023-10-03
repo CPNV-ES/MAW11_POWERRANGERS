@@ -1,0 +1,14 @@
+span,
+h1 {
+    padding: 0 10px;
+}
+
+h1 {
+    font-weight: lighter;
+    color: red;
+}
+
+span{
+    display: inline-block;
+}
+
