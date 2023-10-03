@@ -51,3 +51,9 @@ nav div {
     box-shadow: none;
     background-color: var(--gray);
 }
+
+@media (max-width: 1100px){
+    .page-container {
+        width: 100%;
+    }
+}
