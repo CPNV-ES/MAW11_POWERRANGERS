@@ -9,7 +9,7 @@ class Route
     private string $route;
     private string $method;
     private string $handler;
-    private int $status_code;
+    private int $status_code; //TODO : agree on nomenclature.
 
     /**
      * Route constructor.
