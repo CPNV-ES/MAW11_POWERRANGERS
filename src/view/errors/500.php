@@ -1,6 +1,6 @@
 <?php
 
-$title = "404";
+$title = "500";
 $style = "<link rel='stylesheet' href='./css/pages/error.css'>";
 
 ob_start();
