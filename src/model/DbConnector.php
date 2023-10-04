@@ -32,6 +32,8 @@ class DbConnector
              return $this->db->query($query)->fetchAll(PDO::FETCH_CLASS);
         }
 }
+
+//TODO : delete unused
 /*
 function dbConnector(){
 

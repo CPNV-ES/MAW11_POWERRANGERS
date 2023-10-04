@@ -17,7 +17,7 @@ class Handler
      * @param string $status_code
      * @throws Exception
      */
-    public function __construct(string $handler, string $status_code)
+    public function __construct(string $handler, string $status_code) //TODO : why is this a string on status code?
     {
         $this->status_code = $status_code;
         $this->handler = $handler;
