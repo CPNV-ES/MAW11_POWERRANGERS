@@ -1,6 +1,10 @@
 <?php
 
-function card($title) : void
+/**
+ * @param string $title
+ * @return void
+ */
+function card(string $title) : void
 {
     ?>
 
