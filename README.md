@@ -1,8 +1,19 @@
 # OOLES
 
-# Tools
+<!-- TOC -->
+* [OOLES](#ooles)
+* [Tools used](#tools-used)
+* [Documentation](#documentation)
+* [Code](#code)
+* [Lib / framework](#lib--framework)
+* [Installation](#installation)
+  * [Prerequisites](#prerequisites)
+  * [Install](#install)
+* [Tests](#tests)
+* [Contributors](#contributors)
+<!-- TOC -->
 
-# Project
+# Tools used
 
 - IceScrum
 - Notion
@@ -19,7 +30,7 @@
 
 **IDE :** PhpStorm 2023.2
 
-**Package manager :** Composer v [2.6.2](https://getcomposer.org/download/)
+**Package manager :** Composer [2.6.2](https://getcomposer.org/download/)
 
 # Lib / framework
 
