@@ -4,22 +4,29 @@ namespace model\class;
 
 use PDO;
 
+/**
+ * Class DbConnector
+ * @package model\class
+ */
 class DbConnector
 {
-
+        //attributes
         private string $dbHost;
         private string $dbName;
         private string $dbUser;
         private string $dbPass;
         private PDO $db;
 
+        //constructor
         public function __construct(string $dbHost, string $dbName, string $dbUser, string $dbPass)
         {
+            //set attributes
             $this->dbHost = $dbHost;
             $this->dbName = $dbName;
             $this->dbUser = $dbUser;
             $this->dbPass = $dbPass;
 
+            //connect to database
             $this->db = new PDO(
                 "mysql:host=$this->dbHost;dbname=$this->dbName;charset=utf8",
                 $this->dbUser,
@@ -27,29 +34,13 @@ class DbConnector
             );
         }
 
+        /**
+         * @param string $query
+         * @return false|array
+         */
         public function Query(string $query) : false|array
         {
+            //execute query to database
              return $this->db->query($query)->fetchAll(PDO::FETCH_CLASS);
         }
 }
-
-//TODO : delete unused
-/*
-function dbConnector(){
-
-
-    $dbHost = $_ENV['DATABASE_HOST'];
-    $dbName = $_ENV['DATABASE_NAME'];
-    $dbUser = $_ENV['DATABASE_USERNAME'];
-    $dbPass = $_ENV['DATABASE_PASSWORD'];
-
-    $connexion = new PDO(
-        "mysql:host=$dbHost;dbname=$dbName;charset=utf8",
-        $dbUser,
-        $dbPass
-    );
-
-    return $connexion;
-
-}*/
-

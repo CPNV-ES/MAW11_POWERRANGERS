@@ -2,7 +2,10 @@
 
 namespace model\class;
 
-
+/**
+ * Class Route
+ * @package model\class
+ */
 class Route
 {
     // Attributes
@@ -20,6 +23,7 @@ class Route
      */
     public function __construct(string $route, string $method, string $handler, int $status_code = 200)
     {
+        //set attributes
         $this->route = $route;
         $this->method = $method;
         $this->handler = $handler;

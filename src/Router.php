@@ -4,8 +4,13 @@ namespace model\class;
 
 use Exception;
 
+//load routes class for manage multiple routes
 require_once dirname(__FILE__).'/../src/Routes.php';
 
+/**
+ * Class Router
+ * @package model\class
+ */
 class Router
 {
     // Attributes
@@ -18,6 +23,7 @@ class Router
      */
     public function __construct()
     {
+        //initialize Routes object
         $this->routes = new Routes();
     }
 
@@ -30,14 +36,18 @@ class Router
      */
     public function add(string $route, string $method, string $handler, int $status_code = 200) : void
     {
+        //set other variables for comprehension
         $routeRequest = $route;
         $methodRequest = $method;
 
+        //check if route exists
         foreach ($this->routes->getRoutes() as $route) {
             if ($route->getRoute() == $routeRequest && $route->getMethod() == $methodRequest) {
+                //if route exists, throw exception
                 throw new Exception("Route already exists");
             }
         }
+        //if route doesn't exist, create new route object and add to routes array
         $route = new Route($routeRequest, $method, $handler, $status_code);
         $this->routes->add($route);
     }
@@ -48,12 +58,15 @@ class Router
      */
     public function run(string $routeRequest, string $methodRequest) : void
     {
+        //check if route exists
         foreach ($this->routes->getRoutes() as $route) {
             if ($route->getRoute() === $routeRequest && $route->getMethod() === $methodRequest) {
+                //if route exists, set handler and status code
                 $this->handler = $route->getHandler();
                 $this->status_code = $route->getStatusCode();
             }
         }
+        //if route doesn't exist, set handler to error page and status code to 404
         if (!isset($this->handler)) {
             $this->handler = "view/errors";
             $this->status_code = 404;

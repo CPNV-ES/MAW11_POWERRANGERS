@@ -18,8 +18,9 @@ class Renderer
      */
     public function __construct(string $render, string $httpResponse)
     {
-       $this->render = $render;
-       $this->httpResponse = $httpResponse;
+        //initialize attributes
+        $this->render = $render;
+        $this->httpResponse = $httpResponse;
     }
 
     /**

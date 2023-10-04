@@ -1,5 +1,6 @@
 <?php
 
+//initialize page variables
 $title = "404";
 $style = "<link rel='stylesheet' href='./css/pages/error.css'>";
 
@@ -11,4 +12,6 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
+
+//load layout
 require __DIR__ . "/../layout.php";
