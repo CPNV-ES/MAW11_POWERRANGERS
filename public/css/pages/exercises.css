@@ -13,11 +13,10 @@
     margin-bottom: 1.25rem;
 }
 
-.title {
+.card-title {
     font-family: sans-serif;
     text-align: center;
-    line-height: 1.6rem;
-    padding-bottom: 10px;
+    line-height: 23.6px;
     letter-spacing: 0.2px;
 }
 
