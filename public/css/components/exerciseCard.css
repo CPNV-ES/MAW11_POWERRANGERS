@@ -1,0 +1,20 @@
+.card-title {
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 23.6px;
+    letter-spacing: 0.2px;
+}
+
+.card {
+    background-color: #eeeeee;
+    border: none;
+    padding: 10px;
+    margin-bottom: 1.25rem;
+}
+
+
+@media (max-width: 1100px){
+    .card {
+        border-radius: 0;
+    }
+}

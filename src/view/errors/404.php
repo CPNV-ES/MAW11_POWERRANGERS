@@ -3,7 +3,7 @@
 $title = "404";
 
 //initialize page variables
-$style = "<link rel='stylesheet' href='./css/pages/error.css'>";
+$styles = array("<link rel='stylesheet' href='./css/pages/error.css'>");
 
 ob_start();
 ?>
