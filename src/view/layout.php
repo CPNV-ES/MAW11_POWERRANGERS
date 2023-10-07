@@ -49,7 +49,7 @@ if (isset($nav)) {
 
 
 <!-- PAGE CONTENT -->
-<div class="page-container pt-nav pt-standard m-auto">
+<div class="page-container <?=isset($nav) ? "" : "pt-nav"?> pt-standard m-auto">
     <?= $content ?>
 </div>
 
