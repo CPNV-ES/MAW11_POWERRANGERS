@@ -1,7 +1,7 @@
 <?php
 
 $title = "404";
-
+$navColor = "red";
 //initialize page variables
 $styles = array("<link rel='stylesheet' href='./css/pages/error.css'>");
 

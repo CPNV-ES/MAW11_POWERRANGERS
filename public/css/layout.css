@@ -28,6 +28,10 @@ li {
     background-color: var(--green);
 }
 
+.bg-red {
+    background-color: red;
+}
+
 nav div,
 .page-container {
     width: var(--screen-lg);
