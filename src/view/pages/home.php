@@ -19,12 +19,18 @@ HTML;
 
 ?>
 
-<div class="btn-list">
-    <button class="btn bg-purple">Take an exercise</button>
-    <button class="btn bg-orange">Create an exercise</button>
-    <button class="btn bg-green">Manage an exercise</button>
+    <div class="btn-list">
+        <a href="/exercises">
+            <button class="btn bg-purple">Take an exercise</button>
+        </a>
+        <a href="">
+            <button class="btn bg-orange">Create an exercise</button>
+        </a>
+        <a href="">
+            <button class="btn bg-green">Manage an exercise</button>
+        </a>
 
-</div>
+    </div>
 
 <?php
 
