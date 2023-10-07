@@ -17,6 +17,17 @@ $nav = <<<HTML
     </div>
 HTML;
 
+?>
+
+<div class="btn-list">
+    <button class="btn bg-purple">Take an exercise</button>
+    <button class="btn bg-orange">Create an exercise</button>
+    <button class="btn bg-green">Manage an exercise</button>
+
+</div>
+
+<?php
+
 $content = ob_get_clean();
 
 //load layout

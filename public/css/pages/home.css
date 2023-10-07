@@ -23,3 +23,13 @@ h1{
     text-align: center;
     margin-bottom: 1rem;
 }
+
+.btn-list {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 1.25rem;
+}
+
+.btn-list button{
+    width: 21.65rem;
+}
