@@ -9,6 +9,7 @@
 
 body{
     color: #606c76;
+    font-family: sans-serif;
 }
 
 ul,
@@ -39,6 +40,13 @@ nav div,
 
 nav div{
     padding: 0 10px;
+}
+
+nav span{
+    color: white;
+    padding-left: 15.5px;
+    vertical-align: middle;
+    letter-spacing: 0.18px;
 }
 
 .pt-nav {
