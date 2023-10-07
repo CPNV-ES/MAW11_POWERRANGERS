@@ -13,7 +13,10 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel='stylesheet' href='./css/layout.css'>
-    <?php foreach($styles as $link ){echo $link;}?>
+    <?php
+    foreach ($styles as $link) {
+        echo $link;
+    } ?>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -25,22 +28,24 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-    <title><?=$title?></title>
+    <title><?= $title ?></title>
 </head>
 
 <body>
 
-<nav class="fixed-top bg-purple">
-    <div class="m-auto">
-        <a href="#">
-            <img src="images/logo.png" width="50" height="50" alt="Exercise looper">
-        </a>
-    </div>
-</nav>
+<?php if (!isset($nav) && $nav == false) { ?>
+    <nav class="fixed-top bg-purple">
+        <div class="m-auto">
+            <a href="#">
+                <img src="images/logo.png" width="50" height="50" alt="Exercise looper">
+            </a>
+        </div>
+    </nav>';
+<?php } ?>
 
 <!-- PAGE CONTENT -->
 <div class="page-container pt-nav pt-standard m-auto">
-    <?=$content?>
+    <?= $content ?>
 </div>
 
 </body>
