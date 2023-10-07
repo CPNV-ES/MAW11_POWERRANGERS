@@ -39,7 +39,7 @@ if (isset($nav)) {
 } else { ?>
     <nav class="fixed-top bg-purple">
         <div class="m-auto">
-            <a href="#">
+            <a href="/">
                 <img src="images/logo.png" width="50" height="50" alt="Exercise looper">
             </a>
         </div>
