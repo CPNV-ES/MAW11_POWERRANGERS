@@ -81,4 +81,32 @@ class TestRouter extends TestCase
         $this->assertEquals("404", $router->getStatusCode());
     }
 
+    public function testAddWithVariable()
+    {
+        $router = new Router();
+        $router->add("/exercise/{id}", "GET", "views/exercise");
+
+        $routes = $router->getRoutes();
+
+        $routeExists = false;
+        foreach ($routes->getRoutes() as $route) {
+            if ($route->getRoute() === '/exercise/{id}' && $route->getMethod() === 'GET' && $route->getHandler() === 'views/exercise' && $route->getStatusCode() === 200) {
+                $routeExists = true;
+                break;
+            }
+        }
+        $this->assertTrue($routeExists);
+    }
+
+    public function testRunWithVariable()
+    {
+        $router = new Router();
+        $router->add("/exercise/{id}", "GET", "views/exercise");
+        $router->run("/exercise/1", "GET");
+
+        $this->assertEquals("views/exercise", $router->getHandler());
+        $variable = $router->getVariable();
+        $this->assertEquals("1", $variable["id"]);
+    }
+
 }

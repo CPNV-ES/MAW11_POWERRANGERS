@@ -17,6 +17,7 @@ class Router
     private Routes $routes;
     private string $handler;
     private int $status_code;
+    private array $variables;
 
     /**
      * Router constructor.
@@ -60,6 +61,9 @@ class Router
     {
         //check if route exists
         foreach ($this->routes->getRoutes() as $route) {
+            if (str_contains($route->getRoute(), "{" . $route->getVariable() . "}")) {
+
+            }
             if ($route->getRoute() === $routeRequest && $route->getMethod() === $methodRequest) {
                 //if route exists, set handler and status code
                 $this->handler = $route->getHandler();
@@ -96,4 +100,13 @@ class Router
     {
         return $this->status_code;
     }
+
+    /**
+     * @return array
+     */
+    public function getVariable(): array
+    {
+        return $this->variables;
+    }
+
 }
