@@ -1,22 +1,19 @@
 <?php
 
 //initialize page variables
-$title = "Exercises";
-$styles = array("<link rel='stylesheet' href='./css/components/exerciseCard.css'>");
-
-//load card component
-require_once __DIR__ . '/../components/exerciseCard.php';
+$title = "Create an exercise";
+$navTitle = "New exercise";
+$navColor = "orange";
+//$styles = array("<link rel='stylesheet' href='./css/components/exerciseCard.css'>");
 
 ob_start();
 ?>
-    <ul>
-        <?php
-
-        //make cards with data from database
-        array_map('card', $exercises);
-        ?>
-
-    </ul>
+    <h1>New Exercise</h1>
+    <form method="POST">
+        <label for="title">Title</label>
+        <input type="text" name="title">
+        <input type="submit" value="Create exercise" class="btn bg-purple">
+    </form>
 <?php
 
 $content = ob_get_clean();
