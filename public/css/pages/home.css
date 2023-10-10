@@ -29,7 +29,7 @@ h1 {
     padding-top: 1.25rem;
 }
 
-.btn-list button {
+.btn-list .btn{
     width: 21.65rem;
 }
 
@@ -38,7 +38,7 @@ h1 {
         flex-direction: column;
     }
 
-    .btn-list button {
+    .btn-list .btn {
         width: 100%;
     }
 

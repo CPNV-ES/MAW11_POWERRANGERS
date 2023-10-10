@@ -17,7 +17,7 @@ li {
     all: unset;
 }
 
-a{
+a {
     display: inline-block;
     cursor: pointer;
 }
