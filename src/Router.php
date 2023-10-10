@@ -127,37 +127,3 @@ class Router
     }
 
 }
-
-
-/*
- if (str_contains($route->getRoute(), "{") && str_contains($route->getRoute(), "}")) {
-                $routeRequestArray[] = explode("/", $routeRequest);
-                $routeRequestArray = $routeRequestArray[0];
-                foreach (explode("/", $route->getRoute()) as $key => $value) {
-                    if (str_contains($value, "{") && str_contains($value, "}") && $routeRequestArray[$key] != "") {
-                        $value = str_replace("{", "", $value);
-                        $value = str_replace("}", "", $value);
-                        $this->variables[$value] = $routeRequestArray[$key];
-                        $handlerSave = $route->getHandler();
-                        $statusSave = $route->getStatusCode();
-                    }else{
-                        if ($value !== $routeRequestArray[$key]) {
-                            $this->variables = [];
-                            $checkError = true;
-                        }
-                    }
-                }
-                if ($checkError === false) {
-                    $this->handler = $handlerSave;
-                    $this->status_code = $statusSave;
-                    break;
-                }
-
-
-            }elseif ($route->getRoute() === $routeRequest && $route->getMethod() === $methodRequest) {
-                //if route exists, set handler and status code
-                $this->handler = $route->getHandler();
-                $this->status_code = $route->getStatusCode();
-                break;
-            }
- */
