@@ -17,7 +17,7 @@ li {
     all: unset;
 }
 
-a {
+#logo {
     display: inline-block;
     cursor: pointer;
 }
