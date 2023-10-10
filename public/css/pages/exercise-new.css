@@ -1,0 +1,37 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+input[type=text] {
+    border-radius: 5px;
+    height: 2.2rem;
+    padding-left: 1rem;
+    border: 1px solid #d1d1d1;
+}
+
+input[type=text]:focus {
+    outline: none;
+    border-color: var(--purple)
+}
+
+input[type=submit] {
+    margin-top: 1.5rem;
+    width: 12rem;
+}
+
+.page-container{
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (max-width: 1100px){
+    input[type=submit] {
+        width: 100%;
+    }
+}
