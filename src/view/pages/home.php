@@ -24,7 +24,7 @@ HTML;
             Take an exercise
         </a>
 
-        <a href="/" class="btn bg-orange">
+        <a href="/exercises-new" class="btn bg-orange">
             Create an exercise
         </a>
 
