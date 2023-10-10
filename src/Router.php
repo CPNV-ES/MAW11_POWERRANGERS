@@ -59,16 +59,32 @@ class Router
      */
     public function run(string $routeRequest, string $methodRequest) : void
     {
+        $this->variables = [];
+        $routeRequestArray = explode("/", $routeRequest);
         //check if route exists
         foreach ($this->routes->getRoutes() as $route) {
-            if (str_contains($route->getRoute(), "{" . $route->getVariable() . "}")) {
-
+            //get good route
+            $checkValidRoot = true;
+            $routeArray = explode("/", $route->getRoute());
+            foreach ($routeRequestArray as $key => $value) {
+                if ($value != $routeArray[$key]) {
+                    if (str_contains($routeArray[$key], "{") && str_contains($routeArray[$key], "}") && $value != "") {
+                        $var = str_replace("{", "", $routeArray[$key]);
+                        $var = str_replace("}", "", $var);
+                        $this->variables[$var] = $value;
+                    } else {
+                        $this->variables = [];
+                        $checkValidRoot = false;
+                        break;
+                    }
+                }
             }
-            if ($route->getRoute() === $routeRequest && $route->getMethod() === $methodRequest) {
-                //if route exists, set handler and status code
+            if ($checkValidRoot) {
                 $this->handler = $route->getHandler();
                 $this->status_code = $route->getStatusCode();
+                break;
             }
+
         }
         //if route doesn't exist, set handler to error page and status code to 404
         if (!isset($this->handler)) {
@@ -76,6 +92,7 @@ class Router
             $this->status_code = 404;
         }
     }
+
 
     /**
      * @return Routes
@@ -110,3 +127,37 @@ class Router
     }
 
 }
+
+
+/*
+ if (str_contains($route->getRoute(), "{") && str_contains($route->getRoute(), "}")) {
+                $routeRequestArray[] = explode("/", $routeRequest);
+                $routeRequestArray = $routeRequestArray[0];
+                foreach (explode("/", $route->getRoute()) as $key => $value) {
+                    if (str_contains($value, "{") && str_contains($value, "}") && $routeRequestArray[$key] != "") {
+                        $value = str_replace("{", "", $value);
+                        $value = str_replace("}", "", $value);
+                        $this->variables[$value] = $routeRequestArray[$key];
+                        $handlerSave = $route->getHandler();
+                        $statusSave = $route->getStatusCode();
+                    }else{
+                        if ($value !== $routeRequestArray[$key]) {
+                            $this->variables = [];
+                            $checkError = true;
+                        }
+                    }
+                }
+                if ($checkError === false) {
+                    $this->handler = $handlerSave;
+                    $this->status_code = $statusSave;
+                    break;
+                }
+
+
+            }elseif ($route->getRoute() === $routeRequest && $route->getMethod() === $methodRequest) {
+                //if route exists, set handler and status code
+                $this->handler = $route->getHandler();
+                $this->status_code = $route->getStatusCode();
+                break;
+            }
+ */
