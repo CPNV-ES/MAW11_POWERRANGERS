@@ -33,6 +33,8 @@ try {
     // Add your routes here
     $router->add("/", "GET", "controller/home");
     $router->add("/exercises", "GET", "controller/exercises");
+    $router->add("/exercises/99/fields", "GET", "controller/exercises");
+    $router->add("/exercises/99/fields", "POST", "controller/exercises");
 
     // check if route requested exists
     $router->run($route, $method);
