@@ -15,7 +15,7 @@ ob_start();
         <?php
         if (!empty($error_name)) { ?>
             <span class="error-msg"><?= $error_name ?></span>
-        <?php
+            <?php
         } ?>
 
 
