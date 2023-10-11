@@ -35,3 +35,17 @@ function getAllExercises() : array
 
     return $result;
 }
+
+function createExercise($name) : void{
+    //initialize database connector
+    $bd = new DbConnector(
+        $_ENV['DATABASE_HOST'],
+        $_ENV['DATABASE_NAME'],
+        $_ENV['DATABASE_USERNAME'],
+        $_ENV['DATABASE_PASSWORD']
+    );
+
+    $resultQuery = $bd->Query(
+        "INSERT INTO exercises (name) values ('".$name."');"
+    );
+}

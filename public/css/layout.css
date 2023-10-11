@@ -77,6 +77,14 @@ nav span {
     background-color: var(--gray);
 }
 
+.error-msg{
+    color: red;
+}
+
+.error{
+    outline:1px solid red;
+}
+
 @media (max-width: 1100px) {
     nav div,
     .page-container {

@@ -42,7 +42,7 @@ if (isset($nav)) {
             <a id="logo" href="/">
                 <img src="images/logo.png" width="50" height="50" alt="Exercise looper">
             </a>
-            <span><?=$navTitle?></span>
+            <span><?=isset($navTitle) ? $navTitle : '' ?></span>
         </div>
     </nav>
     <?php

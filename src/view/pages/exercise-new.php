@@ -11,7 +11,14 @@ ob_start();
     <h1>New Exercise</h1>
     <form method="POST">
         <label for="title">Title</label>
-        <input type="text" name="title">
+        <input type="text" name="ex-name" maxlength="96" <?= empty($error_name) ? "" : "class='error'" ?>>
+        <?php
+        if (!empty($error_name)) { ?>
+            <span class="error-msg"><?= $error_name ?></span>
+        <?php
+        } ?>
+
+
         <input type="submit" value="Create exercise" class="btn bg-purple">
     </form>
 <?php
