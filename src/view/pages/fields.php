@@ -14,7 +14,7 @@ ob_start();
         <input type="text" id="Label" name="Label"><br>
         <label for="fieldType">Value kind</label><br>
         <select type="text" id="fieldType" name="fieldType">
-        <option></option>
+            <option></option>
         </select><br>
         <input type="submit" value="Submit">
     </form>
