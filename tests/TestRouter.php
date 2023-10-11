@@ -146,4 +146,17 @@ class TestRouter extends TestCase
         $this->assertEquals("2", $variable["test"]);
     }
 
+    public  function testRunWithVariableWrongMethodError()
+    {
+        $router = new Router();
+        $router->add("/exercise/{id}", "GET", "view/exercise");
+        $router->run("/exercise/1", "POST");
+
+        $this->assertEquals("view/errors", $router->getHandler());
+        $this->assertEquals("404", $router->getStatusCode());
+        $variable = $router->getVariable();
+        //asert no data in array
+        $this->assertTrue(empty($variable));
+    }
+
 }

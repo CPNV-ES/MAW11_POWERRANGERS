@@ -63,28 +63,29 @@ class Router
         $routeRequestArray = explode("/", $routeRequest);
         //check if route exists
         foreach ($this->routes->getRoutes() as $route) {
-            //get good route
-            $checkValidRoot = true;
-            $routeArray = explode("/", $route->getRoute());
-            foreach ($routeRequestArray as $key => $value) {
-                if ($value != $routeArray[$key]) {
-                    if (str_contains($routeArray[$key], "{") && str_contains($routeArray[$key], "}") && $value != "") {
-                        $var = str_replace("{", "", $routeArray[$key]);
-                        $var = str_replace("}", "", $var);
-                        $this->variables[$var] = $value;
-                    } else {
-                        $this->variables = [];
-                        $checkValidRoot = false;
-                        break;
+            if ($methodRequest == $route->getMethod()) {
+                //get good route
+                $checkValidRoot = true;
+                $routeArray = explode("/", $route->getRoute());
+                foreach ($routeRequestArray as $key => $value) {
+                    if ($value != $routeArray[$key]) {
+                        if (str_contains($routeArray[$key], "{") && str_contains($routeArray[$key], "}") && $value != "") {
+                            $var = str_replace("{", "", $routeArray[$key]);
+                            $var = str_replace("}", "", $var);
+                            $this->variables[$var] = $value;
+                        } else {
+                            $this->variables = [];
+                            $checkValidRoot = false;
+                            break;
+                        }
                     }
                 }
+                if ($checkValidRoot) {
+                    $this->handler = $route->getHandler();
+                    $this->status_code = $route->getStatusCode();
+                    break;
+                }
             }
-            if ($checkValidRoot) {
-                $this->handler = $route->getHandler();
-                $this->status_code = $route->getStatusCode();
-                break;
-            }
-
         }
         //if route doesn't exist, set handler to error page and status code to 404
         if (!isset($this->handler)) {
