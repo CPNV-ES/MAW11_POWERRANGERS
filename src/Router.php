@@ -17,6 +17,7 @@ class Router
     private Routes $routes;
     private string $handler;
     private int $status_code;
+    private array $variables;
 
     /**
      * Router constructor.
@@ -58,12 +59,32 @@ class Router
      */
     public function run(string $routeRequest, string $methodRequest) : void
     {
+        $this->variables = [];
+        $routeRequestArray = explode("/", $routeRequest);
         //check if route exists
         foreach ($this->routes->getRoutes() as $route) {
-            if ($route->getRoute() === $routeRequest && $route->getMethod() === $methodRequest) {
-                //if route exists, set handler and status code
-                $this->handler = $route->getHandler();
-                $this->status_code = $route->getStatusCode();
+            if ($methodRequest == $route->getMethod()) {
+                //get good route
+                $checkValidRoot = true;
+                $routeArray = explode("/", $route->getRoute());
+                foreach ($routeRequestArray as $key => $value) {
+                    if ($value != $routeArray[$key]) {
+                        if (str_contains($routeArray[$key], "{") && str_contains($routeArray[$key], "}") && $value != "") {
+                            $var = str_replace("{", "", $routeArray[$key]);
+                            $var = str_replace("}", "", $var);
+                            $this->variables[$var] = $value;
+                        } else {
+                            $this->variables = [];
+                            $checkValidRoot = false;
+                            break;
+                        }
+                    }
+                }
+                if ($checkValidRoot) {
+                    $this->handler = $route->getHandler();
+                    $this->status_code = $route->getStatusCode();
+                    break;
+                }
             }
         }
         //if route doesn't exist, set handler to error page and status code to 404
@@ -72,6 +93,7 @@ class Router
             $this->status_code = 404;
         }
     }
+
 
     /**
      * @return Routes
@@ -96,4 +118,13 @@ class Router
     {
         return $this->status_code;
     }
+
+    /**
+     * @return array
+     */
+    public function getVariable(): array
+    {
+        return $this->variables;
+    }
+
 }
