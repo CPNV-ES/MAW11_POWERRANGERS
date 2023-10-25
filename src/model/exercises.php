@@ -18,10 +18,10 @@ function getAllExercises() : array
         $_ENV['DATABASE_PASSWORD']
     );
 
+    $query = "SELECT name FROM exercises ORDER BY id DESC;";
+
     //get all exercises
-    $resultQuery = $bd->Query(
-        "SELECT name FROM exercises ORDER BY id DESC;"
-    );
+    $resultQuery = $bd->query($query);
 
     //check if result is empty
     if (!$resultQuery) {
@@ -34,4 +34,20 @@ function getAllExercises() : array
     }
 
     return $result;
+}
+
+function createExercise($name) : void
+{
+    //initialize database connector
+    $bd = new DbConnector(
+        $_ENV['DATABASE_HOST'],
+        $_ENV['DATABASE_NAME'],
+        $_ENV['DATABASE_USERNAME'],
+        $_ENV['DATABASE_PASSWORD']
+    );
+
+    $query = "INSERT INTO exercises (name) values (?)";
+    $queryParams = [$name];
+
+    $bd->query($query, $queryParams);
 }

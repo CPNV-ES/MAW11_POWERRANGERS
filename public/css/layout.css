@@ -7,13 +7,19 @@
     --screen-lg: 1100px;
 }
 
-body{
+body {
     color: #606c76;
+    font-family: sans-serif;
 }
 
 ul,
 li {
     all: unset;
+}
+
+#logo {
+    display: inline-block;
+    cursor: pointer;
 }
 
 .bg-purple {
@@ -28,13 +34,24 @@ li {
     background-color: var(--green);
 }
 
+.bg-red {
+    background-color: red;
+}
+
 nav div,
 .page-container {
     width: var(--screen-lg);
 }
 
-nav div{
+nav div {
     padding: 0 10px;
+}
+
+nav span {
+    color: white;
+    padding-left: 15.5px;
+    vertical-align: middle;
+    letter-spacing: 0.18px;
 }
 
 .pt-nav {
@@ -55,12 +72,20 @@ nav div{
     background-color: var(--gray);
 }
 
-.btn:focus{
+.btn:focus {
     box-shadow: none;
     background-color: var(--gray);
 }
 
-@media (max-width: 1100px){
+.error-msg{
+    color: red;
+}
+
+.error{
+    outline:1px solid red;
+}
+
+@media (max-width: 1100px) {
     nav div,
     .page-container {
         width: 100%;

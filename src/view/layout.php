@@ -37,11 +37,12 @@
 if (isset($nav)) {
     echo $nav;
 } else { ?>
-    <nav class="fixed-top bg-purple">
+    <nav class="fixed-top bg-<?=$navColor?>">
         <div class="m-auto">
-            <a href="/">
+            <a id="logo" href="/">
                 <img src="images/logo.png" width="50" height="50" alt="Exercise looper">
             </a>
+            <span><?=isset($navTitle) ? $navTitle : '' ?></span>
         </div>
     </nav>
     <?php

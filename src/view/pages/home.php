@@ -20,14 +20,16 @@ HTML;
 ?>
 
     <div class="btn-list">
-        <a href="/exercises">
-            <button class="btn bg-purple">Take an exercise</button>
+        <a href="/exercises" class="btn bg-purple">
+            Take an exercise
         </a>
-        <a href="">
-            <button class="btn bg-orange">Create an exercise</button>
+
+        <a href="/exercises-new" class="btn bg-orange">
+            Create an exercise
         </a>
-        <a href="">
-            <button class="btn bg-green">Manage an exercise</button>
+
+        <a href="/" class="btn bg-green">
+            Manage an exercise
         </a>
 
     </div>
