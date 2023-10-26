@@ -5,9 +5,8 @@ use model\class\DbConnector;
 // load database connector
 require_once __DIR__ . "/DbConnector.php";
 
-function getAllFieldsByExercise($exerciseID) : array
+function getFieldsByExercise($exerciseID) : array
 {
-    echo $_ENV['DATABASE_HOST'];
     //initialize database connector
     $bd = new DbConnector(
         $_ENV['DATABASE_HOST'],
@@ -18,7 +17,7 @@ function getAllFieldsByExercise($exerciseID) : array
 
     //get all exercises
     $resultQuery = $bd->Query(
-        "SELECT name FROM exercises WHERE id = ". $exerciseID ." ORDER BY id DESC;"
+        "SELECT name FROM fields WHERE exercises_id = ". $exerciseID ." ORDER BY id DESC;"
     );
 
     //check if result is empty
