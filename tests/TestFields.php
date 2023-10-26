@@ -14,7 +14,7 @@ class TestFields extends TestCase
     public function testFieldsGetNominalCase() {
         //Given
         $exercise = 1;
-        $expectedResult = "Tax Accountant";
+        $expectedResult = "Donec semper sapien a libero.";
 
         //When
         $actualResult = getAllFieldsByExercise($exercise);
@@ -32,8 +32,10 @@ class TestFields extends TestCase
 
         //When
         $actualResult = createField($fieldName,$fieldType,$fieldExercise);
+        // TODO : What kind of result should I have ?
 
         //Then
+        //select to be shure that's created ?
         $this->assertEquals($expectedResult, $actualResult);
     }
 
@@ -41,7 +43,8 @@ class TestFields extends TestCase
     public function testFieldsGetDontExist() {
         //Given
         $exercise = 1;
-        $expectedResult = "Vending Avril";
+        $expectedResult = "error dont exist";
+        //TODO : update
 
         //When
         $actualResult = getAllFieldsByExercise($exercise);
