@@ -21,6 +21,14 @@ ob_start();
         <input type="submit" value="Submit">
     </form>
 
+    <?php
+        foreach ($fields as $field){
+            echo $field->name;
+            echo $field->type;
+        }
+    ?>
+
+
 <?php
 
 $content = ob_get_clean();
