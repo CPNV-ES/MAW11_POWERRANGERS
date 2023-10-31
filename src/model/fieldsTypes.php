@@ -16,7 +16,7 @@ function getFieldsTypes() : array
 
     //get all exercises
     $resultQuery = $bd->Query(
-        "SELECT name FROM fieldtypes"
+        "SELECT * FROM fieldtypes"
     );
 
     //check if result is empty
@@ -26,7 +26,7 @@ function getFieldsTypes() : array
 
     //refactor result for view
     foreach ($resultQuery as $exercise) {
-        $result[] = $exercise->name;
+        $result[] = $exercise;
     }
 
     return $result;

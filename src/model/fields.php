@@ -31,11 +31,21 @@ function getFieldsByExercise($exerciseID) : array
     }
 
     return $result;
-
-
 }
 
-function createField($fieldName,$fieldType,$fieldExercise)
+function createField($fieldName,$fieldTypeId,$exerciseId)
 {
+    $bd = new DbConnector(
+        $_ENV['DATABASE_HOST'],
+        $_ENV['DATABASE_NAME'],
+        $_ENV['DATABASE_USERNAME'],
+        $_ENV['DATABASE_PASSWORD']
+    );
 
+    //get all exercises
+    $resultQuery = $bd->Query(
+        "insert into fields (name, exercises_id, fieldTypes_id) values ('". $fieldName ."'," . $exerciseId .",". $fieldTypeId .");"
+    );
+    $fdhgsfkjhg = $resultQuery;
+    return $resultQuery;
 }
