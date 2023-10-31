@@ -17,7 +17,7 @@ function getFieldsByExercise($exerciseID) : array
 
     //get all exercises
     $resultQuery = $bd->Query(
-        "SELECT name FROM fields WHERE exercises_id = ". $exerciseID ." ORDER BY id DESC;"
+        "SELECT f.name AS name, ft.name AS type FROM fields f JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE f.exercises_id = " . $exerciseID . ";"
     );
 
     //check if result is empty
@@ -27,7 +27,7 @@ function getFieldsByExercise($exerciseID) : array
 
     //refactor result for view
     foreach ($resultQuery as $exercise) {
-        $result[] = $exercise->name;
+        $result[] = $exercise;
     }
 
     return $result;
