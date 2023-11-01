@@ -3,7 +3,7 @@
 //initialize page variables
 $title = "Exercises";
 $navColor = "purple";
-$styles = array("<link rel='stylesheet' href='./css/components/exerciseCard.css'>");
+$styles = array("<link rel='stylesheet' href='../../css/components/exerciseCard.css'>");
 
 //load card component
 require_once __DIR__ . '/../components/exerciseCard.php';
