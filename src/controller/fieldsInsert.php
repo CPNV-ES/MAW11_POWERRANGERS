@@ -5,8 +5,8 @@ require_once __DIR__."/../model/fieldsTypes.php";
 
 $fieldName = $_POST["name"];
 $fieldType = $_POST["fieldType"];
-$fieldExercise = $_POST["exercise"];
+$fieldExercise = $this->variables['exerciseId'];
 
 createField($fieldName,$fieldType, $fieldExercise);
 
-header( "Location: /exercises/1/fields" );
+header( "Location: /exercises/". $this->variables['exerciseId'] ."/fields" );

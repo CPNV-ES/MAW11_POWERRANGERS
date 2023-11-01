@@ -9,6 +9,7 @@ class Renderer
 {
     private string $render;
     private string $httpResponse;
+    private array $variables;
 
     /**
      * This constructor allow to create a new renderer object
@@ -16,11 +17,12 @@ class Renderer
      * @param string $render the content of the view
      * @param string $httpResponse the http response (actually the code response)
      */
-    public function __construct(string $render, string $httpResponse)
+    public function __construct(string $render, string $httpResponse, array $variables = [])
     {
         //initialize attributes
         $this->render = $render;
         $this->httpResponse = $httpResponse;
+        $this->variables = $variables;
     }
 
     /**
