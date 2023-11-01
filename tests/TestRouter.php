@@ -32,7 +32,7 @@ class TestRouter extends TestCase
         $routes = $router->getRoutes();
 
         $routeExists = false;
-        foreach ($routes->getRoutes() as $route) {
+        foreach ($routes as $route) {
             if ($route->getRoute() === '/' && $route->getMethod() === 'GET' && $route->getHandler() === 'view/exercise' && $route->getStatusCode() === 200) {
                 $routeExists = true;
                 break;
@@ -89,7 +89,7 @@ class TestRouter extends TestCase
         $routes = $router->getRoutes();
 
         $routeExists = false;
-        foreach ($routes->getRoutes() as $route) {
+        foreach ($routes as $route) {
             if ($route->getRoute() === '/exercise/{id}' && $route->getMethod() === 'GET' && $route->getHandler() === 'view/exercise' && $route->getStatusCode() === 200) {
                 $routeExists = true;
                 break;
@@ -105,7 +105,7 @@ class TestRouter extends TestCase
         $router->run("/exercise/1", "GET");
 
         $this->assertEquals("view/exercise", $router->getHandler());
-        $variable = $router->getVariable();
+        $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
     }
 
@@ -117,10 +117,13 @@ class TestRouter extends TestCase
         $router->run("/exercise/1/test", "GET");
 
         $this->assertEquals("view/exerciseWithTest", $router->getHandler());
-        $variable = $router->getVariable();
+        $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testRunWithVariableError()
     {
         $router = new Router();
@@ -129,7 +132,7 @@ class TestRouter extends TestCase
 
         $this->assertEquals("view/errors", $router->getHandler());
         $this->assertEquals("404", $router->getStatusCode());
-        $variable = $router->getVariable();
+        $variable = $router->getVariables();
         //asert no data in array
         $this->assertTrue(empty($variable));
     }
@@ -141,7 +144,7 @@ class TestRouter extends TestCase
         $router->run("/exercise/1/2", "GET");
 
         $this->assertEquals("view/exercise", $router->getHandler());
-        $variable = $router->getVariable();
+        $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
         $this->assertEquals("2", $variable["test"]);
     }
@@ -154,7 +157,7 @@ class TestRouter extends TestCase
 
         $this->assertEquals("view/errors", $router->getHandler());
         $this->assertEquals("404", $router->getStatusCode());
-        $variable = $router->getVariable();
+        $variable = $router->getVariables();
         //asert no data in array
         $this->assertTrue(empty($variable));
     }

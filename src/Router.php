@@ -5,7 +5,7 @@ namespace model\class;
 use Exception;
 
 //load routes class for manage multiple routes
-require_once dirname(__FILE__).'/../src/Routes.php';
+require_once dirname(__FILE__).'/Route.php';
 
 /**
  * Class Router
@@ -14,7 +14,7 @@ require_once dirname(__FILE__).'/../src/Routes.php';
 class Router
 {
     // Attributes
-    private Routes $routes;
+    private array $routes;
     private string $handler;
     private int $status_code;
     private array $variables;
@@ -24,8 +24,9 @@ class Router
      */
     public function __construct()
     {
-        //initialize Routes object
-        $this->routes = new Routes();
+        //initialize attributes
+        $this->routes = [];
+        $this->variables = [];
     }
 
     /**
@@ -42,7 +43,7 @@ class Router
         $methodRequest = $method;
 
         //check if route exists
-        foreach ($this->routes->getRoutes() as $route) {
+        foreach ($this->routes as $route) {
             if ($route->getRoute() == $routeRequest && $route->getMethod() == $methodRequest) {
                 //if route exists, throw exception
                 throw new Exception("Route already exists");
@@ -50,7 +51,7 @@ class Router
         }
         //if route doesn't exist, create new route object and add to routes array
         $route = new Route($routeRequest, $method, $handler, $status_code);
-        $this->routes->add($route);
+        $this->routes[] = $route;
     }
 
     /**
@@ -62,12 +63,16 @@ class Router
         $this->variables = [];
         $routeRequestArray = explode("/", $routeRequest);
         //check if route exists
-        foreach ($this->routes->getRoutes() as $route) {
+        foreach ($this->routes as $route) {
             if ($methodRequest == $route->getMethod()) {
                 //get good route
                 $checkValidRoot = true;
                 $routeArray = explode("/", $route->getRoute());
                 foreach ($routeRequestArray as $key => $value) {
+                    if (!isset($routeArray[$key])) {
+                        $checkValidRoot = false;
+                        break;
+                    }
                     if ($value != $routeArray[$key]) {
                         if (str_contains($routeArray[$key], "{") && str_contains($routeArray[$key], "}") && $value != "") {
                             $var = str_replace("{", "", $routeArray[$key]);
@@ -96,9 +101,9 @@ class Router
 
 
     /**
-     * @return Routes
+     * @return array
      */
-    public function getRoutes(): Routes
+    public function getRoutes(): array
     {
         return $this->routes;
     }
