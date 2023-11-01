@@ -3,7 +3,7 @@
 namespace model\class;
 
 //load route class for manage single route
-require_once dirname(__FILE__).'/../src/Route.php';
+require_once __DIR__.'/../src/Route.php';
 
 /**
  * Class Routes

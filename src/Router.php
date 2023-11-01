@@ -5,7 +5,7 @@ namespace model\class;
 use Exception;
 
 //load routes class for manage multiple routes
-require_once dirname(__FILE__).'/../src/Routes.php';
+require_once __DIR__.'/../src/Routes.php';
 
 /**
  * Class Router
