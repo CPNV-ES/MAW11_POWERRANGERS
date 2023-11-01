@@ -33,8 +33,8 @@ try {
     // Add your routes here
     $router->add("/", "GET", "view/pages/home");
     $router->add("/exercises", "GET", "controller/exercises");
-    $router->add("/exercises-new", "GET", "view/pages/exercise-new");
-    $router->add("/exercises-new", "POST", "controller/exercise-new");
+    $router->add("/exercises/new", "GET", "view/pages/exercise-new");
+    $router->add("/exercises/new", "POST", "controller/exercise-new");
     // TODO : update to have dynamic values
     $router->add("/exercises/{exerciseId}/fields", "GET", "controller/fields");
     $router->add("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
