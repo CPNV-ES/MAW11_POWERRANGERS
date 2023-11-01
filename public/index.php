@@ -36,8 +36,8 @@ try {
     $router->add("/exercises-new", "GET", "view/pages/exercise-new");
     $router->add("/exercises-new", "POST", "controller/exercise-new");
     // TODO : update to have dynamic values
-    $router->add("/exercises/1/fields", "GET", "controller/fields");
-    $router->add("/exercises/1/fields", "POST", "controller/fieldsInsert");
+    $router->add("/exercises/{exerciseId}/fields", "GET", "controller/fields");
+    $router->add("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
 
     // check if route requested exists
     $router->run($route, $method);
@@ -45,6 +45,7 @@ try {
     //set handler and status code
     $handle = $router->getHandler();
     $status_code = $router->getStatusCode();
+    $variables = $router->getVariables();
 
     //----------------------------------------//
     // Handler
@@ -61,7 +62,7 @@ try {
     //----------------------------------------//
     // Renderer
     // Initialize renderer
-    $renderer = new Renderer($handle, $status_code);
+    $renderer = new Renderer($handle, $status_code, $variables);
 
     //render page with handler and return page and status code to client
     $renderer->send();
@@ -87,7 +88,7 @@ try {
     //----------------------------------------//
     // Renderer
     // Initialize renderer
-    $renderer = new Renderer($render, $status_code);
+    $renderer = new Renderer($render, $status_code, $variables);
 
     //render page with handler and return page and status code to client
     $renderer->send();

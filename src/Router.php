@@ -122,7 +122,7 @@ class Router
     /**
      * @return array
      */
-    public function getVariable(): array
+    public function getVariables(): array
     {
         return $this->variables;
     }
