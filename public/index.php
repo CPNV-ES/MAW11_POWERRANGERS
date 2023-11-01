@@ -35,6 +35,9 @@ try {
     $router->add("/exercises", "GET", "controller/exercises");
     $router->add("/exercises-new", "GET", "view/pages/exercise-new");
     $router->add("/exercises-new", "POST", "controller/exercise-new");
+    // TODO : update to have dynamic values
+    $router->add("/exercises/1/fields", "GET", "controller/fields");
+    $router->add("/exercises/1/fields", "POST", "controller/fieldsInsert");
 
     // check if route requested exists
     $router->run($route, $method);
