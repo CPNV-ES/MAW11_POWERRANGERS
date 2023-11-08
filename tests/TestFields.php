@@ -97,7 +97,7 @@ class TestFields extends TestCase
     }
 
     /**
-     * Test Creation field if fieldtype is empthy
+     * Test Creation field if fieldtype is empty
      * @return void
      */
     public function testFieldCreateHandleEmptyValue() {
