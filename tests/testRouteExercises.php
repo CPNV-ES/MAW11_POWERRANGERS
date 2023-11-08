@@ -1,18 +1,32 @@
 <?php
 
+use model\class\HandlerResponse;
+use model\class\Request;
+use model\class\Route;
 use model\class\Router;
 use model\class\Handler;
+use model\class\RouterResponse;
 use PHPUnit\Framework\TestCase;
 
 require_once dirname(__FILE__).'/../src/Router.php';
 require_once dirname(__FILE__).'/../src/Handler.php';
 require_once dirname(__FILE__).'/../vendor/autoload.php';
+require_once dirname(__FILE__).'/../src/Route.php';
+require_once dirname(__FILE__).'/../src/Request.php';
+require_once dirname(__FILE__).'/../src/RouterResponse.php';
+require_once dirname(__FILE__).'/../src/HandlerResponse.php';
 
 class TestRouteExercises extends TestCase
 {
     //attributes
     private string $route = "/exercises";
     private string $method = "GET";
+
+    private Request $request;
+
+    protected function setUp(): void
+    {
+        $this->request = new Request($this->route, $this->method);    }
 
     /**
      * @throws Exception
@@ -22,34 +36,25 @@ class TestRouteExercises extends TestCase
         //----------------------------------------//
         //Router
         // Initialize router
-        $router = new Router();
 
         // Add your routes here
-        $router->add("/", "GET", "controller/home");
-        $router->add("/exercises", "GET", "controller/exercises");
+        $routes[] = new Route("/", "GET", "view/pages/home");
+        $routes[] = new Route("/exercises", "GET", "controller/exercises");
 
-        // check if route requested exists
-        $router->run($this->route, $this->method);
+        $router = new Router($this->request, $routes);
 
-        //set handler and status code
-        $handle = $router->getHandler();
-        $status_code = $router->getStatusCode();
+        $routerResponse = new RouterResponse($router->getHandler(), $router->getStatusCode(), $router->getVariables());
 
         //----------------------------------------//
         // Handler
         // Initialize handler
-        $handler = new Handler($handle, $status_code);
+        $handler = new Handler($routerResponse);
 
-        //check if handler exists
-        $handler->handle();
-
-        //set handle and status code
-        $handle = $handler->getRender();
-        $status_code = $handler->getStatusCode();
+        $handlerResponse = new HandlerResponse($handler->getRender(), $handler->getStatusCode());
 
         //----------------------------------------//
-        $this->assertStringContainsString("controller/exercises.php", $handle);
-        $this->assertEquals(200, $status_code);
+        $this->assertStringContainsString("controller/exercises.php", $handlerResponse->getPath());
+        $this->assertEquals(200, $handlerResponse->getStatusCode());
     }
 
 }

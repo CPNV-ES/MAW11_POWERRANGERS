@@ -1,23 +1,32 @@
 <?php
 
+use model\class\HandlerResponse;
 use model\class\Renderer;
 use PHPUnit\Framework\TestCase;
 
 require_once dirname(__FILE__).'/../src/Renderer.php';
 require_once dirname(__FILE__).'/../vendor/autoload.php';
+require_once dirname(__FILE__).'/../src/HandlerResponse.php';
 
 class TestRenderer extends TestCase
 {
     // attributes
-    private $render = "view/pages/exercises.php";
+    private $render = "view/pages/home.php";
     private $httpResponse = 200;
+
+    private HandlerResponse $handlerResponse;
+
+    protected function setUp(): void
+    {
+        $this->handlerResponse = new HandlerResponse($this->render, $this->httpResponse);
+    }
 
     /**
      * @throws Exception
      */
     public function testInitSuccess()
     {
-        $renderer = new Renderer($this->render, $this->httpResponse);
+        $renderer = new Renderer($this->handlerResponse);
         $this->assertInstanceOf(Renderer::class, $renderer);
     }
 }
