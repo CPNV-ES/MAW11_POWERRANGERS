@@ -46,4 +46,12 @@ class DbConnector
         $sth->execute($params);
         return $sth->fetchAll(PDO::FETCH_CLASS);
     }
+
+    public function queryReturnId(string $template, array $params = []): int
+    {
+        $sth = $this->db->prepare($template);
+        $sth->execute($params);
+        return $this->db->lastInsertId();
+    }
 }
+
