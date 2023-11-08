@@ -15,6 +15,6 @@ if (empty($name)) {
     require_once __DIR__ . "/../view/pages/exercise-new.php";
 } else {
     createExercise($name);
-    require_once __DIR__ . "/../view/pages/home.php";
+    header("Location: /");
 }
 

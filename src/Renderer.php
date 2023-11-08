@@ -17,12 +17,13 @@ class Renderer
      * @param string $render the content of the view
      * @param string $httpResponse the http response (actually the code response)
      */
-    public function __construct(string $render, string $httpResponse, array $variables = [])
+    public function __construct(HandlerResponse $handlerResponse, array $variables = [])
     {
         //initialize attributes
-        $this->render = $render;
-        $this->httpResponse = $httpResponse;
+        $this->render = $handlerResponse->getPath();
+        $this->httpResponse = $handlerResponse->getStatusCode();
         $this->variables = $variables;
+        $this->send();
     }
 
     /**
@@ -30,7 +31,7 @@ class Renderer
      *
      * @return void
      */
-    public function send(): void
+    private function send(): void
     {
         //TODO : Add header on the response.
         http_response_code($this->httpResponse);

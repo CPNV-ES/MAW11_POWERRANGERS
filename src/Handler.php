@@ -12,44 +12,45 @@ class Handler
 {
     // attributes
     private int $status_code;
-    private string $handler;
+    private string $path;
     private string $render;
 
     /**
      * Handler constructor.
-     * @param string $handler
-     * @param string $status_code
+     *
+     * @param RouterResponse $routerResponse
      * @throws Exception
      */
-    public function __construct(string $handler, string $status_code) //TODO : why is this a string on status code?
+    public function __construct(RouterResponse $routerResponse) //TODO : why is this a string on status code?
     {
         //set attributes
-        $this->status_code = $status_code;
-        $this->handler = $handler;
+        $this->status_code = $routerResponse->getStatusCode();
+        $this->path = $routerResponse->getPath();
+        $this->handle();
     }
 
     /**
      * @throws Exception
      */
-    public function handle() : void
+    private function handle() : void
     {
         //check if handler exists and set render
-        if ($this->status_code == 200 && file_exists(__DIR__ . '/' . $this->handler . '.php'))
+        if ($this->status_code == 200 && file_exists(__DIR__ . '/' . $this->path . '.php'))
         {
-            $this->render = __DIR__ . '/' . $this->handler . '.php';
+            $this->render = __DIR__ . '/' . $this->path . '.php';
         }
 
         //check if error handler exists and set render
-        elseif (file_exists(__DIR__ . '/' . $this->handler . "/" . $this->status_code . ".php"))
+        elseif (file_exists(__DIR__ . '/' . $this->path . "/" . $this->status_code . ".php"))
         {
-            $this->render = __DIR__ . '/' . $this->handler . "/" . $this->status_code . ".php";
+            $this->render = __DIR__ . '/' . $this->path . "/" . $this->status_code . ".php";
         }
 
         //if handler doesn't exist, set render to error 500
         else
         {
             $this->status_code = 500;
-            $this->render = __DIR__ . $this->handler . "/" . $this->status_code . ".php";
+            $this->render = __DIR__ . $this->path . "/" . $this->status_code . ".php";
         }
     }
 

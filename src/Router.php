@@ -22,12 +22,22 @@ class Router
 
     /**
      * Router constructor.
+     *
+     * @throws Exception
      */
-    public function __construct()
+    public function __construct(Request $request, array $routes)
     {
         //initialize attributes
         $this->routes = [];
         $this->variables = [];
+        $routeRequest = $request->getPath();
+        $methodRequest = $request->getStatusCode();
+        //set routes
+        foreach ($routes as $route) {
+            $this->add($route->getRoute(), $route->getMethod(), $route->getHandler(), $route->getStatusCode());
+        }
+
+        $this->run($routeRequest, $methodRequest);
     }
 
     /**
@@ -59,7 +69,7 @@ class Router
      * @param string $routeRequest
      * @param string $methodRequest
      */
-    public function run(string $routeRequest, string $methodRequest) : void
+    private function run(string $routeRequest, string $methodRequest) : void
     {
         $this->variables = [];
         $routeRequestArray = explode("/", $routeRequest);

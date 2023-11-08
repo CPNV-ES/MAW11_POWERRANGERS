@@ -1,14 +1,22 @@
 <?php
 
+use model\class\HandlerResponse;
+use model\class\Route;
 use model\class\Router;
 use model\class\Handler;
 use model\class\Renderer;
+use model\class\Request;
+use model\class\RouterResponse;
 
 //load all dependencies
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/../src/Router.php';
 require_once __DIR__.'/../src/Handler.php';
 require_once __DIR__.'/../src/Renderer.php';
+require_once __DIR__.'/../src/Request.php';
+require_once __DIR__.'/../src/Route.php';
+require_once __DIR__.'/../src/RouterResponse.php';
+require_once __DIR__.'/../src/HandlerResponse.php';
 
 //check if an exception is throw and catch it to display error 500 page
 try {
@@ -22,50 +30,37 @@ try {
         $route = substr($route, 0, strlen($_SERVER["REQUEST_URI"]) - strlen($_SERVER["QUERY_STRING"]) - 1);
     }
     $method = $_SERVER["REQUEST_METHOD"];
-
+    $request = new Request($route, $method);
 
 
     //----------------------------------------//
     //Router
     // Initialize router
-    $router = new Router();
 
     // Add your routes here
-    $router->add("/", "GET", "view/pages/home");
-    $router->add("/exercises", "GET", "controller/exercises");
-    $router->add("/exercises/new", "GET", "view/pages/exercise-new");
-    $router->add("/exercises/new", "POST", "controller/exercise-new");
-    // TODO : update to have dynamic values
-    $router->add("/exercises/{exerciseId}/fields", "GET", "controller/fields");
-    $router->add("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+    $routes[] = new Route("/", "GET", "view/pages/home");
+    $routes[] = new Route("/exercises", "GET", "controller/exercises");
+    $routes[] = new Route("/exercises/new", "GET", "view/pages/exercise-new");
+    $routes[] = new Route("/exercises/new", "POST", "controller/exercise-new");
+    $routes[] = new Route("/exercises/{exerciseId}/fields", "GET", "controller/fields");
+    $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
 
-    // check if route requested exists
-    $router->run($route, $method);
+    $router = new Router($request, $routes);
 
-    //set handler and status code
-    $handle = $router->getHandler();
-    $status_code = $router->getStatusCode();
-    $variables = $router->getVariables();
+    $routerResponse = new RouterResponse($router->getHandler(), $router->getStatusCode(), $router->getVariables());
 
     //----------------------------------------//
     // Handler
     // Initialize handler
-    $handler = new Handler($handle, $status_code);
+    $handler = new Handler($routerResponse);
 
-    //check if handler exists
-    $handler->handle();
-
-    //set handle and status code
-    $handle = $handler->getRender();
-    $status_code = $handler->getStatusCode();
+    $handlerResponse = new HandlerResponse($handler->getRender(), $handler->getStatusCode());
 
     //----------------------------------------//
     // Renderer
     // Initialize renderer
-    $renderer = new Renderer($handle, $status_code, $variables);
+    $renderer = new Renderer($handlerResponse, $routerResponse->getVariables());
 
-    //render page with handler and return page and status code to client
-    $renderer->send();
     //----------------------------------------//
 
 } catch (Exception) {
@@ -76,21 +71,14 @@ try {
     //----------------------------------------//
     // handler
     // Initialize handler
-    $handler = new Handler($handle, $status_code);
+    $handler = new Handler($routerResponse);
 
-    //check if handler exists
-    $handler->handle();
-
-    //set handler and status code
-    $render = $handler->getRender();
-    $status_code = $handler->getStatusCode();
+    $handlerResponse = new HandlerResponse($handler->getRender(), $handler->getStatusCode());
 
     //----------------------------------------//
     // Renderer
     // Initialize renderer
-    $renderer = new Renderer($render, $status_code, $variables);
+    $renderer = new Renderer($handlerResponse, $routerResponse->getVariables());
 
-    //render page with handler and return page and status code to client
-    $renderer->send();
     //----------------------------------------//
 }
