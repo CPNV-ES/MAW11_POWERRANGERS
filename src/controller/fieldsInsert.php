@@ -7,6 +7,15 @@ $fieldName = $_POST["name"];
 $fieldType = $_POST["fieldType"];
 $fieldExercise = $this->variables['exerciseId'];
 
-createField($fieldName,$fieldType, $fieldExercise);
-
-header( "Location: /exercises/". $this->variables['exerciseId'] ."/fields" );
+if (strlen($fieldName) > 512) {
+    $error_name = "The label of your field can't exceed 512 characters";
+    // reload view for create a new exercise
+    require_once __DIR__ . "/fields.php";
+} elseif ($fieldType == null) {
+    $error_select = "The value kind cannot be empty";
+    // reload view for create a new exercise
+    require_once __DIR__ . "/fields.php";
+}else {
+    createField($fieldName,$fieldType, $fieldExercise);
+    header( "Location: /exercises/". $this->variables['exerciseId'] ."/fields" );
+}
