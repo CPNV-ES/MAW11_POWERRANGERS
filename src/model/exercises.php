@@ -8,7 +8,7 @@ require_once __DIR__ . "/DbConnector.php";
 /**
  * @return array
  */
-function getAllExercises() : array
+function getAllExercises(): array
 {
     //initialize database connector
     $bd = new DbConnector(
@@ -36,7 +36,7 @@ function getAllExercises() : array
     return $result;
 }
 
-function createExercise($name) : void
+function createExercise($name): int
 {
     //initialize database connector
     $bd = new DbConnector(
@@ -49,5 +49,5 @@ function createExercise($name) : void
     $query = "INSERT INTO exercises (name) values (?)";
     $queryParams = [$name];
 
-    $bd->query($query, $queryParams);
+    return $bd->queryReturnId($query, $queryParams);
 }

@@ -47,7 +47,7 @@ class Router
      * @param int $status_code
      * @throws Exception
      */
-    public function add(string $route, string $method, string $handler, int $status_code = 200) : void
+    private function add(string $route, string $method, string $handler, int $status_code = 200) : void
     {
         //set other variables for comprehension
         $routeRequest = $route;
