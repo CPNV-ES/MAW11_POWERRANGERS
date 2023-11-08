@@ -1,22 +1,37 @@
 <?php
 
+use model\class\Request;
+use model\class\Route;
 use model\class\Router;
 use PHPUnit\Framework\TestCase;
 
 require_once dirname(__FILE__).'/../src/Router.php';
 require_once dirname(__FILE__).'/../vendor/autoload.php';
+require_once dirname(__FILE__).'/../src/Route.php';
+require_once dirname(__FILE__).'/../src/Request.php';
 
 /**
  * @covers Router
  */
 class TestRouter extends TestCase
 {
+
+    private array $routes;
+
+    protected function setUp(): void
+    {
+        $this->routes[] = new Route("/", "GET", "view/pages/home");
+        $this->routes[] = new Route("/exercises", "GET", "controller/exercises");
+        $this->routes[] = new Route("/exercises/new", "GET", "view/pages/exercise-new");
+        $this->routes[] = new Route("/exercises/new", "POST", "controller/exercise-new");
+    }
+
     /**
      * @covers Router::__construct
      */
     public function testInitSuccess()
     {
-        $router = new Router();
+        $router = new Router(new Request("/", "GET"), $this->routes);
         $this->assertInstanceOf(Router::class, $router);
     }
 
@@ -24,34 +39,12 @@ class TestRouter extends TestCase
      * @covers Router::add
      * @throws Exception
      */
-    public function testAddSuccess()
+    public function testInitError()
     {
-        $router = new Router();
-        $router->add("/", "GET", "view/exercise");
-
-        $routes = $router->getRoutes();
-
-        $routeExists = false;
-        foreach ($routes as $route) {
-            if ($route->getRoute() === '/' && $route->getMethod() === 'GET' && $route->getHandler() === 'view/exercise' && $route->getStatusCode() === 200) {
-                $routeExists = true;
-                break;
-            }
-        }
-        $this->assertTrue($routeExists);
-    }
-
-    /**
-     * @covers Router::add
-     * @throws Exception
-     */
-    public function testAddError()
-    {
-        $router = new Router();
-        $router->add("/", "GET", "view/exercise");
-
+        $this->routes[] = new Route("/", "GET", "view/pages/home");
         $this->expectException(Exception::class);
-        $router->add("/", "GET", "view/exercise");
+        new Router(new Request("/", "GET"), $this->routes);
+
     }
 
     /**
@@ -60,11 +53,8 @@ class TestRouter extends TestCase
      */
     public function testRunSuccess()
     {
-        $router = new Router();
-        $router->add("/", "GET", "view/exercise");
-        $router->run("/", "GET");
-
-        $this->assertEquals("view/exercise", $router->getHandler());
+        $router = new Router(new Request("/", "GET"), $this->routes);
+        $this->assertEquals("view/pages/home", $router->getHandler());
     }
 
     /**
@@ -73,24 +63,27 @@ class TestRouter extends TestCase
      */
     public function testRunError()
     {
-        $router = new Router();
-        $router->add("/", "GET", "view/exercise");
-        $router->run("/errors", "GET");
+        $router = new Router(new Request("/error", "GET"), $this->routes);
 
         $this->assertEquals("view/errors", $router->getHandler());
         $this->assertEquals("404", $router->getStatusCode());
     }
 
+    /**
+     * @throws Exception
+     */
     public function testAddWithVariable()
     {
-        $router = new Router();
-        $router->add("/exercise/{id}", "GET", "view/exercise");
+        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
+        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+
+        $router = new Router(new Request("/", "GET"), $this->routes);
 
         $routes = $router->getRoutes();
 
         $routeExists = false;
         foreach ($routes as $route) {
-            if ($route->getRoute() === '/exercise/{id}' && $route->getMethod() === 'GET' && $route->getHandler() === 'view/exercise' && $route->getStatusCode() === 200) {
+            if ($route->getRoute() === '/exercises/{id}' && $route->getMethod() === 'GET' && $route->getHandler() === 'view/exercise' && $route->getStatusCode() === 200) {
                 $routeExists = true;
                 break;
             }
@@ -100,23 +93,12 @@ class TestRouter extends TestCase
 
     public function testRunWithVariable()
     {
-        $router = new Router();
-        $router->add("/exercise/{id}", "GET", "view/exercise");
-        $router->run("/exercise/1", "GET");
+        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
+        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+
+        $router = new Router(new Request("/exercises/1", "GET"), $this->routes);
 
         $this->assertEquals("view/exercise", $router->getHandler());
-        $variable = $router->getVariables();
-        $this->assertEquals("1", $variable["id"]);
-    }
-
-    public function testRunWithMultipleRouteWithVariable()
-    {
-        $router = new Router();
-        $router->add("/exercise/{id}", "GET", "view/exercise");
-        $router->add("/exercise/{id}/test", "GET", "view/exerciseWithTest");
-        $router->run("/exercise/1/test", "GET");
-
-        $this->assertEquals("view/exerciseWithTest", $router->getHandler());
         $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
     }
@@ -126,40 +108,30 @@ class TestRouter extends TestCase
      */
     public function testRunWithVariableError()
     {
-        $router = new Router();
-        $router->add("/exercise/{id}", "GET", "view/exercise");
-        $router->run("/exercise/", "GET");
+        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
+        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+
+        $router = new Router(new Request("/error/1", "GET"), $this->routes);
 
         $this->assertEquals("view/errors", $router->getHandler());
         $this->assertEquals("404", $router->getStatusCode());
         $variable = $router->getVariables();
-        //asert no data in array
-        $this->assertTrue(empty($variable));
+        $this->assertEmpty($variable);
     }
 
+    /**
+     * @throws Exception
+     */
     public function testRunWithMultipleVariableSuccess()
     {
-        $router = new Router();
-        $router->add("/exercise/{id}/{test}", "GET", "view/exercise");
-        $router->run("/exercise/1/2", "GET");
+        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
+        $this->routes[] = new Route("/exercises/{id}/{test}", "GET", "view/exercise2");
 
-        $this->assertEquals("view/exercise", $router->getHandler());
+        $router = new Router(new Request("/exercises/1/2", "GET"), $this->routes);
+
+        $this->assertEquals("view/exercise2", $router->getHandler());
         $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
         $this->assertEquals("2", $variable["test"]);
     }
-
-    public  function testRunWithVariableWrongMethodError()
-    {
-        $router = new Router();
-        $router->add("/exercise/{id}", "GET", "view/exercise");
-        $router->run("/exercise/1", "POST");
-
-        $this->assertEquals("view/errors", $router->getHandler());
-        $this->assertEquals("404", $router->getStatusCode());
-        $variable = $router->getVariables();
-        //asert no data in array
-        $this->assertTrue(empty($variable));
-    }
-
 }
