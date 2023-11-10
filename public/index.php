@@ -40,10 +40,10 @@ try {
     // Add your routes here
     $routes[] = new Route("/", "GET", "view/pages/home");
     $routes[] = new Route("/exercises", "GET", "controller/exercises");
-    $routes[] = new Route("/exercises/new", "GET", "view/pages/exercise-new");
-    $routes[] = new Route("/exercises/new", "POST", "controller/exercise-new");
+    $routes[] = new Route("/exercises/new", "GET", "view/pages/exerciseCreate");
+    $routes[] = new Route("/exercises/new", "POST", "controller/exerciseCreate");
     $routes[] = new Route("/exercises/{exerciseId}/fields", "GET", "controller/fields");
-    $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+    $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsCreate");
 
     $router = new Router($request, $routes);
 

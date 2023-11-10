@@ -63,7 +63,7 @@ class TestFields extends TestCase
         $_POST["name"] = $fieldName;
         $_POST["fieldType"] = $fieldType;
 
-        new Renderer(New HandlerResponse("controller/fieldsInsert.php", 200),["exerciseId" => $fieldExercise]);
+        new Renderer(New HandlerResponse("controller/fieldsCreate.php", 200),["exerciseId" => $fieldExercise]);
 
         //Then
         $this->assertEquals(302, http_response_code() );
@@ -89,7 +89,7 @@ class TestFields extends TestCase
         $_POST["name"] = $fieldName;
         $_POST["fieldType"] = $fieldType;
 
-        new Renderer(New HandlerResponse("controller/fieldsInsert.php", 200),["exerciseId" => $fieldExercise]);
+        new Renderer(New HandlerResponse("controller/fieldsCreate.php", 200),["exerciseId" => $fieldExercise]);
 
         //Then
         $this->assertEquals(406, http_response_code() );
@@ -110,7 +110,7 @@ class TestFields extends TestCase
         $_POST["name"] = $fieldName;
         $_POST["fieldType"] = $fieldType;
 
-        new Renderer(New HandlerResponse("controller/fieldsInsert.php", 200),["exerciseId" => $fieldExercise]);
+        new Renderer(New HandlerResponse("controller/fieldsCreate.php", 200),["exerciseId" => $fieldExercise]);
 
         //Then
         $this->assertEquals(406, http_response_code() );
