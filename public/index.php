@@ -67,7 +67,7 @@ try {
     //set handler and status code for error 500
     $handle = "view/errors";
     $status_code = 500;
-
+    $routerResponse = new RouterResponse($handle, $status_code);
     //----------------------------------------//
     // handler
     // Initialize handler

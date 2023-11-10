@@ -36,21 +36,30 @@ class DbConnector
     }
 
     /**
-     * @param string $query
+     * Prepare and execute a query
+     *
+     * @param string $request requests to execute without values
+     * @param array $values values of the insertion default value []
      * @return false|array
      */
-
-    public function query(string $template, array $params = []): false|array
+    public function query(string $request, array $values = []): false|array
     {
-        $sth = $this->db->prepare($template);
-        $sth->execute($params);
+        $sth = $this->db->prepare($request);
+        $sth->execute($values);
         return $sth->fetchAll(PDO::FETCH_CLASS);
     }
 
-    public function queryReturnId(string $template, array $params = []): int
+    /**
+     * Prepare, execute a query and return the id value
+     *
+     * @param string $request requests to execute without values
+     * @param array $values values of the insertion default value []
+     * @return int value of the query return
+     */
+    public function queryReturnId(string $request, array $values = []): int
     {
-        $sth = $this->db->prepare($template);
-        $sth->execute($params);
+        $sth = $this->db->prepare($request);
+        $sth->execute($values);
         return $this->db->lastInsertId();
     }
 }
