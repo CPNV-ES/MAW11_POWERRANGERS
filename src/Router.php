@@ -73,28 +73,37 @@ class Router
     {
         $this->variables = [];
         $routeRequestArray = explode("/", $routeRequest);
+        $routeRequestArray = array_filter($routeRequestArray);
         //check if route exists
         foreach ($this->routes as $route) {
             if ($methodRequest == $route->getMethod()) {
                 //get good route
                 $checkValidRoot = true;
                 $routeArray = explode("/", $route->getRoute());
-                foreach ($routeRequestArray as $key => $value) {
-                    if (!isset($routeArray[$key])) {
-                        $checkValidRoot = false;
-                        break;
-                    }
-                    if ($value != $routeArray[$key]) {
-                        if (str_contains($routeArray[$key], "{") && str_contains($routeArray[$key], "}") && $value != "") {
-                            $var = str_replace("{", "", $routeArray[$key]);
-                            $var = str_replace("}", "", $var);
-                            $this->variables[$var] = $value;
-                        } else {
-                            $this->variables = [];
+                $routeArray = array_filter($routeArray);
+                if (count($routeArray) == count($routeRequestArray)) {
+                    foreach ($routeRequestArray as $key => $value) {
+                        if (!isset($routeArray[$key])) {
                             $checkValidRoot = false;
                             break;
                         }
+                        if ($value != $routeArray[$key]) {
+                            if (str_contains($routeArray[$key], "{") && str_contains(
+                                    $routeArray[$key],
+                                    "}"
+                                ) && $value != "") {
+                                $var = str_replace("{", "", $routeArray[$key]);
+                                $var = str_replace("}", "", $var);
+                                $this->variables[$var] = $value;
+                            } else {
+                                $this->variables = [];
+                                $checkValidRoot = false;
+                                break;
+                            }
+                        }
                     }
+                } else {
+                    $checkValidRoot = false;
                 }
                 if ($checkValidRoot) {
                     $this->handler = $route->getHandler();
