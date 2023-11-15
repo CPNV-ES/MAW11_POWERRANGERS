@@ -6,6 +6,7 @@
 $title = "Exercises";
 $navTitle = "New exercise";
 $navColor = "orange";
+$navTitle = $exercise["name"];
 
 ob_start();
 ?>
