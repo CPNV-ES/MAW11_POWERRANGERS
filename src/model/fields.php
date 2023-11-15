@@ -52,9 +52,8 @@ function createField($fieldName,$fieldTypeId,$exerciseId)
         $_ENV['DATABASE_PASSWORD']
     );
 
-    //get all exercises
-    $resultQuery = $bd->Query(
-        "insert into fields (name, exercises_id, fieldTypes_id) values ('". $fieldName ."'," . $exerciseId .",". $fieldTypeId .");"
-    );
-    return $resultQuery;
+    $query = "insert into fields (name, exercises_id, fieldTypes_id) values (?)";
+    $queryParams = [$fieldName, $exerciseId, $fieldTypeId];
+
+    return $bd->queryReturnId($query, $queryParams);
 }
