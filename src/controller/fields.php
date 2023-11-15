@@ -3,7 +3,7 @@
 // load model for exercises
 require_once SOURCE_DIR."/model/fields.php";
 require_once SOURCE_DIR."/model/fieldsTypes.php";
-require_once SOURCE_DIR."/../model/exercises.php";
+require_once SOURCE_DIR."/model/exercises.php";
 
 $fields = getFieldsByExercise($this->variables['exerciseId']);
 $fieldsTypes = getFieldsTypes();
