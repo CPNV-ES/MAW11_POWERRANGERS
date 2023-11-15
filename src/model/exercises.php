@@ -18,7 +18,7 @@ function getAllExercises(): array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT name FROM exercises ORDER BY id DESC;";
+    $query = "SELECT name, id FROM exercises ORDER BY id DESC;";
 
     //get all exercises
     $resultQuery = $bd->query($query);
@@ -30,7 +30,7 @@ function getAllExercises(): array
 
     //refactor result for view
     foreach ($resultQuery as $exercise) {
-        $result[] = $exercise->name;
+        $result[] = ['name' => $exercise->name, 'id' => $exercise->id];
     }
 
     return $result;
