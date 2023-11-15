@@ -2,22 +2,23 @@
 
 //initialize page variables
 $title = "Answer an exercise";
-$navTitle = "Exercise: <b>". $exercise['name'] ."</b>";
+$navTitle = "Exercise: <b>" . $exercise['name'] . "</b>";
 $navColor = "purple";
 $styles = array("<link rel='stylesheet' href='../../css/pages/exercise-new.css'>");
 
+$test = ['name' => 'teast'];
 ob_start();
 ?>
     <h1>Your take</h1>
     <span>If you'd like to come back later to finish, simply submit it with blanks</span>
 
     <form action="">
-        <label>Décriver le polymorphisme</label>
-        <input type="text">
-        <label>Décriver le polymorphisme</label>
-        <input type="text">
-        <label>Décriver le polymorphisme</label>
-        <input type="text">
+        <?php
+        array_map(function ($field) {
+            echo '<label>' . $field->name . '</label>
+            <input type="text">';
+        }, $fields)
+        ?>
 
         <input type="submit" value="save" class="btn bg-purple">
     </form>
