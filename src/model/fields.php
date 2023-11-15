@@ -6,10 +6,11 @@ use model\class\DbConnector;
 require_once SOURCE_DIR . "/model/DbConnector.php";
 
 /**
- * @param int $exerciseID
+ * Get fields by exercise
+ * @param int $exerciseId
  * @return array
  */
-function getFieldsByExercise($exerciseId) : array
+function getFieldsByExercise(int $exerciseId) : array
 {
     //initialize database connector
     $bd = new DbConnector(
@@ -40,13 +41,12 @@ function getFieldsByExercise($exerciseId) : array
 
 /**
  * Create a field
- *
  * @param $fieldName string name
- * @param $fieldTypeId int type id associeted
- * @param $exerciseId int exercise id associeted
- * @return int associeted
+ * @param $fieldTypeId int type id associated
+ * @param $exerciseId int exercise id associated
+ * @return int associated
  */
-function createField($fieldName,$fieldTypeId,$exerciseId)
+function createField(string $fieldName, int $fieldTypeId, int $exerciseId): int
 {
     $bd = new DbConnector(
         $_ENV['DATABASE_HOST'],
@@ -67,11 +67,10 @@ function createField($fieldName,$fieldTypeId,$exerciseId)
 
 /**
  * delete a field
- *
  * @param $id int
- * @return string result
+ * @return void
  */
-function deleteField(int $id)
+function deleteField(int $id): void
 {
     $bd = new DbConnector(
         $_ENV['DATABASE_HOST'],
