@@ -5,17 +5,19 @@ use model\class\Route;
 use model\class\Router;
 use PHPUnit\Framework\TestCase;
 
-require_once dirname(__FILE__).'/../src/Router.php';
-require_once dirname(__FILE__).'/../vendor/autoload.php';
-require_once dirname(__FILE__).'/../src/Route.php';
-require_once dirname(__FILE__).'/../src/Request.php';
+define('BASE_DIR', dirname( __FILE__ ).'/..');
+define('SOURCE_DIR', BASE_DIR.'/src');
+
+require_once SOURCE_DIR.'/Router.php';
+require_once BASE_DIR.'/vendor/autoload.php';
+require_once SOURCE_DIR.'/Route.php';
+require_once SOURCE_DIR.'/Request.php';
 
 /**
  * @covers Router
  */
 class TestRouter extends TestCase
 {
-
     private array $routes;
 
     protected function setUp(): void
@@ -44,7 +46,6 @@ class TestRouter extends TestCase
         $this->routes[] = new Route("/", "GET", "view/pages/home");
         $this->expectException(Exception::class);
         new Router(new Request("/", "GET"), $this->routes);
-
     }
 
     /**
@@ -83,7 +84,8 @@ class TestRouter extends TestCase
 
         $routeExists = false;
         foreach ($routes as $route) {
-            if ($route->getRoute() === '/exercises/{id}' && $route->getMethod() === 'GET' && $route->getHandler() === 'view/exercise' && $route->getStatusCode() === 200) {
+            if ($route->getRoute() === '/exercises/{id}' && $route->getMethod() === 'GET' && $route->getHandler(
+                ) === 'view/exercise' && $route->getStatusCode() === 200) {
                 $routeExists = true;
                 break;
             }
@@ -133,5 +135,17 @@ class TestRouter extends TestCase
         $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
         $this->assertEquals("2", $variable["test"]);
+    }
+
+    public function testRouteSelectCorrectRouteSuccess()
+    {
+        $routes[] = new Route("/exercises/{id}/fields", "GET", "view/exercise2");
+        $routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
+
+        $router = new Router(new Request("/exercises/1", "GET"), $routes);
+
+        $this->assertEquals("view/exercise", $router->getHandler());
+        $variable = $router->getVariables();
+        $this->assertEquals("1", $variable["id"]);
     }
 }

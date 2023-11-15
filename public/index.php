@@ -8,20 +8,25 @@ use model\class\Renderer;
 use model\class\Request;
 use model\class\RouterResponse;
 
+define('BASE_DIR', dirname( __FILE__ ).'/..');
+define('SOURCE_DIR', BASE_DIR.'/src');
+
 //load all dependencies
-require_once __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/../src/Router.php';
-require_once __DIR__.'/../src/Handler.php';
-require_once __DIR__.'/../src/Renderer.php';
-require_once __DIR__.'/../src/Request.php';
-require_once __DIR__.'/../src/Route.php';
-require_once __DIR__.'/../src/RouterResponse.php';
-require_once __DIR__.'/../src/HandlerResponse.php';
+require_once BASE_DIR.'/vendor/autoload.php';
+require_once SOURCE_DIR.'/Router.php';
+require_once SOURCE_DIR.'/Handler.php';
+require_once SOURCE_DIR.'/Renderer.php';
+require_once SOURCE_DIR.'/Request.php';
+require_once SOURCE_DIR.'/Route.php';
+require_once SOURCE_DIR.'/RouterResponse.php';
+require_once SOURCE_DIR.'/HandlerResponse.php';
+
+
 
 //check if an exception is throw and catch it to display error 500 page
 try {
     // Load environment variable
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "../..");
+    $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR."/..");
     $dotenv->load();
 
     // Get requested route and init route and method variables
@@ -40,11 +45,12 @@ try {
     // Add your routes here
     $routes[] = new Route("/", "GET", "view/pages/home");
     $routes[] = new Route("/exercises", "GET", "controller/exercises");
-    $routes[] = new Route("/exercises/new", "GET", "view/pages/exercise-new");
-    $routes[] = new Route("/exercises/new", "POST", "controller/exercise-new");
+    $routes[] = new Route("/exercises/new", "GET", "view/pages/exerciseCreate");
+    $routes[] = new Route("/exercises/new", "POST", "controller/exerciseCreate");
     $routes[] = new Route("/exercises/{exerciseId}/fields", "GET", "controller/fields");
-    $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
     $routes[] = new Route("/exercises/{exerciseId}/answer", "GET", "view/pages/answerCreate");
+    $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsCreate");
+
 
     $router = new Router($request, $routes);
 

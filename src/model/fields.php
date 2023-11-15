@@ -3,8 +3,12 @@
 use model\class\DbConnector;
 
 // load database connector
-require_once __DIR__ . "/DbConnector.php";
+require_once SOURCE_DIR . "/model/DbConnector.php";
 
+/**
+ * @param $exerciseID
+ * @return array
+ */
 function getFieldsByExercise($exerciseID) : array
 {
     //initialize database connector
@@ -33,6 +37,12 @@ function getFieldsByExercise($exerciseID) : array
     return $result;
 }
 
+/**
+ * @param $fieldName
+ * @param $fieldTypeId
+ * @param $exerciseId
+ * @return array|false
+ */
 function createField($fieldName,$fieldTypeId,$exerciseId)
 {
     $bd = new DbConnector(
@@ -46,6 +56,5 @@ function createField($fieldName,$fieldTypeId,$exerciseId)
     $resultQuery = $bd->Query(
         "insert into fields (name, exercises_id, fieldTypes_id) values ('". $fieldName ."'," . $exerciseId .",". $fieldTypeId .");"
     );
-    $fdhgsfkjhg = $resultQuery;
     return $resultQuery;
 }
