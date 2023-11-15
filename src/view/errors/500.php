@@ -3,7 +3,7 @@
 $title = "500";
 $navColor = "red";
 //initialize page variables
-$styles = array("<link rel='stylesheet' href='./css/pages/error.css'>");
+$styles = array("<link rel='stylesheet' href='".BASE_DIR."/public/css/pages/error.css'>");
 
 ob_start();
 ?>
@@ -15,4 +15,4 @@ ob_start();
 $content = ob_get_clean();
 
 //load layout
-require __DIR__ . "/../layout.php";
+require SOURCE_DIR . "/view/layout.php";

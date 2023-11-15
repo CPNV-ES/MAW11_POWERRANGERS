@@ -3,7 +3,7 @@
 use model\class\DbConnector;
 
 // load database connector
-require_once __DIR__ . "/DbConnector.php";
+require_once SOURCE_DIR . "/model/DbConnector.php";
 
 /**
  * @return array

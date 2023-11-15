@@ -4,7 +4,7 @@
 $title = "Create an exercise";
 $navTitle = "New exercise";
 $navColor = "orange";
-$styles = array("<link rel='stylesheet' href='../../css/pages/exercise-new.css'>");
+$styles = array("<link rel='stylesheet' href='/css/pages/exercise-new.css'>");
 
 ob_start();
 ?>
@@ -26,4 +26,4 @@ ob_start();
 $content = ob_get_clean();
 
 //load layout
-require __DIR__ . "/../layout.php";
+require SOURCE_DIR . "/view/layout.php";

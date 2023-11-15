@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel='stylesheet' href="../../css/layout.css">
+    <link rel='stylesheet' href="/css/layout.css">
     <?php
     foreach ($styles as $link) {
         echo $link;
@@ -40,7 +40,7 @@ if (isset($nav)) {
     <nav class="fixed-top bg-<?=$navColor?>">
         <div class="m-auto">
             <a id="logo" href="/">
-                <img src="../../images/logo.png" width="50" height="50" alt="Exercise looper">
+                <img src="/images/logo.png" width="50" height="50" alt="Exercise looper">
             </a>
             <span><?=isset($navTitle) ? $navTitle : '' ?></span>
         </div>

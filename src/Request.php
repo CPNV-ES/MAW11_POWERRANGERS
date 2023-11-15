@@ -4,7 +4,7 @@ namespace model\class;
 
 use HTTP;
 
-require_once dirname(__FILE__).'/HTTP.php';
+require_once SOURCE_DIR.'/HTTP.php';
 
 class Request extends HTTP
 {

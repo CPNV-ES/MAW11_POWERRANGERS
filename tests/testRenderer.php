@@ -4,9 +4,12 @@ use model\class\HandlerResponse;
 use model\class\Renderer;
 use PHPUnit\Framework\TestCase;
 
-require_once dirname(__FILE__).'/../src/Renderer.php';
-require_once dirname(__FILE__).'/../vendor/autoload.php';
-require_once dirname(__FILE__).'/../src/HandlerResponse.php';
+define('BASE_DIR', dirname( __FILE__ ).'/..');
+define('SOURCE_DIR', BASE_DIR.'/src');
+
+require_once SOURCE_DIR.'/Renderer.php';
+require_once BASE_DIR.'/vendor/autoload.php';
+require_once SOURCE_DIR.'/HandlerResponse.php';
 
 class TestRenderer extends TestCase
 {

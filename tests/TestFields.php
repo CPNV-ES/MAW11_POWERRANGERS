@@ -5,14 +5,17 @@ use model\class\Renderer;
 use PHPUnit\Framework\TestCase;
 use model\class\DbConnector;
 
-require_once dirname(__FILE__). "/../src/model/DbConnector.php";
-require_once dirname(__FILE__).'/../src/model/fields.php';
-require_once dirname(__FILE__).'/../src/Renderer.php';
-require_once dirname(__FILE__).'/../src/HandlerResponse.php';
+define('BASE_DIR', dirname( __FILE__ ).'/..');
+define('SOURCE_DIR', BASE_DIR.'/src');
+
+require_once SOURCE_DIR. "/model/DbConnector.php";
+require_once SOURCE_DIR.'/model/fields.php';
+require_once SOURCE_DIR.'/Renderer.php';
+require_once SOURCE_DIR.'/HandlerResponse.php';
 
 
 // Load environment variable
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "../..");
+$dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR . "/..");
 $dotenv->load();
 
 class TestFields extends TestCase
