@@ -6,7 +6,7 @@ use Exception;
 
 //load routes class for manage multiple routes
 
-require_once dirname(__FILE__).'/Route.php';
+require_once SOURCE_DIR.'/Route.php';
 
 /**
  * Class Router

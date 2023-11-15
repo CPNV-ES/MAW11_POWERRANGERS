@@ -8,13 +8,16 @@ use model\class\Handler;
 use model\class\RouterResponse;
 use PHPUnit\Framework\TestCase;
 
-require_once dirname(__FILE__).'/../src/Router.php';
-require_once dirname(__FILE__).'/../src/Handler.php';
-require_once dirname(__FILE__).'/../vendor/autoload.php';
-require_once dirname(__FILE__).'/../src/Route.php';
-require_once dirname(__FILE__).'/../src/Request.php';
-require_once dirname(__FILE__).'/../src/RouterResponse.php';
-require_once dirname(__FILE__).'/../src/HandlerResponse.php';
+define('BASE_DIR', dirname( __FILE__ ).'/..');
+define('SOURCE_DIR', BASE_DIR.'/src');
+
+require_once SOURCE_DIR.'/Router.php';
+require_once SOURCE_DIR.'/Handler.php';
+require_once BASE_DIR.'/vendor/autoload.php';
+require_once SOURCE_DIR.'/Route.php';
+require_once SOURCE_DIR.'/Request.php';
+require_once SOURCE_DIR.'/RouterResponse.php';
+require_once SOURCE_DIR.'/HandlerResponse.php';
 
 class TestRouteExercises extends TestCase
 {

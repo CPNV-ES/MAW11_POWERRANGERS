@@ -5,10 +5,13 @@ use model\class\Route;
 use model\class\Router;
 use PHPUnit\Framework\TestCase;
 
-require_once dirname(__FILE__).'/../src/Router.php';
-require_once dirname(__FILE__).'/../vendor/autoload.php';
-require_once dirname(__FILE__).'/../src/Route.php';
-require_once dirname(__FILE__).'/../src/Request.php';
+define('BASE_DIR', dirname( __FILE__ ).'/..');
+define('SOURCE_DIR', BASE_DIR.'/src');
+
+require_once SOURCE_DIR.'/Router.php';
+require_once BASE_DIR.'/vendor/autoload.php';
+require_once SOURCE_DIR.'/Route.php';
+require_once SOURCE_DIR.'/Request.php';
 
 /**
  * @covers Router
