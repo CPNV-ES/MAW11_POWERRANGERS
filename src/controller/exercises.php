@@ -1,9 +1,9 @@
 <?php
 
 // load model for exercises
-require_once __DIR__."/../model/exercises.php";
+require_once SOURCE_DIR."/model/exercises.php";
 
 $exercises = getAllExercises();
 
 // load view for exercises
-require_once __DIR__."/../view/pages/exercises.php";
+require_once SOURCE_DIR."/view/pages/exercises.php";

@@ -8,7 +8,6 @@ $navTitle = "New exercise";
 $navColor = "orange";
 
 ob_start();
-// TODO : update to have dynamic values
 ?>
 <div class="container">
     <div class="row">
@@ -98,4 +97,4 @@ ob_start();
 $content = ob_get_clean();
 
 //load layout
-require __DIR__ . "/../layout.php";
+require SOURCE_DIR . "/view/layout.php";

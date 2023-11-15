@@ -3,10 +3,10 @@
 //initialize page variables
 $title = "Exercises";
 $navColor = "purple";
-$styles = array("<link rel='stylesheet' href='../../css/components/exerciseCard.css'>");
+$styles = array("<link rel='stylesheet' href='/css/components/exerciseCard.css'>");
 
 //load card component
-require_once __DIR__ . '/../components/exerciseCard.php';
+require_once SOURCE_DIR . '/view/components/exerciseCard.php';
 
 ob_start();
 ?>
@@ -23,4 +23,4 @@ ob_start();
 $content = ob_get_clean();
 
 //load layout
-require __DIR__ . "/../layout.php";
+require SOURCE_DIR . "/view/layout.php";
