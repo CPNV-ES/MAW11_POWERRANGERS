@@ -116,10 +116,29 @@ class TestFields extends TestCase
         new Renderer(New HandlerResponse("controller/fieldsCreate.php", 200),["exerciseId" => $fieldExercise]);
 
         //Then
-        $this->assertEquals(406, http_response_code() );
+        $this->assertEquals(406, http_response_code());
 
     }
 
+    public function testFieldDeleteNominalCase() {
+        //Given
+        $fieldName = "Une question ?";
+        $fieldType = 1;
+        $fieldExercise = 1;
+
+        //When
+        require_once SOURCE_DIR . "/model/fields.php";
+        $fieldId = createField("test", 1, 1);
+
+        //When
+        $_POST["fieldId"] = $fieldId;
+
+        new Renderer(New HandlerResponse("controller/fieldsDelete.php", 200),["exerciseId" => $fieldExercise]);
+
+        //Then
+        $this->assertEquals(200, http_response_code());
+
+    }
 
     /**
      * Test Creation field nominal case
