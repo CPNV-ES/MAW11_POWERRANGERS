@@ -2,5 +2,5 @@
 
 require_once SOURCE_DIR."/model/fields.php";
 
-$fieldId = $_POST["fieldId"];
-deleteField($fieldId);
+deleteField($this->variables['fieldId']);
+header( "Location: /exercises/". $this->variables['exerciseId'] ."/fields" );

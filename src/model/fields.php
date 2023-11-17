@@ -20,7 +20,7 @@ function getFieldsByExercise(int $exerciseId) : array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT f.name AS name, ft.name AS type FROM fields f JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE f.exercises_id = :exercise_id";
+    $query = "SELECT f.id AS id, f.name AS name, ft.name AS type FROM fields f JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE f.exercises_id = :exercise_id";
     $queryParams["exercise_id"] = $exerciseId;
 
     //get all exercises
