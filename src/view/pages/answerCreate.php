@@ -15,8 +15,19 @@ ob_start();
     <form action="">
         <?php
         array_map(function ($field) {
-            echo '<label>' . $field->name . '</label>
-            <input type="text">';
+            switch ($field->length) {
+                case 64:
+                    $input = '<input type="text" name='.$field->id.'>';
+                    break;
+                case 128:
+                    $input = '<textarea name='.$field->id.'></textarea>';
+                    break;
+                case 255:
+                    $input = '<textarea name='.$field->id.'></textarea>';
+                    break;
+            }
+
+            echo '<label>' . $field->name . '</label>' . $input;
         }, $fields)
         ?>
 

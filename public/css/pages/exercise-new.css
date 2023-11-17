@@ -8,14 +8,18 @@ label{
     font-weight: bold;
 }
 
-input[type=text] {
+input[type=text], textarea {
     border-radius: 5px;
     height: 2.2rem;
     padding-left: 1rem;
     border: 1px solid #d1d1d1;
 }
 
-input[type=text]:focus {
+textarea{
+    height: 4.4rem;
+}
+
+input[type=text]:focus, textarea:focus {
     outline: none;
     border-color: var(--purple)
 }

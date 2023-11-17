@@ -21,7 +21,7 @@ function getFieldsByExercise($exerciseID) : array
 
     //get all exercises
     $resultQuery = $bd->Query(
-        "SELECT f.name AS name, ft.name AS type FROM fields f JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE f.exercises_id = " . $exerciseID . ";"
+        "SELECT f.name AS name,  f.id AS id, ft.name AS type, ft.maxLength AS length FROM fields f JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE f.exercises_id =" . $exerciseID . ";"
     );
 
     //check if result is empty
