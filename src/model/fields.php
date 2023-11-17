@@ -40,6 +40,42 @@ function getFieldsByExercise(int $exerciseId) : array
 }
 
 /**
+ * Get fields by exercise
+ * @param int $exerciseId
+ * @return array
+ */
+function getFieldsById(int $fieldId) : array
+{
+    //initialize database connector
+    $bd = new DbConnector(
+        $_ENV['DATABASE_HOST'],
+        $_ENV['DATABASE_NAME'],
+        $_ENV['DATABASE_USERNAME'],
+        $_ENV['DATABASE_PASSWORD']
+    );
+
+    $query = "SELECT f.id AS id, f.name AS name, ft.name AS type FROM fields f JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE f.id = :field_id";
+    $queryParams["field_id"] = $fieldId;
+
+    //get all exercises
+    $resultQuery = $bd->Query($query, $queryParams);
+
+    //check if result is empty
+    if (!$resultQuery) {
+        return [];
+    }
+
+    //refactor result for view
+    foreach ($resultQuery as $field) {
+        $result["id"] = $field->id;
+        $result["name"] = $field->name;
+        $result["type"] = $field->type;
+    }
+
+    return $result;
+}
+
+/**
  * Create a field
  * @param $fieldName string name
  * @param $fieldTypeId int type id associated
@@ -56,6 +92,31 @@ function createField(string $fieldName, int $fieldTypeId, int $exerciseId): int
     );
 
     $query = "insert into fields (name, exercises_id, fieldTypes_id) values (:name,:exercises_id,:fieldTypes_id)";
+    $queryParams = array(
+        'name' => $fieldName,
+        'exercises_id' => $exerciseId,
+        'fieldTypes_id' => $fieldTypeId
+    );
+
+    return $bd->queryReturnId($query, $queryParams);
+}
+
+/**
+ * delete a field
+ * @param $id int
+ * @return void
+ */
+function updateField(string $fieldName, int $fieldTypeId, int $exerciseId): int
+{
+    $bd = new DbConnector(
+        $_ENV['DATABASE_HOST'],
+        $_ENV['DATABASE_NAME'],
+        $_ENV['DATABASE_USERNAME'],
+        $_ENV['DATABASE_PASSWORD']
+    );
+
+    $query = "UPDATE fields SET name = :name, fieldTypes_id = :fieldTypes_id WHERE (id = :exercises_id);
+";
     $queryParams = array(
         'name' => $fieldName,
         'exercises_id' => $exerciseId,
