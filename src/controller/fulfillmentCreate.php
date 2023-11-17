@@ -6,11 +6,15 @@
 //
 //$exercise = getExerciseById($this->variables['exerciseId']);
 //$fields = getFieldsByExercise($this->variables['exerciseId']);
+require_once SOURCE_DIR."/model/fulfillments.php";
+$fullfillment = createFulfillment();
+
+
 
 foreach ($_POST as $answer=> $value){
 //    var_dump($answer);
 //    var_dump($value);
-    $test+=$answer;
+var_dump($fullfillment);
 }
 
 // load view for exercises

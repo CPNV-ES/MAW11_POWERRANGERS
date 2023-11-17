@@ -12,7 +12,7 @@ ob_start();
     <h1>Your take</h1>
     <span>If you'd like to come back later to finish, simply submit it with blanks</span>
 
-    <form action="">
+    <form method="POST">
         <?php
         array_map(function ($field) {
             switch ($field->length) {
