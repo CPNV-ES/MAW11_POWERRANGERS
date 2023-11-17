@@ -49,6 +49,7 @@ try {
     $routes[] = new Route("/exercises/new", "POST", "controller/exerciseCreate");
     $routes[] = new Route("/exercises/{exerciseId}/fields", "GET", "controller/fields");
     $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsCreate");
+    $routes[] = new Route("/exercises/{exerciseId}/fields/{fieldId}/delete", "GET", "controller/fieldsDelete");
 
     $router = new Router($request, $routes);
 
