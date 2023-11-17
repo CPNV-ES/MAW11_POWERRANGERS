@@ -4,7 +4,7 @@ use model\class\DbConnector;
 // load database connector
 require_once SOURCE_DIR . "/model/DbConnector.php";
 
-function getFieldsTypes() : array
+function createFulfillment() : int
 {
     //initialize database connector
     $bd = new DbConnector(
@@ -14,20 +14,8 @@ function getFieldsTypes() : array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    //get all exercises
-    $resultQuery = $bd->Query(
-        "SELECT * FROM fieldtypes"
-    );
+    $query = "INSERT INTO fulfillments (dateTime) values (?);";
+    $queryParams = [gmdate("Y-m-d H:i:s")];
 
-    //check if result is empty
-    if (!$resultQuery) {
-        return [];
-    }
-
-    //refactor result for view
-    foreach ($resultQuery as $exercise) {
-        $result[] = $exercise;
-    }
-
-    return $result;
+    return $bd->queryReturnId($query, $queryParams);
 }
