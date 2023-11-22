@@ -11,7 +11,7 @@ $navTitle = "Exercise: " . "<strong>". $exercise["name"] . "</strong>";
 ob_start();
 ?>
 <div class="container">
-    <h1>New Field</h1>
+    <h1>Editing Field</h1>
 
     <form action="/exercises/<?= $this->variables['exerciseId'] ?>/fields" method="post">
         <!-- Name of the field  -->
