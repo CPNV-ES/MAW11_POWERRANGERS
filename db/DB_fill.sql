@@ -33,9 +33,9 @@ insert into exercises (id, name) values (25, 'Recruiter');
 -- -----------------------------------------------------
 -- Table `exercise-looper`.`fieldTypes`
 -- -----------------------------------------------------
-insert into fieldTypes (id, name) values (1, 'Single line text');
-insert into fieldTypes (id, name) values (2, 'List of single lines');
-insert into fieldTypes (id, name) values (3, 'Multi-line text');
+insert into fieldTypes (id, name, maxLength) values (1, 'Single line text', 64);
+insert into fieldTypes (id, name, maxLength) values (2, 'List of single lines', 128);
+insert into fieldTypes (id, name, maxLength) values (3, 'Multi-line text', 255);
 
 
 -- -----------------------------------------------------
