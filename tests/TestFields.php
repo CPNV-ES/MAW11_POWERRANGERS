@@ -32,16 +32,19 @@ class TestFields extends TestCase
                 (object) array(
                     'name' => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
                     'type' => 'Single line text',
+                    'id' => 9
                 ),
             1 =>
                 (object) array(
                     'name' => 'Nulla justo.',
                     'type' => 'Multi-line text',
+                    'id' => 11
                 ),
             2 =>
                 (object) array(
                     'name' => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
                     'type' => 'Single line text',
+                    'id' => 12
                 ),
         );
 
@@ -116,10 +119,32 @@ class TestFields extends TestCase
         new Renderer(New HandlerResponse("controller/fieldsCreate.php", 200),["exerciseId" => $fieldExercise]);
 
         //Then
-        $this->assertEquals(406, http_response_code() );
+        $this->assertEquals(406, http_response_code());
 
     }
 
+    /**
+     * Test deletion of a field
+     * @return void
+     */
+    public function testFieldDeleteNominalCase() {
+        //Given
+        $fieldName = "Une question ?";
+        $fieldType = 1;
+        $fieldExercise = 1;
+
+        //When
+        require_once SOURCE_DIR . "/model/fields.php";
+        $fieldId = createField("test", 1, 1);
+
+        //When
+        $_POST["fieldId"] = $fieldId;
+
+        new Renderer(New HandlerResponse("controller/fieldsDelete.php", 200),["exerciseId" => $fieldExercise]);
+
+        //Then
+        $this->assertEquals(302, http_response_code());
+    }
 
     /**
      * Test Creation field nominal case
@@ -136,5 +161,4 @@ class TestFields extends TestCase
         //Then
         $this->assertEquals($expectedResult, $actualResult);
     }
-
 }
