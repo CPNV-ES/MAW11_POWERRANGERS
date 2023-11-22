@@ -1,8 +1,8 @@
-svg {
+a >svg {
     fill: #9b4dca;
 }
 
-svg:hover {
+a >svg:hover {
     fill: rgb(164, 157, 145);
 }
 
