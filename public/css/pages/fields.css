@@ -1,0 +1,15 @@
+a >svg {
+    fill: #9b4dca;
+}
+
+a >svg:hover {
+    fill: rgb(164, 157, 145);
+}
+
+.form-control {
+    color: white;
+}
+
+.form-control:focus {
+    color: white;
+}

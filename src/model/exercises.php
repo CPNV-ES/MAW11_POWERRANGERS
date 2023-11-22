@@ -55,7 +55,6 @@ function createExercise($name): int
 
 /**
  * Get an exercise by passing his id
- *
  * @param $id integer
  * @return array
  */
@@ -69,7 +68,7 @@ function getExerciseById($id): array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT * FROM exercises WHERE id = " . $id . ";";
+    $query = "SELECT * FROM exercises WHERE id = ". $id .";";
     $resultQuery = $bd->query($query);
 
     //check if result is empty

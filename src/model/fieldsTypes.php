@@ -25,8 +25,8 @@ function getFieldsTypes() : array
     }
 
     //refactor result for view
-    foreach ($resultQuery as $exercise) {
-        $result[] = $exercise;
+    foreach ($resultQuery as $types) {
+        $result[] = $types;
     }
 
     return $result;
