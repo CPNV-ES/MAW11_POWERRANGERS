@@ -51,6 +51,7 @@ function getAnswersByFulfillment(int $answerId) : array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT a.value AS value, f.name AS name, a.id AS id, ft.name AS type, ft.maxLength AS length FROM answers a JOIN fields f ON a.fields_id = f.id JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE a.fulfillments_id =" . $answerId . ";";
-    return $bd->query($query);
+    $query = "SELECT a.value AS value, f.name AS name, a.id AS id, ft.name AS type, ft.maxLength AS length FROM answers a JOIN fields f ON a.fields_id = f.id JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE a.fulfillments_id =(?);";
+    $queryParams = [$answerId];
+    return $bd->query($query, $queryParams);
 }
