@@ -51,7 +51,8 @@ try {
     $routes[] = new Route("/exercises/{exerciseId}/answer", "GET", "controller/answerCreate");
     $routes[] = new Route("/exercises/{exerciseId}/answer", "POST", "controller/fulfillmentCreate");
     $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsCreate");
-
+    $routes[] = new Route("/exercises/{exerciseId}/answer/{answerId}/edit", "GET", "controller/answerEditView");
+    $routes[] = new Route("/exercises/{exerciseId}/answer/{answerId}/edit", "POST", "controller/answerEdit");
 
     $router = new Router($request, $routes);
 

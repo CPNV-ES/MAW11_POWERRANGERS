@@ -4,26 +4,25 @@
 $title = "Answer an exercise";
 $navTitle = "Exercise: <b>" . $exercise['name'] . "</b>";
 $navColor = "purple";
-$styles = array("<link rel='stylesheet' href='../../css/pages/exercise-new.css'>");
+$styles = array("<link rel='stylesheet' href='/css/pages/exercise-new.css'>");
 
-$test = ['name' => 'teast'];
 ob_start();
 ?>
     <h1>Your take</h1>
-    <span>If you'd like to come back later to finish, simply submit it with blanks</span>
+    <span><?=$description ?></span>
 
     <form method="POST">
         <?php
         array_map(function ($field) {
             switch ($field->length) {
                 case 64:
-                    $input = '<input type="text" name='.$field->id.'>';
+                    $input = '<input type="text" name='.$field->id.' value="'.$field->value.'">';
                     break;
                 case 128:
-                    $input = '<textarea name='.$field->id.'></textarea>';
+                    $input = '<textarea name='.$field->id.'>'.$field->value.'</textarea>';
                     break;
                 case 255:
-                    $input = '<textarea name='.$field->id.'></textarea>';
+                    $input = '<textarea name='.$field->id.'>'.$field->value.'</textarea>';
                     break;
             }
 
