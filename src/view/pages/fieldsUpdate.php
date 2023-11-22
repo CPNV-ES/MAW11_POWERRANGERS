@@ -8,6 +8,7 @@ $navTitle = "New exercise";
 $navColor = "orange";
 $navTitle = "Exercise: " . "<strong>". $exercise["name"] . "</strong>";
 
+$styles = array("<link rel='stylesheet' href='/css/pages/fields.css'>");
 ob_start();
 ?>
 <div class="container">
