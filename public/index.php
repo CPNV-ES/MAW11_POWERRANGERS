@@ -11,6 +11,11 @@ use model\class\RouterResponse;
 define('BASE_DIR', dirname( __FILE__ ).'/..');
 define('SOURCE_DIR', BASE_DIR.'/src');
 
+//const of fields length
+define('FIELD_SINGLE_LINE', 64);
+define('FIELD_MULTI_LINE', 255);
+define('FIELD_LIST_OF_SINGLE_LINE', 128);
+
 //load all dependencies
 require_once BASE_DIR.'/vendor/autoload.php';
 require_once SOURCE_DIR.'/Router.php';
