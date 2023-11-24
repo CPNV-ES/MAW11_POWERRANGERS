@@ -14,7 +14,7 @@ ob_start();
 <div class="container">
     <h1>Editing Field</h1>
 
-    <form action="/exercises/<?= $this->variables['exerciseId'] ?>/fields" method="post">
+    <form action="/exercises/<?= $this->variables['exerciseId'] ."/fields/". $this->variables['fieldId'] ?>/edit" method="post">
         <!-- Name of the field  -->
         <div class="field">
             <label for="name">Label</label><br>
