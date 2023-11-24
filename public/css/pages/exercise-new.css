@@ -19,14 +19,23 @@ textarea{
     height: 4.4rem;
 }
 
-input[type=text]:focus, textarea:focus {
+input[type=text]:focus, textarea:focus, .form-control:focus {
     outline: none;
-    border-color: var(--purple)
+    box-shadow: none;
+    border-color: var(--purple);
 }
 
 input[type=submit] {
     margin-top: 1.5rem;
     width: 12rem;
+}
+
+.icon, .icon:visited{
+    color: var(--purple);
+}
+
+.icon:hover, .icon:focus{
+    color: var(--gray);
 }
 
 .page-container{
