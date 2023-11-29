@@ -5,13 +5,13 @@ use model\class\Renderer;
 use PHPUnit\Framework\TestCase;
 use model\class\DbConnector;
 
-define('BASE_DIR', dirname( __FILE__ ).'/..');
-define('SOURCE_DIR', BASE_DIR.'/src');
+define('BASE_DIR', dirname(__FILE__) . '/..');
+define('SOURCE_DIR', BASE_DIR . '/src');
 
-require_once SOURCE_DIR. "/model/DbConnector.php";
-require_once SOURCE_DIR.'/model/fields.php';
-require_once SOURCE_DIR.'/Renderer.php';
-require_once SOURCE_DIR.'/HandlerResponse.php';
+require_once SOURCE_DIR . "/model/DbConnector.php";
+require_once SOURCE_DIR . '/model/fields.php';
+require_once SOURCE_DIR . '/Renderer.php';
+require_once SOURCE_DIR . '/HandlerResponse.php';
 
 
 // Load environment variable
@@ -22,31 +22,33 @@ class TestFields extends TestCase
 {
     /**
      * Test getting fields nominal case
+     *
      * @return void
      */
-    public function testFieldsGetNominalCase() {
+    public function testFieldsGetNominalCase()
+    {
         //Given
         $exercise = 22;
-        $expectedResult = array (
+        $expectedResult = [
             0 =>
-                (object) array(
+                (object)[
                     'name' => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
                     'type' => 'Single line text',
                     'id' => 9
-                ),
+                ],
             1 =>
-                (object) array(
+                (object)[
                     'name' => 'Nulla justo.',
                     'type' => 'Multi-line text',
                     'id' => 11
-                ),
+                ],
             2 =>
-                (object) array(
+                (object)[
                     'name' => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
                     'type' => 'Single line text',
                     'id' => 12
-                ),
-        );
+                ]
+        ];
 
         //When
         $actualResult = getFieldsByExercise($exercise);
@@ -57,9 +59,11 @@ class TestFields extends TestCase
 
     /**
      * Test Creation field nominal case
+     *
      * @return void
      */
-    public function testFieldCreateNominalCase() {
+    public function testFieldCreateNominalCase()
+    {
         //Given
         $fieldName = "Une question ?";
         $fieldType = 1;
@@ -69,17 +73,19 @@ class TestFields extends TestCase
         $_POST["name"] = $fieldName;
         $_POST["fieldType"] = $fieldType;
 
-        new Renderer(New HandlerResponse("controller/fieldsCreate.php", 200),["exerciseId" => $fieldExercise]);
+        new Renderer(new HandlerResponse("controller/fieldsCreate.php", 200), ["exerciseId" => $fieldExercise]);
 
         //Then
-        $this->assertEquals(302, http_response_code() );
+        $this->assertEquals(302, http_response_code());
     }
 
     /**
      * Test Creation field if lenght of fieldname is too long
+     *
      * @return void
      */
-    public function testFieldCreateHandleFieldNameTooLong() {
+    public function testFieldCreateHandleFieldNameTooLong()
+    {
         //Given
         $fieldName = "
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida elit sed enim interdum, 
@@ -95,39 +101,41 @@ class TestFields extends TestCase
         $_POST["name"] = $fieldName;
         $_POST["fieldType"] = $fieldType;
 
-        new Renderer(New HandlerResponse("controller/fieldsCreate.php", 200),["exerciseId" => $fieldExercise]);
+        new Renderer(new HandlerResponse("controller/fieldsCreate.php", 200), ["exerciseId" => $fieldExercise]);
 
         //Then
-        $this->assertEquals(406, http_response_code() );
-
+        $this->assertEquals(406, http_response_code());
     }
 
     /**
      * Test Creation field if fieldtype is empty
+     *
      * @return void
      */
-    public function testFieldCreateHandleEmptyValue() {
+    public function testFieldCreateHandleEmptyValue()
+    {
         //Given
         $fieldName = "";
-        $fieldType = Null;
+        $fieldType = null;
         $fieldExercise = 1;
 
         //When
         $_POST["name"] = $fieldName;
         $_POST["fieldType"] = $fieldType;
 
-        new Renderer(New HandlerResponse("controller/fieldsCreate.php", 200),["exerciseId" => $fieldExercise]);
+        new Renderer(new HandlerResponse("controller/fieldsCreate.php", 200), ["exerciseId" => $fieldExercise]);
 
         //Then
         $this->assertEquals(406, http_response_code());
-
     }
 
     /**
      * Test deletion of a field
+     *
      * @return void
      */
-    public function testFieldDeleteNominalCase() {
+    public function testFieldDeleteNominalCase()
+    {
         //Given
         $fieldName = "Une question ?";
         $fieldType = 1;
@@ -140,7 +148,7 @@ class TestFields extends TestCase
         //When
         $_POST["fieldId"] = $fieldId;
 
-        new Renderer(New HandlerResponse("controller/fieldsDelete.php", 200),["exerciseId" => $fieldExercise]);
+        new Renderer(new HandlerResponse("controller/fieldsDelete.php", 200), ["exerciseId" => $fieldExercise]);
 
         //Then
         $this->assertEquals(302, http_response_code());
@@ -148,9 +156,11 @@ class TestFields extends TestCase
 
     /**
      * Test Creation field nominal case
+     *
      * @return void
      */
-    public function testFieldsGetDontExist() {
+    public function testFieldsGetDontExist()
+    {
         //Given
         $exercise = 100000;
         $expectedResult = [];

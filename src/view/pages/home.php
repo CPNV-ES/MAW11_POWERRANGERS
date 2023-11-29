@@ -2,7 +2,7 @@
 
 //initialize page variables
 $title = "Home";
-$styles = array("<link rel='stylesheet' href='/css/pages/home.css'>");
+$styles = ["<link rel='stylesheet' href='/css/pages/home.css'>"];
 
 ob_start();
 
