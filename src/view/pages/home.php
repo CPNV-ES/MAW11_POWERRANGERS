@@ -16,7 +16,6 @@ $nav = <<<HTML
         </span>
     </div>
 HTML;
-
 ?>
 
     <div class="btn-list">

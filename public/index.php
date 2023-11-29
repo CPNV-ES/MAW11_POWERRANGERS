@@ -8,8 +8,8 @@ use model\class\Renderer;
 use model\class\Request;
 use model\class\RouterResponse;
 
-define('BASE_DIR', dirname( __FILE__ ).'/..');
-define('SOURCE_DIR', BASE_DIR.'/src');
+define('BASE_DIR', dirname(__FILE__) . '/..');
+define('SOURCE_DIR', BASE_DIR . '/src');
 
 //const of fields length
 define('FIELD_SINGLE_LINE', 64);
@@ -17,21 +17,19 @@ define('FIELD_MULTI_LINE', 255);
 define('FIELD_LIST_OF_SINGLE_LINE', 128);
 
 //load all dependencies
-require_once BASE_DIR.'/vendor/autoload.php';
-require_once SOURCE_DIR.'/Router.php';
-require_once SOURCE_DIR.'/Handler.php';
-require_once SOURCE_DIR.'/Renderer.php';
-require_once SOURCE_DIR.'/Request.php';
-require_once SOURCE_DIR.'/Route.php';
-require_once SOURCE_DIR.'/RouterResponse.php';
-require_once SOURCE_DIR.'/HandlerResponse.php';
-
-
+require_once BASE_DIR . '/vendor/autoload.php';
+require_once SOURCE_DIR . '/Router.php';
+require_once SOURCE_DIR . '/Handler.php';
+require_once SOURCE_DIR . '/Renderer.php';
+require_once SOURCE_DIR . '/Request.php';
+require_once SOURCE_DIR . '/Route.php';
+require_once SOURCE_DIR . '/RouterResponse.php';
+require_once SOURCE_DIR . '/HandlerResponse.php';
 
 //check if an exception is throw and catch it to display error 500 page
 try {
     // Load environment variable
-    $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR."/..");
+    $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR . "/..");
     $dotenv->load();
 
     // Get requested route and init route and method variables
@@ -79,7 +77,6 @@ try {
     $renderer = new Renderer($handlerResponse, $routerResponse->getVariables());
 
     //----------------------------------------//
-
 } catch (Exception) {
     //set handler and status code for error 500
     $handle = "view/errors";
