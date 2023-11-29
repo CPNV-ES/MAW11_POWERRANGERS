@@ -10,5 +10,5 @@ foreach ($_POST as $field => $value) {
     updateAnswer($value, $field);
 }
 
-// load view for exercises
-header("Location: /exercises/".$exerciseId."/answer/".$answerId."/edit");
+// load view for answers
+header("Location: /exercises/" . $exerciseId . "/answer/" . $answerId . "/edit");

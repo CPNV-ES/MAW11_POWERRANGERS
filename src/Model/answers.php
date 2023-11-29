@@ -1,10 +1,14 @@
 <?php
 
-use model\class\DbConnector;
+use App\Model\DbConnector;
 
-// load database connector
-require_once SOURCE_DIR . "/model/DbConnector.php";
-
+/**
+ * Used to create an answer
+ * @param $value
+ * @param $fulfillment
+ * @param $field
+ * @return void
+ */
 function createAnswer($value, $fulfillment, $field): void
 {
     $bd = new DbConnector(
@@ -24,6 +28,12 @@ function createAnswer($value, $fulfillment, $field): void
     $bd->query($query, $queryParams);
 }
 
+/**
+ * Used to update answer
+ * @param $value
+ * @param $fieldId
+ * @return void
+ */
 function updateAnswer($value, $fieldId): void
 {
     $bd = new DbConnector(
@@ -42,7 +52,12 @@ function updateAnswer($value, $fieldId): void
     $bd->query($query, $queryParams);
 }
 
-function getAnswersByFulfillment(int $answerId) : array
+/**
+ * Used to get all answer by fulfillment id
+ * @param int $answerId
+ * @return array
+ */
+function getAnswersByFulfillment(int $answerId): array
 {
     $bd = new DbConnector(
         $_ENV['DATABASE_HOST'],
@@ -51,7 +66,13 @@ function getAnswersByFulfillment(int $answerId) : array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT a.value AS value, f.name AS name, a.id AS id, ft.name AS type, ft.maxLength AS length FROM answers a JOIN fields f ON a.fields_id = f.id JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE a.fulfillments_id =(?);";
+    $query =
+        "
+            SELECT a.value AS value,f.name AS name, a.id AS id,ft.name AS type,ft.maxLength AS length FROM answers a 
+            JOIN fields f ON a.fields_id = f.id 
+            JOIN fieldTypes ft ON f.fieldTypes_id = ft.id 
+            WHERE a.fulfillments_id =(?);
+        ";
     $queryParams = [$answerId];
     return $bd->query($query, $queryParams);
 }

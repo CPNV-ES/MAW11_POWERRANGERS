@@ -1,6 +1,6 @@
 <?php
 
-namespace model\class;
+namespace App;
 
 /**
  * This class is designed to manage the rendering process.
@@ -33,7 +33,6 @@ class Renderer
      */
     private function send(): void
     {
-        //TODO : Add header on the response.
         http_response_code($this->httpResponse);
         require $this->render;
     }

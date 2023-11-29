@@ -1,37 +1,27 @@
 <?php
 
-use model\class\HandlerResponse;
-use model\class\Route;
-use model\class\Router;
-use model\class\Handler;
-use model\class\Renderer;
-use model\class\Request;
-use model\class\RouterResponse;
-
-define('BASE_DIR', dirname( __FILE__ ).'/..');
-define('SOURCE_DIR', BASE_DIR.'/src');
+define('BASE_DIR', dirname(__FILE__) . '/..');
+define('SOURCE_DIR', BASE_DIR . '/src');
 
 //const of fields length
 define('FIELD_SINGLE_LINE', 64);
 define('FIELD_MULTI_LINE', 255);
 define('FIELD_LIST_OF_SINGLE_LINE', 128);
 
-//load all dependencies
-require_once BASE_DIR.'/vendor/autoload.php';
-require_once SOURCE_DIR.'/Router.php';
-require_once SOURCE_DIR.'/Handler.php';
-require_once SOURCE_DIR.'/Renderer.php';
-require_once SOURCE_DIR.'/Request.php';
-require_once SOURCE_DIR.'/Route.php';
-require_once SOURCE_DIR.'/RouterResponse.php';
-require_once SOURCE_DIR.'/HandlerResponse.php';
+require_once '../vendor/autoload.php';
 
-
+use App\Handler;
+use App\HandlerResponse;
+use App\Renderer;
+use App\Request;
+use App\Route;
+use App\Router;
+use App\RouterResponse;
 
 //check if an exception is throw and catch it to display error 500 page
 try {
     // Load environment variable
-    $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR."/..");
+    $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR . "/..");
     $dotenv->load();
 
     // Get requested route and init route and method variables
@@ -42,11 +32,6 @@ try {
     $method = $_SERVER["REQUEST_METHOD"];
     $request = new Request($route, $method);
 
-
-    //----------------------------------------//
-    //Router
-    // Initialize router
-
     // Add your routes here
     $routes[] = new Route("/", "GET", "view/pages/home");
     $routes[] = new Route("/exercises", "GET", "controller/exercises");
@@ -56,11 +41,31 @@ try {
     $routes[] = new Route("/exercises/{exerciseId}/answer", "GET", "controller/answerCreate");
     $routes[] = new Route("/exercises/{exerciseId}/answer", "POST", "controller/fulfillmentCreate");
     $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsCreate");
-    $routes[] = new Route("/exercises/{exerciseId}/answer/{answerId}/edit", "GET", "controller/answerEditView");
-    $routes[] = new Route("/exercises/{exerciseId}/answer/{answerId}/edit", "POST", "controller/answerEdit");
-    $routes[] = new Route("/exercises/{exerciseId}/fields/{fieldId}/delete", "GET", "controller/fieldsDelete");
-    $routes[] = new Route("/exercises/{exerciseId}/fields/{fieldId}", "GET", "controller/fieldsUpdateView");
-    $routes[] = new Route("/exercises/{exerciseId}/fields/{fieldId}/edit", "POST", "controller/fieldsUpdate");
+    $routes[] = new Route(
+        "/exercises/{exerciseId}/answer/{answerId}/edit",
+        "GET",
+        "controller/answerEditView"
+    );
+    $routes[] = new Route(
+        "/exercises/{exerciseId}/answer/{answerId}/edit",
+        "POST",
+        "controller/answerEdit"
+    );
+    $routes[] = new Route(
+        "/exercises/{exerciseId}/fields/{fieldId}/delete",
+        "GET",
+        "controller/fieldsDelete"
+    );
+    $routes[] = new Route(
+        "/exercises/{exerciseId}/fields/{fieldId}",
+        "GET",
+        "controller/fieldsUpdateView"
+    );
+    $routes[] = new Route(
+        "/exercises/{exerciseId}/fields/{fieldId}/edit",
+        "POST",
+        "controller/fieldsUpdate"
+    );
 
     $router = new Router($request, $routes);
 
@@ -79,7 +84,6 @@ try {
     $renderer = new Renderer($handlerResponse, $routerResponse->getVariables());
 
     //----------------------------------------//
-
 } catch (Exception) {
     //set handler and status code for error 500
     $handle = "view/errors";

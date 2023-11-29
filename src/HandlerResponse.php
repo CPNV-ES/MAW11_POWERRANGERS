@@ -1,10 +1,6 @@
 <?php
 
-namespace model\class;
-
-use HTTP;
-
-require_once dirname(__FILE__).'/HTTP.php';
+namespace App;
 
 class HandlerResponse extends HTTP
 {

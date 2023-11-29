@@ -1,10 +1,6 @@
 <?php
 
-namespace model\class;
-
-use HTTP;
-
-require_once SOURCE_DIR.'/HTTP.php';
+namespace App;
 
 class RouterResponse extends HTTP
 {

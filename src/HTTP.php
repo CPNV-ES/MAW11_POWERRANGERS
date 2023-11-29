@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 abstract class HTTP
 {
     private string $path;

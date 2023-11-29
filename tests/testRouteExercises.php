@@ -1,23 +1,19 @@
 <?php
 
-use model\class\HandlerResponse;
-use model\class\Request;
-use model\class\Route;
-use model\class\Router;
-use model\class\Handler;
-use model\class\RouterResponse;
+namespace Tests;
+
+define('BASE_DIR', dirname(__FILE__) . '/..');
+define('SOURCE_DIR', BASE_DIR . '/src');
+
+require_once '../vendor/autoload.php';
+
+use App\HandlerResponse;
+use App\Request;
+use App\Route;
+use App\Router;
+use App\Handler;
+use App\RouterResponse;
 use PHPUnit\Framework\TestCase;
-
-define('BASE_DIR', dirname( __FILE__ ).'/..');
-define('SOURCE_DIR', BASE_DIR.'/src');
-
-require_once SOURCE_DIR.'/Router.php';
-require_once SOURCE_DIR.'/Handler.php';
-require_once BASE_DIR.'/vendor/autoload.php';
-require_once SOURCE_DIR.'/Route.php';
-require_once SOURCE_DIR.'/Request.php';
-require_once SOURCE_DIR.'/RouterResponse.php';
-require_once SOURCE_DIR.'/HandlerResponse.php';
 
 class TestRouteExercises extends TestCase
 {
@@ -29,7 +25,8 @@ class TestRouteExercises extends TestCase
 
     protected function setUp(): void
     {
-        $this->request = new Request($this->route, $this->method);    }
+        $this->request = new Request($this->route, $this->method);
+    }
 
     /**
      * @throws Exception
@@ -59,5 +56,4 @@ class TestRouteExercises extends TestCase
         $this->assertStringContainsString("controller/exercises.php", $handlerResponse->getPath());
         $this->assertEquals(200, $handlerResponse->getStatusCode());
     }
-
 }

@@ -1,13 +1,12 @@
 <?php
 
-namespace model\class;
+namespace App\Model;
 
 use PDO;
 
 /**
  * Class DbConnector
- *
- * @package model\class
+ * @package App\Model
  */
 class DbConnector
 {
@@ -63,4 +62,3 @@ class DbConnector
         return $this->db->lastInsertId();
     }
 }
-

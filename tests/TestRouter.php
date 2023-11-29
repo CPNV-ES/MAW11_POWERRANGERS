@@ -1,20 +1,19 @@
 <?php
 
-use model\class\Request;
-use model\class\Route;
-use model\class\Router;
+namespace Tests;
+
+define('BASE_DIR', dirname(__FILE__) . '/..');
+define('SOURCE_DIR', BASE_DIR . '/src');
+
+require_once '../vendor/autoload.php';
+
+use App\Request;
+use App\Route;
+use App\Router;
 use PHPUnit\Framework\TestCase;
 
-define('BASE_DIR', dirname( __FILE__ ).'/..');
-define('SOURCE_DIR', BASE_DIR.'/src');
-
-require_once SOURCE_DIR.'/Router.php';
-require_once BASE_DIR.'/vendor/autoload.php';
-require_once SOURCE_DIR.'/Route.php';
-require_once SOURCE_DIR.'/Request.php';
-
 /**
- * @covers Router
+ * @covers \model\class\framework\Router
  */
 class TestRouter extends TestCase
 {
@@ -29,7 +28,7 @@ class TestRouter extends TestCase
     }
 
     /**
-     * @covers Router::__construct
+     * @covers \model\class\framework\Router::__construct
      */
     public function testInitSuccess()
     {
@@ -38,7 +37,7 @@ class TestRouter extends TestCase
     }
 
     /**
-     * @covers Router::add
+     * @covers \model\class\framework\Router::add
      * @throws Exception
      */
     public function testInitError()
@@ -49,7 +48,7 @@ class TestRouter extends TestCase
     }
 
     /**
-     * @covers Router::run
+     * @covers \model\class\framework\Router::run
      * @throws Exception
      */
     public function testRunSuccess()
@@ -59,7 +58,7 @@ class TestRouter extends TestCase
     }
 
     /**
-     * @covers Router::run
+     * @covers \model\class\framework\Router::run
      * @throws Exception
      */
     public function testRunError()
@@ -84,8 +83,10 @@ class TestRouter extends TestCase
 
         $routeExists = false;
         foreach ($routes as $route) {
-            if ($route->getRoute() === '/exercises/{id}' && $route->getMethod() === 'GET' && $route->getHandler(
-                ) === 'view/exercise' && $route->getStatusCode() === 200) {
+            if (
+                $route->getRoute() === '/exercises/{id}' && $route->getMethod() === 'GET' && $route->getHandler(
+                ) === 'view/exercise' && $route->getStatusCode() === 200
+            ) {
                 $routeExists = true;
                 break;
             }

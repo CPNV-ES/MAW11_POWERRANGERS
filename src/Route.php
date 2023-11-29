@@ -1,10 +1,10 @@
 <?php
 
-namespace model\class;
+namespace App;
 
 /**
  * Class Route
- * @package model\class
+ * @package App\Model
  */
 class Route
 {

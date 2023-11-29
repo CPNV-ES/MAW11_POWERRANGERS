@@ -1,10 +1,12 @@
 <?php
-use model\class\DbConnector;
 
-// load database connector
-require_once SOURCE_DIR . "/model/DbConnector.php";
+use App\Model\DbConnector;
 
-function createFulfillment() : int
+/**
+ * Used to create a fulfillment
+ * @return int - the created id item
+ */
+function createFulfillment(): int
 {
     //initialize database connector
     $bd = new DbConnector(
@@ -14,8 +16,11 @@ function createFulfillment() : int
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "INSERT INTO fulfillments (dateTime) values (?);";
+    $query =
+        "
+            INSERT INTO fulfillments (dateTime) 
+            values (?);
+        ";
     $queryParams = [gmdate("Y-m-d H:i:s")];
-
     return $bd->queryReturnId($query, $queryParams);
 }

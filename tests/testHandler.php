@@ -1,15 +1,15 @@
 <?php
 
-use model\class\Handler;
-use model\class\RouterResponse;
+namespace Tests;
+
+define('BASE_DIR', dirname(__FILE__) . '/..');
+define('SOURCE_DIR', BASE_DIR . '/src');
+
+require_once '../vendor/autoload.php';
+
+use App\Handler;
+use App\RouterResponse;
 use PHPUnit\Framework\TestCase;
-
-define('BASE_DIR', dirname( __FILE__ ).'/..');
-define('SOURCE_DIR', BASE_DIR.'/src');
-
-require_once SOURCE_DIR.'/Handler.php';
-require_once BASE_DIR.'/vendor/autoload.php';
-require_once SOURCE_DIR.'/RouterResponse.php';
 
 class TestHandler extends TestCase
 {
@@ -21,7 +21,7 @@ class TestHandler extends TestCase
 
     protected function setUp(): void
     {
-       $this->routerResponse = new RouterResponse($this->handler, $this->status_code);
+        $this->routerResponse = new RouterResponse($this->handler, $this->status_code);
     }
 
     /**

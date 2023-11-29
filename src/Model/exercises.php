@@ -1,11 +1,9 @@
 <?php
 
-use model\class\DbConnector;
-
-// load database connector
-require_once SOURCE_DIR . "/model/DbConnector.php";
+use App\Model\DbConnector;
 
 /**
+ * Used to get all exercises
  * @return array
  */
 function getAllExercises(): array
@@ -36,7 +34,11 @@ function getAllExercises(): array
     return $result;
 }
 
-
+/**
+ * Used to create an exercise
+ * @param $name - name of the exercise
+ * @return int - ID of the exercise
+ */
 function createExercise($name): int
 {
     //initialize database connector
@@ -55,7 +57,7 @@ function createExercise($name): int
 
 /**
  * Get an exercise by passing his id
- * @param $id integer
+ * @param $id int
  * @return array
  */
 function getExerciseById($id): array
@@ -68,7 +70,7 @@ function getExerciseById($id): array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT * FROM exercises WHERE id = ". $id .";";
+    $query = "SELECT * FROM exercises WHERE id = " . $id . ";";
     $resultQuery = $bd->query($query);
 
     //check if result is empty

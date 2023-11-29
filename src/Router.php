@@ -1,16 +1,13 @@
 <?php
 
-namespace model\class;
+namespace App;
 
 use Exception;
-
-//load routes class for manage multiple routes
-
-require_once SOURCE_DIR.'/Route.php';
+use App\Route;
 
 /**
  * Class Router
- * @package model\class
+ * @package App\Model
  */
 class Router
 {
@@ -47,7 +44,7 @@ class Router
      * @param int $status_code
      * @throws Exception
      */
-    private function add(string $route, string $method, string $handler, int $status_code = 200) : void
+    private function add(string $route, string $method, string $handler, int $status_code = 200): void
     {
         //set other variables for comprehension
         $routeRequest = $route;
@@ -69,7 +66,7 @@ class Router
      * @param string $routeRequest
      * @param string $methodRequest
      */
-    private function run(string $routeRequest, string $methodRequest) : void
+    private function run(string $routeRequest, string $methodRequest): void
     {
         $this->variables = [];
         $routeRequestArray = explode("/", $routeRequest);
@@ -88,10 +85,12 @@ class Router
                             break;
                         }
                         if ($value != $routeArray[$key]) {
-                            if (str_contains($routeArray[$key], "{") && str_contains(
+                            if (
+                                str_contains($routeArray[$key], "{") && str_contains(
                                     $routeArray[$key],
                                     "}"
-                                ) && $value != "") {
+                                ) && $value != ""
+                            ) {
                                 $var = str_replace("{", "", $routeArray[$key]);
                                 $var = str_replace("}", "", $var);
                                 $this->variables[$var] = $value;
@@ -151,5 +150,4 @@ class Router
     {
         return $this->variables;
     }
-
 }

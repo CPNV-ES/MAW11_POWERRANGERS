@@ -1,16 +1,13 @@
 <?php
 
-use model\class\DbConnector;
-
-// load database connector
-require_once SOURCE_DIR . "/model/DbConnector.php";
+use App\Model\DbConnector;
 
 /**
  * Get fields by exercise
  * @param int $exerciseId
- * @return array
+ * @return array - array of fields
  */
-function getFieldsByExercise(int $exerciseId) : array
+function getFieldsByExercise(int $exerciseId): array
 {
     //initialize database connector
     $bd = new DbConnector(
@@ -20,7 +17,12 @@ function getFieldsByExercise(int $exerciseId) : array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT f.name AS name,  f.id AS id, ft.name AS type, ft.maxLength AS length FROM fields f JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE f.exercises_id = :exercise_id";
+    $query =
+        "
+            SELECT f.name AS name, f.id AS id, ft.name AS type, ft.maxLength AS length FROM fields f 
+            JOIN fieldTypes ft ON f.fieldTypes_id = ft.id 
+            WHERE f.exercises_id = :exercise_id
+        ";
     $queryParams["exercise_id"] = $exerciseId;
 
     //get all exercises
@@ -42,9 +44,9 @@ function getFieldsByExercise(int $exerciseId) : array
 /**
  * Get fields by exercise
  * @param int $exerciseId
- * @return array
+ * @return array - array of fields
  */
-function getFieldsById(int $fieldId) : array
+function getFieldsById(int $fieldId): array
 {
     //initialize database connector
     $bd = new DbConnector(
@@ -54,7 +56,13 @@ function getFieldsById(int $fieldId) : array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT f.id AS id, f.name AS name, ft.name AS type FROM fields f JOIN fieldTypes ft ON f.fieldTypes_id = ft.id WHERE f.id = :field_id";
+    $query =
+        "
+            SELECT f.id AS id, f.name AS name, ft.name AS type 
+            FROM fields f 
+            JOIN fieldTypes ft ON f.fieldTypes_id = ft.id 
+            WHERE f.id = :field_id
+        ";
     $queryParams["field_id"] = $fieldId;
 
     //get all exercises
@@ -76,7 +84,7 @@ function getFieldsById(int $fieldId) : array
 }
 
 /**
- * Create a field
+ * Used to create a field
  * @param $fieldName string name
  * @param $fieldTypeId int type id associated
  * @param $exerciseId int exercise id associated
@@ -91,7 +99,11 @@ function createField(string $fieldName, int $fieldTypeId, int $exerciseId): int
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "insert into fields (name, exercises_id, fieldTypes_id) values (:name,:exercises_id,:fieldTypes_id)";
+    $query =
+        "
+            insert into fields (name, exercises_id, fieldTypes_id) 
+            values (:name,:exercises_id,:fieldTypes_id)
+        ";
     $queryParams = array(
         'name' => $fieldName,
         'exercises_id' => $exerciseId,
@@ -102,7 +114,7 @@ function createField(string $fieldName, int $fieldTypeId, int $exerciseId): int
 }
 
 /**
- * delete a field
+ * Used to delete a field
  * @param $id int
  * @return void
  */
@@ -115,8 +127,12 @@ function updateField(string $fieldName, int $fieldTypeId, int $exerciseId): int
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "UPDATE fields SET name = :name, fieldTypes_id = :fieldTypes_id WHERE (id = :exercises_id);
-";
+    $query =
+        "
+            UPDATE fields 
+            SET name = :name, fieldTypes_id = :fieldTypes_id 
+            WHERE (id = :exercises_id);
+        ";
     $queryParams = array(
         'name' => $fieldName,
         'exercises_id' => $exerciseId,
@@ -127,7 +143,7 @@ function updateField(string $fieldName, int $fieldTypeId, int $exerciseId): int
 }
 
 /**
- * delete a field
+ * Used to delete a field
  * @param $id int
  * @return void
  */
@@ -140,7 +156,11 @@ function deleteField(int $id): void
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "DELETE FROM fields WHERE id = :id";
+    $query =
+        "
+            DELETE FROM fields 
+            WHERE id = :id
+        ";
     $queryParams["id"] = $id;
     $bd->Query($query, $queryParams);
 }

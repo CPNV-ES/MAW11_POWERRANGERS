@@ -1,10 +1,12 @@
 <?php
-use model\class\DbConnector;
 
-// load database connector
-require_once SOURCE_DIR . "/model/DbConnector.php";
+use App\Model\DbConnector;
 
-function getFieldsTypes() : array
+/**
+ * Used to get fields types
+ * @return array
+ */
+function getFieldsTypes(): array
 {
     //initialize database connector
     $bd = new DbConnector(
@@ -13,13 +15,9 @@ function getFieldsTypes() : array
         $_ENV['DATABASE_USERNAME'],
         $_ENV['DATABASE_PASSWORD']
     );
-
-    //get all exercises
-    $resultQuery = $bd->Query(
-        "SELECT * FROM fieldtypes"
-    );
-
-    //check if result is empty
+//get all exercises
+    $resultQuery = $bd->Query("SELECT * FROM fieldtypes");
+//check if result is empty
     if (!$resultQuery) {
         return [];
     }

@@ -11,5 +11,5 @@ foreach ($_POST as $field => $value) {
     createAnswer($value, $fulfillment, $field);
 }
 
-// load view for exercises
-header("Location: /exercises/".$exerciseId."/answer/".$fulfillment."/edit");
+// load view for fulfillment
+header("Location: /exercises/" . $exerciseId . "/answer/" . $fulfillment . "/edit");

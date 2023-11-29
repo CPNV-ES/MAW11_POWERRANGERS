@@ -1,12 +1,12 @@
 <?php
 
-namespace model\class;
+namespace App;
 
 use Exception;
 
 /**
  * Class Handler
- * @package model\class
+ * @package App\Model
  */
 class Handler
 {
@@ -16,8 +16,7 @@ class Handler
     private string $render;
 
     /**
-     * Handler constructor.
-     *
+     * Handler constructor
      * @param RouterResponse $routerResponse
      * @throws Exception
      */
@@ -32,23 +31,20 @@ class Handler
     /**
      * @throws Exception
      */
-    private function handle() : void
+    private function handle(): void
     {
         //check if handler exists and set render
-        if ($this->status_code == 200 && file_exists(__DIR__ . '/' . $this->path . '.php'))
-        {
+        if ($this->status_code == 200 && file_exists(__DIR__ . '/' . $this->path . '.php')) {
             $this->render = __DIR__ . '/' . $this->path . '.php';
         }
 
         //check if error handler exists and set render
-        elseif (file_exists(__DIR__ . '/' . $this->path . "/" . $this->status_code . ".php"))
-        {
+        elseif (file_exists(__DIR__ . '/' . $this->path . "/" . $this->status_code . ".php")) {
             $this->render = __DIR__ . '/' . $this->path . "/" . $this->status_code . ".php";
         }
 
         //if handler doesn't exist, set render to error 500
-        else
-        {
+        else {
             $this->status_code = 500;
             $this->render = __DIR__ . $this->path . "/" . $this->status_code . ".php";
         }
@@ -57,7 +53,7 @@ class Handler
     /**
      * @return string
      */
-    public function getRender() : string
+    public function getRender(): string
     {
         return $this->render;
     }
@@ -65,7 +61,7 @@ class Handler
     /**
      * @return int
      */
-    public function getStatusCode() : int
+    public function getStatusCode(): int
     {
         return $this->status_code;
     }
