@@ -104,11 +104,11 @@ function createField(string $fieldName, int $fieldTypeId, int $exerciseId): int
             insert into fields (name, exercises_id, fieldTypes_id) 
             values (:name,:exercises_id,:fieldTypes_id)
         ";
-    $queryParams = array(
+    $queryParams = [
         'name' => $fieldName,
         'exercises_id' => $exerciseId,
         'fieldTypes_id' => $fieldTypeId
-    );
+    ];
 
     return $bd->queryReturnId($query, $queryParams);
 }
@@ -133,11 +133,11 @@ function updateField(string $fieldName, int $fieldTypeId, int $exerciseId): int
             SET name = :name, fieldTypes_id = :fieldTypes_id 
             WHERE (id = :exercises_id);
         ";
-    $queryParams = array(
+    $queryParams = [
         'name' => $fieldName,
         'exercises_id' => $exerciseId,
         'fieldTypes_id' => $fieldTypeId
-    );
+    ];
 
     return $bd->queryReturnId($query, $queryParams);
 }

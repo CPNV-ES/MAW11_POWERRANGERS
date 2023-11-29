@@ -18,7 +18,8 @@ require_once SOURCE_DIR . '/model/fields.php';
 $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR . "/..");
 $dotenv->load();
 
-class TestFields extends TestCase
+class
+TestFields extends TestCase
 {
     /**
      * Test getting fields nominal case
@@ -28,30 +29,30 @@ class TestFields extends TestCase
     {
         //Given
         $exercise = 22;
-        $expectedResult = array (
+        $expectedResult = [
             0 =>
-                (object) array(
+                (object) [
                     'name' => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                      Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, 
                      sit amet lobortis sapien sapien non mi.',
                     'type' => 'Single line text',
                     'id' => 9
-                ),
+                ],
             1 =>
-                (object) array(
+                (object) [
                     'name' => 'Nulla justo.',
                     'type' => 'Multi-line text',
                     'id' => 11
-                ),
+                ],
             2 =>
-                (object) array(
+                (object) [
                     'name' => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
                      Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, 
                      sit amet lobortis sapien sapien non mi.',
                     'type' => 'Single line text',
                     'id' => 12
-                ),
-        );
+                ],
+        ];
 
         //When
         $actualResult = getFieldsByExercise($exercise);

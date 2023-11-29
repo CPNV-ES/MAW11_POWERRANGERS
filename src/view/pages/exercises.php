@@ -3,7 +3,6 @@
 //initialize page variables
 $title = "Exercises";
 $navColor = "purple";
-$styles = array("<link rel='stylesheet' href='/css/components/exerciseCard.css'>");
 
 ob_start();
 ?>

@@ -4,7 +4,6 @@
 $title = "Answer an exercise";
 $navTitle = "Exercise: <b>" . $exercise['name'] . "</b>";
 $navColor = "purple";
-$styles = array("<link rel='stylesheet' href='/css/pages/exercise-new.css'>");
 
 ob_start();
 ?>
