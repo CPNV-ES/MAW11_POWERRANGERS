@@ -10,7 +10,6 @@ require_once '../vendor/autoload.php';
 use App\HandlerResponse;
 use App\Renderer;
 use PHPUnit\Framework\TestCase;
-use App\Model\DbConnector;
 
 require_once SOURCE_DIR . '/model/fields.php';
 
@@ -18,8 +17,7 @@ require_once SOURCE_DIR . '/model/fields.php';
 $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR . "/..");
 $dotenv->load();
 
-class
-TestFields extends TestCase
+class TestFields extends TestCase
 {
     /**
      * Test getting fields nominal case

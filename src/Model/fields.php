@@ -1,6 +1,6 @@
 <?php
 
-use App\Model\DbConnector;
+use App\Model\Service\DbConnector;
 
 /**
  * Get fields by exercise
