@@ -4,6 +4,7 @@ namespace App;
 
 use App\Controller\Controller;
 use App\Controller\ErrorController;
+use App\HandlerResponse;
 use Exception;
 
 /**
@@ -44,8 +45,9 @@ class Handler
                 $this->handlerResponse = new HandlerResponse($method, $statusCode);
                 return;
             }
-            $this->handlerResponse = new HandlerResponse([ErrorController::class, "index"], 404);
+
         }
+        $this->handlerResponse = new HandlerResponse([ErrorController::class, "index"], 500);
     }
 
     public function getHandlerResponse() :HandlerResponse {

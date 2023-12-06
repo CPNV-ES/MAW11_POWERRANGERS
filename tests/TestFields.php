@@ -1,11 +1,9 @@
 <?php
 
-namespace Tests;
-
 define('BASE_DIR', dirname(__FILE__) . '/..');
 define('SOURCE_DIR', BASE_DIR . '/src');
 
-require_once '../vendor/autoload.php';
+require_once BASE_DIR.'/vendor/autoload.php';
 
 use App\HandlerResponse;
 use App\Renderer;

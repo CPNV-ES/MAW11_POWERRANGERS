@@ -16,7 +16,6 @@ use App\Controller\FieldsController;
 use App\Controller\Controller;
 use App\Controller\FullfilmentsController;
 use App\Handler;
-use App\HandlerResponse;
 use App\Renderer;
 use App\Request;
 use App\Route;

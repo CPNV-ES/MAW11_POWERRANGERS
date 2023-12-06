@@ -7,6 +7,8 @@ define('SOURCE_DIR', BASE_DIR . '/src');
 
 require_once '../vendor/autoload.php';
 
+use App\Controller\ErrorController;
+use App\Controller\ExercisesController;
 use App\Handler;
 use App\RouterResponse;
 use PHPUnit\Framework\TestCase;
@@ -14,7 +16,7 @@ use PHPUnit\Framework\TestCase;
 class TestHandler extends TestCase
 {
     // attributes
-    private $handler = ["controller/exercises", "index"];
+    private $handler = [ExercisesController::class, "index"];
     private $status_code = 200;
 
     private RouterResponse $routerResponse;
@@ -39,8 +41,9 @@ class TestHandler extends TestCase
     public function testHandleSuccess()
     {
         $handler = new Handler($this->routerResponse);
-        $this->assertIsString($handler->getRender());
-        $this->assertEquals(200, $handler->getStatusCode());
+        $handlerResponse = $handler->getHandlerResponse();
+        $this->assertIsArray($handlerResponse->getMethod());
+        $this->assertEquals(200, $handlerResponse->getStatusCode());
     }
 
     /**
@@ -48,8 +51,9 @@ class TestHandler extends TestCase
      */
     public function testHandleFailed()
     {
-        $handler = new Handler(new RouterResponse("Controller/exercises3", $this->status_code));
-        $this->assertEquals(500, $handler->getStatusCode());
+        $handler = new Handler(new RouterResponse([ExercisesController::class, "storefail"], $this->status_code));
+        $handlerResponse = $handler->getHandlerResponse();
+        $this->assertEquals(500, $handlerResponse->getStatusCode());
     }
 
     /**
@@ -57,7 +61,8 @@ class TestHandler extends TestCase
      */
     public function testGetRenderErrorCodesSuccess()
     {
-        $handler = new Handler(new RouterResponse("view/errors", 404));
-        $this->assertEquals(404, $handler->getStatusCode());
+        $handler = new Handler(new RouterResponse([ErrorController::class, "index"], 404));
+        $handlerResponse = $handler->getHandlerResponse();
+        $this->assertEquals(404, $handlerResponse->getStatusCode());
     }
 }
