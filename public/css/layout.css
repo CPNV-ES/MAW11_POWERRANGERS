@@ -91,3 +91,8 @@ nav span {
         width: 100%;
     }
 }
+
+.col-header {
+    text-align: start;
+    font-size: 3rem;
+}
