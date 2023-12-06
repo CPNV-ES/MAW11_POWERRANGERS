@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class TestHandler extends TestCase
 {
     // attributes
-    private $handler = "controller/exercises";
+    private $handler = ["controller/exercises", "index"];
     private $status_code = 200;
 
     private RouterResponse $routerResponse;
@@ -48,7 +48,7 @@ class TestHandler extends TestCase
      */
     public function testHandleFailed()
     {
-        $handler = new Handler(new RouterResponse("controller/exercises3", $this->status_code));
+        $handler = new Handler(new RouterResponse("Controller/exercises3", $this->status_code));
         $this->assertEquals(500, $handler->getStatusCode());
     }
 

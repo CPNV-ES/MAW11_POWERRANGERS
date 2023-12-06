@@ -10,8 +10,7 @@ require_once '../vendor/autoload.php';
 use App\HandlerResponse;
 use App\Renderer;
 use PHPUnit\Framework\TestCase;
-
-require_once SOURCE_DIR . '/model/fields.php';
+use App\Model\Service\Fields;
 
 // Load environment variable
 $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR . "/..");
@@ -53,7 +52,7 @@ class TestFields extends TestCase
         ];
 
         //When
-        $actualResult = getFieldsByExercise($exercise);
+        $actualResult = Fields::getFieldsByExercise($exercise);
 
         //Then
         $this->assertEquals($expectedResult, $actualResult);
@@ -150,7 +149,7 @@ class TestFields extends TestCase
         $fieldExercise = 1;
 
         //When
-        $fieldId = createField("test", 1, 1);
+        $fieldId = Fields::createField("test", 1, 1);
 
         //When
         $_POST["fieldId"] = $fieldId;
@@ -175,7 +174,7 @@ class TestFields extends TestCase
         $expectedResult = [];
 
         //When
-        $actualResult = getFieldsByExercise($exercise);
+        $actualResult = Fields::getFieldsByExercise($exercise);
 
         //Then
         $this->assertEquals($expectedResult, $actualResult);

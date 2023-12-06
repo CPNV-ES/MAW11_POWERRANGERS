@@ -7,6 +7,9 @@ define('SOURCE_DIR', BASE_DIR . '/src');
 
 require_once '../vendor/autoload.php';
 
+use App\Controller\Controller;
+use App\Controller\ExercisesController;
+use App\Controller\FieldsController;
 use App\Request;
 use App\Route;
 use App\Router;
@@ -21,10 +24,9 @@ class TestRouter extends TestCase
 
     protected function setUp(): void
     {
-        $this->routes[] = new Route("/", "GET", "view/pages/home");
-        $this->routes[] = new Route("/exercises", "GET", "controller/exercises");
-        $this->routes[] = new Route("/exercises/new", "GET", "view/pages/exercise-new");
-        $this->routes[] = new Route("/exercises/new", "POST", "controller/exercise-new");
+        $this->routes[] = new Route("/", "GET", [Controller::class, "/pages/home"]);
+        $this->routes[] = new Route("/exercises", "GET", [ExercisesController::class, "index"]);
+        $this->routes[] = new Route("/exercises/new", "GET", [Controller::class, "/pages/exercise-new"]);
     }
 
     /**
@@ -42,7 +44,7 @@ class TestRouter extends TestCase
      */
     public function testInitError()
     {
-        $this->routes[] = new Route("/", "GET", "view/pages/home");
+        $this->routes[] = new Route("/", "GET", [Controller::class, "/pages/home"]);
         $this->expectException(Exception::class);
         new Router(new Request("/", "GET"), $this->routes);
     }
@@ -74,8 +76,8 @@ class TestRouter extends TestCase
      */
     public function testAddWithVariable()
     {
-        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
-        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+        $this->routes[] = new Route("/exercises/{id}", "GET", [Controller::class, "/exercise"]);
+        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", [FieldsController::class, "create"]);
 
         $router = new Router(new Request("/", "GET"), $this->routes);
 
@@ -96,8 +98,8 @@ class TestRouter extends TestCase
 
     public function testRunWithVariable()
     {
-        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
-        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+        $this->routes[] = new Route("/exercises/{id}", "GET", [Controller::class, "/exercise"]);
+        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", [FieldsController::class, "store"]);
 
         $router = new Router(new Request("/exercises/1", "GET"), $this->routes);
 

@@ -7,6 +7,8 @@ define('SOURCE_DIR', BASE_DIR . '/src');
 
 require_once '../vendor/autoload.php';
 
+use App\Controller\Controller;
+use App\Controller\ExercisesController;
 use App\HandlerResponse;
 use App\Request;
 use App\Route;
@@ -38,17 +40,15 @@ class TestRouteExercises extends TestCase
         // Initialize router
 
         // Add your routes here
-        $routes[] = new Route("/", "GET", "view/pages/home");
-        $routes[] = new Route("/exercises", "GET", "controller/exercises");
+        $routes[] = new Route("/", "GET", [Controller::class, "pages/home"]);
+        $routes[] = new Route("/exercises", "GET", [ExercisesController::class, "index"]);
 
         $router = new Router($this->request, $routes);
-
-        $routerResponse = new RouterResponse($router->getHandler(), $router->getStatusCode(), $router->getVariables());
 
         //----------------------------------------//
         // Handler
         // Initialize handler
-        $handler = new Handler($routerResponse);
+        $handler = new Handler($router->findRoute());
 
         $handlerResponse = new HandlerResponse($handler->getRender(), $handler->getStatusCode());
 
