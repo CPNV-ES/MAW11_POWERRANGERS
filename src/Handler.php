@@ -13,8 +13,8 @@ use Exception;
 class Handler
 {
     // attributes
-    private int $status_code;
-    private array $method;
+    
+    private HandlerResponse $handlerResponse;
     /**
      * Handler constructor
      * @param RouterResponse $routerResponse
@@ -22,47 +22,33 @@ class Handler
      */
     public function __construct(RouterResponse $routerResponse)
     {
-        //set attributes
-        $this->status_code = $routerResponse->getStatusCode();
-        $this->method = $routerResponse->getMethod();
-        $this->handle();
+        $this->handle($routerResponse->getStatusCode(), $routerResponse->getMethod());
     }
 
     /**
      * @throws Exception
      */
-    private function handle() : void
+    public function handle(int $statusCode, array $method) : void
     {
         //check if class exists
-        if (class_exists($this->method[0])) {
-            if ($this->method[0] == Controller::class) {
+        if (class_exists($method[0])) {
+            if ($method[0] == Controller::class) {
                 //check method[1] is a valid path
-                if (file_exists(SOURCE_DIR . "/view/" . $this->method[1] . ".php")) {
+                if (file_exists(SOURCE_DIR . "/view/" . $method[1] . ".php")) {
+                    $this->handlerResponse = new HandlerResponse($method, $statusCode);
                     return;
                 }
             }
             //if class exists, check if method exists
-            if (method_exists($this->method[0], $this->method[1])) {
+            if (method_exists($method[0], $method[1])) {
+                $this->handlerResponse = new HandlerResponse($method, $statusCode);
                 return;
             }
-            $this->method = [ErrorController::class, "index"];
-            $this->status_code = 404;
+            $this->handlerResponse = new HandlerResponse([ErrorController::class, "index"], 404);
         }
     }
 
-    /**
-     * @return array
-     */
-    public function getMethod() : array
-    {
-        return $this->method;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode() : int
-    {
-        return $this->status_code;
+    public function getHandlerResponse() :HandlerResponse {
+        return $this->handlerResponse;
     }
 }

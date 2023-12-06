@@ -70,6 +70,5 @@ $routes[] = new Route(
 );
 
 $router = new Router($request, $routes);
-$handler = new Handler($router->findRoute());
-$handlerResponse = new HandlerResponse($handler->getMethod(), $handler->getStatusCode());
-$renderer = new Renderer($handlerResponse, $router->getVariables());
+$handler = new Handler($router->getRouterResponse());
+$renderer = new Renderer($handler->getHandlerResponse(), $router->getVariables());

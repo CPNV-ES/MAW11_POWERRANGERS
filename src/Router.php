@@ -17,6 +17,8 @@ class Router
     private string $routeRequest;
     private string $methodRequest;
 
+    private RouterResponse $routerResponse;
+
     /**
      * Router constructor.
      *
@@ -33,6 +35,8 @@ class Router
         foreach ($routes as $route) {
             $this->add($route->getRoute(), $route->getMethod(), $route->getHandler(), $route->getStatusCode());
         }
+        $this->findRoute();
+
     }
 
     /**
@@ -60,11 +64,8 @@ class Router
         $this->routes[] = $route;
     }
 
-    /**
-     * @param string $routeRequest
-     * @param string $methodRequest
-     */
-    public function findRoute() : RouterResponse
+
+    public function findRoute() : void
     {
         $this->variables = [];
         $routeRequestArray = explode("/", $this->routeRequest);
@@ -101,12 +102,14 @@ class Router
                     $checkValidRoot = false;
                 }
                 if ($checkValidRoot) {
-                    return new RouterResponse($route->getHandler(), $route->getStatusCode(),  $this->variables);
+                    $this->routerResponse = new RouterResponse($route->getHandler(), $route->getStatusCode(),  $this->variables);
+                    break;
                 }
             }
         }
-        //if route doesn't exist, set handler to error page and status code to 404
-        return new RouterResponse([ErrorController::class, "errors"], 404, $this->variables);
+        if (!isset($this->routerResponse)) {
+            $this->routerResponse = new RouterResponse([ErrorController::class, "errors"], 404, $this->variables);
+        }
     }
 
     /**
@@ -123,6 +126,10 @@ class Router
     public function getVariables(): array
     {
         return $this->variables;
+    }
+
+    public function getRouterResponse() :RouterResponse {
+        return $this->routerResponse;
     }
 
 }

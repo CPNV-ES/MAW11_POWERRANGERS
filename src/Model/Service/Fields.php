@@ -117,15 +117,15 @@ class Fields
      * @param $id int
      * @return void
      */
-    public static function updateField(string $fieldName, int $fieldTypeId, int $exerciseId): int
+    public static function updateField(string $fieldName, int $fieldTypeId, int $fieldId): int
     {
         $bd = self::DBConnection();
 
         $query =
-            "UPDATE fields SET name = :name, fieldTypes_id = :fieldTypes_id WHERE (id = :exercises_id);";
+            "UPDATE fields SET name = :name, fieldTypes_id = :fieldTypes_id WHERE id = :field_id;";
         $queryParams = [
             'name' => $fieldName,
-            'exercises_id' => $exerciseId,
+            'field_id' => $fieldId,
             'fieldTypes_id' => $fieldTypeId
         ];
 

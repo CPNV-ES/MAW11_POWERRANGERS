@@ -6,6 +6,7 @@ use App\Model\Service\Exercises;
 use App\Model\Service\Fields;
 use App\Model\Service\FieldTypes;
 
+
 class FieldsController extends Controller
 {
     public function index()
@@ -59,6 +60,7 @@ class FieldsController extends Controller
         $fieldName = $_POST["name"];
         $fieldType = $_POST["fieldType"];
         $fieldExercise = $this->variables['exerciseId'];
+        $fieldId = $this->variables['fieldId'];
 
         if (strlen($fieldName) > 512) {
             $error_name = "The label of your field can't exceed 512 characters";
@@ -69,7 +71,7 @@ class FieldsController extends Controller
             http_response_code(406);
             $this->index();
         } else {
-            Fields::updateField($fieldName, $fieldType, $fieldExercise);
+            Fields::updateField($fieldName, $fieldType, $fieldId);
             header("Location: /exercises/" . $this->variables['exerciseId'] . "/fields");
         }
 
