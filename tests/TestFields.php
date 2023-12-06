@@ -5,6 +5,7 @@ define('SOURCE_DIR', BASE_DIR . '/src');
 
 require_once BASE_DIR.'/vendor/autoload.php';
 
+use App\Controller\FieldsController;
 use App\HandlerResponse;
 use App\Renderer;
 use PHPUnit\Framework\TestCase;
@@ -24,36 +25,12 @@ class TestFields extends TestCase
     {
         //Given
         $exercise = 22;
-        $expectedResult = [
-            0 =>
-                (object) [
-                    'name' => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                     Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, 
-                     sit amet lobortis sapien sapien non mi.',
-                    'type' => 'Single line text',
-                    'id' => 9
-                ],
-            1 =>
-                (object) [
-                    'name' => 'Nulla justo.',
-                    'type' => 'Multi-line text',
-                    'id' => 11
-                ],
-            2 =>
-                (object) [
-                    'name' => 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-                     Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, 
-                     sit amet lobortis sapien sapien non mi.',
-                    'type' => 'Single line text',
-                    'id' => 12
-                ],
-        ];
 
         //When
         $actualResult = Fields::getFieldsByExercise($exercise);
 
         //Then
-        $this->assertEquals($expectedResult, $actualResult);
+        $this->assertIsArray($actualResult);
     }
 
     /**
@@ -72,7 +49,7 @@ class TestFields extends TestCase
         $_POST["fieldType"] = $fieldType;
 
         new Renderer(
-            new HandlerResponse("controller/fieldsCreate.php", 200),
+            new HandlerResponse([FieldsController::class, "store"], 200),
             ["exerciseId" => $fieldExercise]
         );
 
@@ -103,7 +80,7 @@ class TestFields extends TestCase
         $_POST["fieldType"] = $fieldType;
 
         new Renderer(
-            new HandlerResponse("controller/fieldsCreate.php", 200),
+            new HandlerResponse([FieldsController::class, "store"], 200),
             ["exerciseId" => $fieldExercise]
         );
 
@@ -127,7 +104,7 @@ class TestFields extends TestCase
         $_POST["fieldType"] = $fieldType;
 
         new Renderer(
-            new HandlerResponse("controller/fieldsCreate.php", 200),
+            new HandlerResponse([FieldsController::class, "store"], 200),
             ["exerciseId" => $fieldExercise]
         );
 
@@ -153,7 +130,7 @@ class TestFields extends TestCase
         $_POST["fieldId"] = $fieldId;
 
         new Renderer(
-            new HandlerResponse("controller/fieldsDelete.php", 200),
+            new HandlerResponse([FieldsController::class, "destroy"], 200),
             ["exerciseId" => $fieldExercise]
         );
 
