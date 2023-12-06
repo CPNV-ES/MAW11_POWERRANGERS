@@ -5,6 +5,8 @@ h1 {
     line-height: 47.2px;
 }
 
+/* Alternative nav */
+
 .top {
     color: white;
     background-color: var(--purple);
@@ -23,15 +25,19 @@ h1 {
     margin-bottom: 1rem;
 }
 
+/* Menus */
+
 .btn-list {
     display: flex;
     justify-content: space-around;
     padding-top: 1.25rem;
 }
 
-.btn-list .btn{
+.btn-list .btn {
     width: 21.65rem;
 }
+
+/* Mobile view */
 
 @media (max-width: 1100px) {
     .btn-list {

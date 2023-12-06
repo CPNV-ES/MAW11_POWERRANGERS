@@ -3,19 +3,20 @@
 //initialize page variables
 $title = "Exercises";
 $navColor = "purple";
-$styles = array("<link rel='stylesheet' href='/css/components/exerciseCard.css'>");
-
-//load card component
-require_once SOURCE_DIR . '/view/components/exerciseCard.php';
 
 ob_start();
 ?>
     <ul>
-        <?php
 
-        //make cards with data from database
-        array_map('card', $exercises);
-        ?>
+        <!--make cards with data from database-->
+        <?php
+        foreach ($exercises as $exercise): ?>
+            <li class='card'>
+                <span class='card-title'><?= $exercise['name'] ?></span>
+                <a href="/exercises/<?= $exercise['id'] ?>/answer" class='btn bg-purple'>take it</a>
+            </li>
+        <?php
+        endforeach; ?>
 
     </ul>
 <?php

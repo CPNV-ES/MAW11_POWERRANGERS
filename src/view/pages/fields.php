@@ -8,7 +8,6 @@ $navTitle = "New exercise";
 $navColor = "orange";
 $navTitle = "Exercise: " . "<strong>". $exercise["name"] . "</strong>";
 
-$styles = array("<link rel='stylesheet' href='/css/pages/exercise-new.css'>");
 ob_start();
 ?>
 <div class="container">
@@ -36,7 +35,7 @@ ob_start();
                                title="Edit"
                                class="icon"
                                rel="nofollow"
-                               data-method="put"
+                               data-method="GET"
                                href="/exercises/<?= $this->variables['exerciseId']; ?>/fields/<?= $field->id ?>"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

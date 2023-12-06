@@ -4,7 +4,6 @@
 $title = "Create an exercise";
 $navTitle = "New exercise";
 $navColor = "orange";
-$styles = array("<link rel='stylesheet' href='/css/pages/exercise-new.css'>");
 
 ob_start();
 ?>

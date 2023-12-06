@@ -1,19 +1,21 @@
 <?php
 
+namespace App;
+
 abstract class HTTP
 {
-    private string $path;
+    private array $method;
     private string $statusCode;
 
-    public function __construct(string $path, string $statusCode)
+    public function __construct(array $method, string $statusCode)
     {
-        $this->path = $path;
+        $this->method = $method;
         $this->statusCode = $statusCode;
     }
 
-    public function getPath(): string
+    public function getMethod(): array
     {
-        return $this->path;
+        return $this->method;
     }
 
     public function getStatusCode(): string

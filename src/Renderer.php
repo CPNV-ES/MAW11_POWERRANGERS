@@ -1,13 +1,15 @@
 <?php
 
-namespace model\class;
+namespace App;
+
+use App\Controller\Controller;
 
 /**
  * This class is designed to manage the rendering process.
  */
 class Renderer
 {
-    private string $render;
+    private array $render;
     private string $httpResponse;
     private array $variables;
 
@@ -20,7 +22,7 @@ class Renderer
     public function __construct(HandlerResponse $handlerResponse, array $variables = [])
     {
         //initialize attributes
-        $this->render = $handlerResponse->getPath();
+        $this->render = $handlerResponse->getMethod();
         $this->httpResponse = $handlerResponse->getStatusCode();
         $this->variables = $variables;
         $this->send();
@@ -33,8 +35,14 @@ class Renderer
      */
     private function send(): void
     {
-        //TODO : Add header on the response.
         http_response_code($this->httpResponse);
-        require $this->render;
+        if ($this->render[0] == Controller::class) {
+            require SOURCE_DIR . "/view/" . $this->render[1] . ".php";
+        }else{
+            $class = $this->render[0];
+            $method = $this->render[1];
+            $result = new $class($this->variables);
+            $result->$method();
+        }
     }
 }

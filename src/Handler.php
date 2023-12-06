@@ -1,72 +1,56 @@
 <?php
 
-namespace model\class;
+namespace App;
 
+use App\Controller\Controller;
+use App\Controller\ErrorController;
+use App\HandlerResponse;
 use Exception;
 
 /**
  * Class Handler
- * @package model\class
+ * @package App\Model
  */
 class Handler
 {
     // attributes
-    private int $status_code;
-    private string $path;
-    private string $render;
-
+    
+    private HandlerResponse $handlerResponse;
     /**
-     * Handler constructor.
-     *
+     * Handler constructor
      * @param RouterResponse $routerResponse
      * @throws Exception
      */
-    public function __construct(RouterResponse $routerResponse) //TODO : why is this a string on status code?
+    public function __construct(RouterResponse $routerResponse)
     {
-        //set attributes
-        $this->status_code = $routerResponse->getStatusCode();
-        $this->path = $routerResponse->getPath();
-        $this->handle();
+        $this->handle($routerResponse->getStatusCode(), $routerResponse->getMethod());
     }
 
     /**
      * @throws Exception
      */
-    private function handle() : void
+    public function handle(int $statusCode, array $method) : void
     {
-        //check if handler exists and set render
-        if ($this->status_code == 200 && file_exists(__DIR__ . '/' . $this->path . '.php'))
-        {
-            $this->render = __DIR__ . '/' . $this->path . '.php';
-        }
+        //check if class exists
+        if (class_exists($method[0])) {
+            if ($method[0] == Controller::class) {
+                //check method[1] is a valid path
+                if (file_exists(SOURCE_DIR . "/view/" . $method[1] . ".php")) {
+                    $this->handlerResponse = new HandlerResponse($method, $statusCode);
+                    return;
+                }
+            }
+            //if class exists, check if method exists
+            if (method_exists($method[0], $method[1])) {
+                $this->handlerResponse = new HandlerResponse($method, $statusCode);
+                return;
+            }
 
-        //check if error handler exists and set render
-        elseif (file_exists(__DIR__ . '/' . $this->path . "/" . $this->status_code . ".php"))
-        {
-            $this->render = __DIR__ . '/' . $this->path . "/" . $this->status_code . ".php";
         }
-
-        //if handler doesn't exist, set render to error 500
-        else
-        {
-            $this->status_code = 500;
-            $this->render = __DIR__ . $this->path . "/" . $this->status_code . ".php";
-        }
+        $this->handlerResponse = new HandlerResponse([ErrorController::class, "index"], 500);
     }
 
-    /**
-     * @return string
-     */
-    public function getRender() : string
-    {
-        return $this->render;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode() : int
-    {
-        return $this->status_code;
+    public function getHandlerResponse() :HandlerResponse {
+        return $this->handlerResponse;
     }
 }
