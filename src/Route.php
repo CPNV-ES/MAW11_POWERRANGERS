@@ -11,17 +11,17 @@ class Route
     // Attributes
     private string $route;
     private string $method;
-    private string $handler;
+    private array $handler;
     private int $status_code; //TODO : agree on nomenclature.
 
     /**
      * Route constructor.
      * @param string $route
      * @param string $method
-     * @param string $handler
+     * @param array $handler
      * @param int $status_code
      */
-    public function __construct(string $route, string $method, string $handler, int $status_code = 200)
+    public function __construct(string $route, string $method, array $handler, int $status_code = 200)
     {
         //set attributes
         $this->route = $route;
@@ -47,9 +47,9 @@ class Route
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getHandler(): string
+    public function getHandler(): array
     {
         return $this->handler;
     }

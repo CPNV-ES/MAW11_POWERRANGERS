@@ -2,7 +2,7 @@
 
 namespace App\Model\Service;
 
-class fields
+class Fields
 {
     /**
      * Used to create a db connection
@@ -122,11 +122,7 @@ class fields
         $bd = self::DBConnection();
 
         $query =
-            "
-            UPDATE fields 
-            SET name = :name, fieldTypes_id = :fieldTypes_id 
-            WHERE (id = :exercises_id);
-        ";
+            "UPDATE fields SET name = :name, fieldTypes_id = :fieldTypes_id WHERE (id = :exercises_id);";
         $queryParams = [
             'name' => $fieldName,
             'exercises_id' => $exerciseId,

@@ -13,7 +13,7 @@ ob_start();
         foreach ($exercises as $exercise): ?>
             <li class='card'>
                 <span class='card-title'><?= $exercise['name'] ?></span>
-                <a href="exercises/<?= $exercise['id'] ?>/answer" class='btn bg-purple'>take it</a>
+                <a href="exercises/<?= $exercise['id'] ?>/fields" class='btn bg-purple'>take it</a>
             </li>
         <?php
         endforeach; ?>

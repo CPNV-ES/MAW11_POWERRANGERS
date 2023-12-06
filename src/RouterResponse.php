@@ -5,9 +5,9 @@ namespace App;
 class RouterResponse extends HTTP
 {
     private array $variables;
-    public function __construct(string $path, string $statusCode, array $variables = [])
+    public function __construct(array $method, string $statusCode, array $variables = [])
     {
-        parent::__construct($path, $statusCode);
+        parent::__construct($method, $statusCode);
         $this->variables = $variables;
     }
 

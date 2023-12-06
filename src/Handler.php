@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Controller\Controller;
+use App\Controller\ErrorController;
 use Exception;
 
 /**
@@ -12,56 +14,54 @@ class Handler
 {
     // attributes
     private int $status_code;
-    private string $path;
-    private string $render;
-
+    private array $method;
     /**
      * Handler constructor
      * @param RouterResponse $routerResponse
      * @throws Exception
      */
-    public function __construct(RouterResponse $routerResponse) //TODO : why is this a string on status code?
+    public function __construct(RouterResponse $routerResponse)
     {
         //set attributes
         $this->status_code = $routerResponse->getStatusCode();
-        $this->path = $routerResponse->getPath();
+        $this->method = $routerResponse->getMethod();
         $this->handle();
     }
 
     /**
      * @throws Exception
      */
-    private function handle(): void
+    private function handle() : void
     {
-        //check if handler exists and set render
-        if ($this->status_code == 200 && file_exists(__DIR__ . '/' . $this->path . '.php')) {
-            $this->render = __DIR__ . '/' . $this->path . '.php';
-        }
-
-        //check if error handler exists and set render
-        elseif (file_exists(__DIR__ . '/' . $this->path . "/" . $this->status_code . ".php")) {
-            $this->render = __DIR__ . '/' . $this->path . "/" . $this->status_code . ".php";
-        }
-
-        //if handler doesn't exist, set render to error 500
-        else {
-            $this->status_code = 500;
-            $this->render = __DIR__ . $this->path . "/" . $this->status_code . ".php";
+        //check if class exists
+        if (class_exists($this->method[0])) {
+            if ($this->method[0] == Controller::class) {
+                //check method[1] is a valid path
+                if (file_exists(SOURCE_DIR . "/view/" . $this->method[1] . ".php")) {
+                    return;
+                }
+            }
+            //if class exists, check if method exists
+            if (method_exists($this->method[0], $this->method[1])) {
+                return;
+            }
+            $this->method = [ErrorController::class, "index"];
+            $this->status_code = 404;
         }
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getRender(): string
+    public function getMethod() : array
     {
-        return $this->render;
+        return $this->method;
     }
 
     /**
      * @return int
      */
-    public function getStatusCode(): int
+    public function getStatusCode() : int
     {
         return $this->status_code;
     }

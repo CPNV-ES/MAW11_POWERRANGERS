@@ -10,96 +10,66 @@ define('FIELD_LIST_OF_SINGLE_LINE', 128);
 
 require_once '../vendor/autoload.php';
 
+use App\Controller\AnswersController;
+use App\Controller\ExercisesController;
+use App\Controller\FieldsController;
+use App\Controller\Controller;
+use App\Controller\FullfilmentsController;
 use App\Handler;
 use App\HandlerResponse;
 use App\Renderer;
 use App\Request;
 use App\Route;
 use App\Router;
-use App\RouterResponse;
 
 //check if an exception is throw and catch it to display error 500 page
-try {
-    // Load environment variable
-    $dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR . "/..");
-    $dotenv->load();
+// Load environment variable
+$dotenv = Dotenv\Dotenv::createImmutable(SOURCE_DIR . "/..");
+$dotenv->load();
 
-    // Get requested route and init route and method variables
-    $route = $_SERVER["REQUEST_URI"];
-    if (!empty($_SERVER["QUERY_STRING"])) {
-        $route = substr($route, 0, strlen($_SERVER["REQUEST_URI"]) - strlen($_SERVER["QUERY_STRING"]) - 1);
-    }
-    $method = $_SERVER["REQUEST_METHOD"];
-    $request = new Request($route, $method);
-
-    // Add your routes here
-    $routes[] = new Route("/", "GET", "view/pages/home");
-    $routes[] = new Route("/exercises", "GET", "controller/exercises");
-    $routes[] = new Route("/exercises/new", "GET", "view/pages/exerciseCreate");
-    $routes[] = new Route("/exercises/new", "POST", "controller/exerciseCreate");
-    $routes[] = new Route("/exercises/{exerciseId}/fields", "GET", "controller/fields");
-    $routes[] = new Route("/exercises/{exerciseId}/answer", "GET", "controller/answerCreate");
-    $routes[] = new Route("/exercises/{exerciseId}/answer", "POST", "controller/fulfillmentCreate");
-    $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsCreate");
-    $routes[] = new Route(
-        "/exercises/{exerciseId}/answer/{answerId}/edit",
-        "GET",
-        "controller/answerEditView"
-    );
-    $routes[] = new Route(
-        "/exercises/{exerciseId}/answer/{answerId}/edit",
-        "POST",
-        "controller/answerEdit"
-    );
-    $routes[] = new Route(
-        "/exercises/{exerciseId}/fields/{fieldId}/delete",
-        "GET",
-        "controller/fieldsDelete"
-    );
-    $routes[] = new Route(
-        "/exercises/{exerciseId}/fields/{fieldId}",
-        "GET",
-        "controller/fieldsUpdateView"
-    );
-    $routes[] = new Route(
-        "/exercises/{exerciseId}/fields/{fieldId}/edit",
-        "POST",
-        "controller/fieldsUpdate"
-    );
-
-    $router = new Router($request, $routes);
-
-    $routerResponse = new RouterResponse($router->getHandler(), $router->getStatusCode(), $router->getVariables());
-
-    //----------------------------------------//
-    // Handler
-    // Initialize handler
-    $handler = new Handler($routerResponse);
-
-    $handlerResponse = new HandlerResponse($handler->getRender(), $handler->getStatusCode());
-
-    //----------------------------------------//
-    // Renderer
-    // Initialize renderer
-    $renderer = new Renderer($handlerResponse, $routerResponse->getVariables());
-
-    //----------------------------------------//
-} catch (Exception) {
-    //set handler and status code for error 500
-    $handle = "view/errors";
-    $status_code = 500;
-    $routerResponse = new RouterResponse($handle, $status_code);
-    //----------------------------------------//
-    // handler
-    // Initialize handler
-    $handler = new Handler($routerResponse);
-
-    $handlerResponse = new HandlerResponse($handler->getRender(), $handler->getStatusCode());
-
-    //----------------------------------------//
-    // Renderer
-    // Initialize renderer
-    $renderer = new Renderer($handlerResponse, $routerResponse->getVariables());
-
-    //----------------------------------------//
+// Get requested route and init route and method variables
+$route = $_SERVER["REQUEST_URI"];
+if (!empty($_SERVER["QUERY_STRING"])) {
+    $route = substr($route, 0, strlen($_SERVER["REQUEST_URI"]) - strlen($_SERVER["QUERY_STRING"]) - 1);
 }
+$method = $_SERVER["REQUEST_METHOD"];
+$request = new Request($route, $method);
+
+$routes[] = new Route("/", "GET", [Controller::class, "pages/home"]);
+$routes[] = new Route("/exercises", "GET", [ExercisesController::class, "index"]);
+$routes[] = new Route("/exercises/new", "GET", [Controller::class, "/pages/exerciseCreate"]);
+$routes[] = new Route("/exercises/new", "POST", [ExercisesController::class, "store"]);
+$routes[] = new Route("/exercises/{exerciseId}/fields", "GET", [FieldsController::class, "index"]);
+$routes[] = new Route("/exercises/{exerciseId}/answer", "GET", [AnswersController::class, "create"]);
+$routes[] = new Route("/exercises/{exerciseId}/answer", "POST", [FullfilmentsController::class, "create"]);
+$routes[] = new Route("/exercises/{exerciseId}/fields", "POST", [FieldsController::class, "store"]);
+$routes[] = new Route(
+    "/exercises/{exerciseId}/answer/{answerId}/edit",
+    "GET",
+    [AnswersController::class, "edit"]
+);
+$routes[] = new Route(
+    "/exercises/{exerciseId}/answer/{answerId}/edit",
+    "POST",
+    [AnswersController::class, "update"]
+);
+$routes[] = new Route(
+    "/exercises/{exerciseId}/fields/{fieldId}/delete",
+    "GET",
+    [FieldsController::class, "destroy"]
+);
+$routes[] = new Route(
+    "/exercises/{exerciseId}/fields/{fieldId}",
+    "GET",
+    [FieldsController::class, "edit"]
+);
+$routes[] = new Route(
+    "/exercises/{exerciseId}/fields/{fieldId}/edit",
+    "POST",
+    [FieldsController::class, "update"]
+);
+
+$router = new Router($request, $routes);
+$handler = new Handler($router->findRoute());
+$handlerResponse = new HandlerResponse($handler->getMethod(), $handler->getStatusCode());
+$renderer = new Renderer($handlerResponse, $router->getVariables());
