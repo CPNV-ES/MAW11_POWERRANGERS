@@ -3,7 +3,7 @@
 //initialize page variables
 $title = "Exercises";
 $navColor = "purple";
-
+$styles = [];
 ob_start();
 ?>
     <ul>
