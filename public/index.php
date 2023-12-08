@@ -15,6 +15,7 @@ use App\Controller\ExercisesController;
 use App\Controller\FieldsController;
 use App\Controller\Controller;
 use App\Controller\FullfilmentsController;
+use App\Controller\ResultController;
 use App\Handler;
 use App\Renderer;
 use App\Request;
@@ -67,6 +68,7 @@ $routes[] = new Route(
     "POST",
     [FieldsController::class, "update"]
 );
+$routes[] = new Route("/exercises/{exerciseId}/results", "GET", [ResultController::class, "index"]);
 
 $router = new Router($request, $routes);
 $handler = new Handler($router->getRouterResponse());
