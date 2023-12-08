@@ -27,7 +27,6 @@ class FullfilmentsController extends Controller
         $fulfillment = Fulfillments::getFulfillmentById($fulfillmentId);
         $exerciseId = $this->variables['exerciseId'];
         $exercise = Exercises::getExerciseById($exerciseId);
-        $fields = Fields::getFieldsByExercise($exerciseId);
         $answers = Answers::getAnswersByFulfillment($fulfillmentId);
         require_once SOURCE_DIR . "/view/pages/fulfillments.php";
     }
