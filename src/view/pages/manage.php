@@ -8,7 +8,6 @@ $styles = array("<link rel='stylesheet' href='/css/pages/manage.css'>");
 ob_start();
 ?>
 
-
     <div class="container">
         <div class="row">
 
@@ -22,7 +21,7 @@ ob_start();
                         <?php
                         foreach ($exercises_building as $exercise) : ?>
                             <tr>
-                                <td class="text-section"><?= $exercise['name'] ?></td>
+                                <td class="text-section"><?= $exercise['name']?></td>
                                 <td class="icon-section">
                                     <i class="fa-solid fa-comment"></i>
                                     <i class="fa-solid fa-pen-to-square"></i>

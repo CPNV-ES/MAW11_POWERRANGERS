@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Service\Exercises;
+use App\Model\Service\Fields;
 
 class ManageController extends Controller
 {
@@ -15,7 +16,7 @@ class ManageController extends Controller
 
     public function index()
     {
-        $exercises = Exercises::getAllExercises();
+        $exercises = $this->addFieldCountOnExercises(Exercises::getAllExercises());
 
         $exercises_building = $this->filterExercises($exercises, 'Building');
         $exercises_answering = $this->filterExercises($exercises, 'Answering');
@@ -33,5 +34,16 @@ class ManageController extends Controller
             }
         }
         return $exercises_filtered;
+    }
+
+    private function addFieldCountOnExercises($exercises)
+    {
+        $result = [];
+        foreach ($exercises as $exercise) {
+            $fields = Fields::getFieldsByExercise($exercise['id']);
+            $exercise['fieldCount'] = count($fields);
+            array_push($result, $exercise);
+        }
+        return $result;
     }
 }
