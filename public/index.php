@@ -42,6 +42,7 @@ $routes[] = new Route("/exercises/{exerciseId}/fields", "GET", [FieldsController
 $routes[] = new Route("/exercises/{exerciseId}/answer", "GET", [AnswersController::class, "create"]);
 $routes[] = new Route("/exercises/{exerciseId}/answer", "POST", [FullfilmentsController::class, "create"]);
 $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", [FieldsController::class, "store"]);
+$routes[] = new Route("/exercises/{exerciseId}/fulfillments/{fulfillmentsId}", "GET", [FullfilmentsController::class, "show"]);
 $routes[] = new Route(
     "/exercises/{exerciseId}/answer/{answerId}/edit",
     "GET",

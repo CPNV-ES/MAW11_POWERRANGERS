@@ -34,4 +34,17 @@ class Fulfillments
         $queryParams = [gmdate("Y-m-d H:i:s")];
         return $bd->queryReturnId($query, $queryParams);
     }
+
+    public static function getFulfillmentById(int $fulfillmentId): array
+    {
+        $bd = self::DBConnection();
+
+        $query =
+            "
+                SELECT * FROM fulfillments
+                WHERE id = ?;
+            ";
+        $queryParams = [$fulfillmentId];
+        return $bd->query($query, $queryParams);
+    }
 }
