@@ -1,20 +1,25 @@
 <?php
 
-use model\class\Request;
-use model\class\Route;
-use model\class\Router;
+namespace Tests;
+
+define('BASE_DIR', dirname(__FILE__) . '/..');
+define('SOURCE_DIR', BASE_DIR . '/src');
+
+require_once '../vendor/autoload.php';
+
+use App\Controller\Controller;
+use App\Controller\ErrorController;
+use App\Controller\ExercisesController;
+use App\Controller\FieldsController;
+use App\Request;
+use App\Route;
+use App\Router;
+use App\RouterResponse;
+use Exception;
 use PHPUnit\Framework\TestCase;
 
-define('BASE_DIR', dirname( __FILE__ ).'/..');
-define('SOURCE_DIR', BASE_DIR.'/src');
-
-require_once SOURCE_DIR.'/Router.php';
-require_once BASE_DIR.'/vendor/autoload.php';
-require_once SOURCE_DIR.'/Route.php';
-require_once SOURCE_DIR.'/Request.php';
-
 /**
- * @covers Router
+ * @covers \model\class\framework\Router
  */
 class TestRouter extends TestCase
 {
@@ -22,14 +27,13 @@ class TestRouter extends TestCase
 
     protected function setUp(): void
     {
-        $this->routes[] = new Route("/", "GET", "view/pages/home");
-        $this->routes[] = new Route("/exercises", "GET", "controller/exercises");
-        $this->routes[] = new Route("/exercises/new", "GET", "view/pages/exercise-new");
-        $this->routes[] = new Route("/exercises/new", "POST", "controller/exercise-new");
+        $this->routes[] = new Route("/", "GET", [Controller::class, "/pages/home"]);
+        $this->routes[] = new Route("/exercises", "GET", [ExercisesController::class, "index"]);
+        $this->routes[] = new Route("/exercises/new", "GET", [Controller::class, "/pages/exercise-new"]);
     }
 
     /**
-     * @covers Router::__construct
+     * @covers \model\class\framework\Router::__construct
      */
     public function testInitSuccess()
     {
@@ -38,36 +42,38 @@ class TestRouter extends TestCase
     }
 
     /**
-     * @covers Router::add
+     * @covers \model\class\framework\Router::add
      * @throws Exception
      */
     public function testInitError()
     {
-        $this->routes[] = new Route("/", "GET", "view/pages/home");
+        $this->routes[] = new Route("/", "GET", [Controller::class, "/pages/home"]);
         $this->expectException(Exception::class);
         new Router(new Request("/", "GET"), $this->routes);
     }
 
     /**
-     * @covers Router::run
+     * @covers \model\class\framework\Router::run
      * @throws Exception
      */
     public function testRunSuccess()
     {
         $router = new Router(new Request("/", "GET"), $this->routes);
-        $this->assertEquals("view/pages/home", $router->getHandler());
+        $routerResponse = $router->getRouterResponse();
+        $this->assertEquals([Controller::class, "/pages/home"], $routerResponse->getMethod());
     }
 
     /**
-     * @covers Router::run
+     * @covers \model\class\framework\Router::run
      * @throws Exception
      */
     public function testRunError()
     {
         $router = new Router(new Request("/error", "GET"), $this->routes);
+        $routerResponse = $router->getRouterResponse();
 
-        $this->assertEquals("view/errors", $router->getHandler());
-        $this->assertEquals("404", $router->getStatusCode());
+        $this->assertEquals([ErrorController::class, "errors"], $routerResponse->getMethod());
+        $this->assertEquals("404", $routerResponse->getStatusCode());
     }
 
     /**
@@ -75,8 +81,8 @@ class TestRouter extends TestCase
      */
     public function testAddWithVariable()
     {
-        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
-        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+        $this->routes[] = new Route("/exercises/{id}", "GET", [Controller::class, "/exercise"]);
+        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", [FieldsController::class, "create"]);
 
         $router = new Router(new Request("/", "GET"), $this->routes);
 
@@ -84,8 +90,10 @@ class TestRouter extends TestCase
 
         $routeExists = false;
         foreach ($routes as $route) {
-            if ($route->getRoute() === '/exercises/{id}' && $route->getMethod() === 'GET' && $route->getHandler(
-                ) === 'view/exercise' && $route->getStatusCode() === 200) {
+            if (
+                $route->getRoute() === '/exercises/{id}' && $route->getMethod() === 'GET' && $route->getHandler(
+                ) === [Controller::class, "/exercise"] && $route->getStatusCode() === 200
+            ) {
                 $routeExists = true;
                 break;
             }
@@ -95,12 +103,13 @@ class TestRouter extends TestCase
 
     public function testRunWithVariable()
     {
-        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
-        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+        $this->routes[] = new Route("/exercises/{id}", "GET", [Controller::class, "/exercise"]);
+        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", [FieldsController::class, "store"]);
 
         $router = new Router(new Request("/exercises/1", "GET"), $this->routes);
+        $routerResponse = $router->getRouterResponse();
 
-        $this->assertEquals("view/exercise", $router->getHandler());
+        $this->assertEquals([Controller::class, "/exercise"], $routerResponse->getMethod());
         $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
     }
@@ -110,13 +119,14 @@ class TestRouter extends TestCase
      */
     public function testRunWithVariableError()
     {
-        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
-        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", "controller/fieldsInsert");
+        $this->routes[] = new Route("/exercises/{id}", "GET", [Controller::class, "/exercise"]);
+        $this->routes[] = new Route("/exercises/{exerciseId}/fields", "POST", [FieldsController::class, "store"]);
 
         $router = new Router(new Request("/error/1", "GET"), $this->routes);
+        $routerResponse = $router->getRouterResponse();
 
-        $this->assertEquals("view/errors", $router->getHandler());
-        $this->assertEquals("404", $router->getStatusCode());
+        $this->assertEquals([ErrorController::class, "errors"], $routerResponse->getMethod());
+        $this->assertEquals("404", $routerResponse->getStatusCode());
         $variable = $router->getVariables();
         $this->assertEmpty($variable);
     }
@@ -126,12 +136,14 @@ class TestRouter extends TestCase
      */
     public function testRunWithMultipleVariableSuccess()
     {
-        $this->routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
-        $this->routes[] = new Route("/exercises/{id}/{test}", "GET", "view/exercise2");
+        $this->routes[] = new Route("/exercises/{id}", "GET", [Controller::class, "/exercise"]);
+        $this->routes[] = new Route("/exercises/{id}/{test}", "GET", [Controller::class, "/exercise2"]);
+
 
         $router = new Router(new Request("/exercises/1/2", "GET"), $this->routes);
+        $routerResponse = $router->getRouterResponse();
 
-        $this->assertEquals("view/exercise2", $router->getHandler());
+        $this->assertEquals([Controller::class, "/exercise2"], $routerResponse->getMethod());
         $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
         $this->assertEquals("2", $variable["test"]);
@@ -139,12 +151,13 @@ class TestRouter extends TestCase
 
     public function testRouteSelectCorrectRouteSuccess()
     {
-        $routes[] = new Route("/exercises/{id}/fields", "GET", "view/exercise2");
-        $routes[] = new Route("/exercises/{id}", "GET", "view/exercise");
+        $this->routes[] = new Route("/exercises/{id}/{test}", "GET", [Controller::class, "/exercise2"]);
+        $this->routes[] = new Route("/exercises/{id}", "GET", [Controller::class, "/exercise"]);
 
-        $router = new Router(new Request("/exercises/1", "GET"), $routes);
+        $router = new Router(new Request("/exercises/1", "GET"), $this->routes);
+        $routerResponse = $router->getRouterResponse();
 
-        $this->assertEquals("view/exercise", $router->getHandler());
+        $this->assertEquals([Controller::class, "/exercise"], $routerResponse->getMethod());
         $variable = $router->getVariables();
         $this->assertEquals("1", $variable["id"]);
     }

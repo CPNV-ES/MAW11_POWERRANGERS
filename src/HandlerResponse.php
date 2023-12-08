@@ -1,15 +1,13 @@
 <?php
 
-namespace model\class;
+namespace App;
 
-use HTTP;
-
-require_once dirname(__FILE__).'/HTTP.php';
+use App\HTTP;
 
 class HandlerResponse extends HTTP
 {
-    public function __construct(string $path, string $statusCode)
+    public function __construct(array $method, string $statusCode)
     {
-        parent::__construct($path, $statusCode);
+        parent::__construct($method, $statusCode);
     }
 }

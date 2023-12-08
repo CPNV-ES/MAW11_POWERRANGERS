@@ -1,12 +1,9 @@
 <?php
 
-namespace model\class;
+namespace App;
 
 use Exception;
-
-//load routes class for manage multiple routes
-
-require_once SOURCE_DIR.'/Route.php';
+use App\Controller\ErrorController;
 
 /**
  * Class Router
@@ -16,9 +13,11 @@ class Router
 {
     // Attributes
     private array $routes;
-    private string $handler;
-    private int $status_code;
     private array $variables;
+    private string $routeRequest;
+    private string $methodRequest;
+
+    private RouterResponse $routerResponse;
 
     /**
      * Router constructor.
@@ -30,14 +29,13 @@ class Router
         //initialize attributes
         $this->routes = [];
         $this->variables = [];
-        $routeRequest = $request->getPath();
-        $methodRequest = $request->getStatusCode();
+        $this->routeRequest = $request->getPath();
+        $this->methodRequest = $request->getMethod();
         //set routes
         foreach ($routes as $route) {
             $this->add($route->getRoute(), $route->getMethod(), $route->getHandler(), $route->getStatusCode());
         }
-
-        $this->run($routeRequest, $methodRequest);
+        $this->findRoute();
     }
 
     /**
@@ -47,7 +45,7 @@ class Router
      * @param int $status_code
      * @throws Exception
      */
-    private function add(string $route, string $method, string $handler, int $status_code = 200) : void
+    private function add(string $route, string $method, array $handler, int $status_code = 200): void
     {
         //set other variables for comprehension
         $routeRequest = $route;
@@ -65,18 +63,15 @@ class Router
         $this->routes[] = $route;
     }
 
-    /**
-     * @param string $routeRequest
-     * @param string $methodRequest
-     */
-    private function run(string $routeRequest, string $methodRequest) : void
+
+    public function findRoute(): void
     {
         $this->variables = [];
-        $routeRequestArray = explode("/", $routeRequest);
+        $routeRequestArray = explode("/", $this->routeRequest);
         $routeRequestArray = array_filter($routeRequestArray);
         //check if route exists
         foreach ($this->routes as $route) {
-            if ($methodRequest == $route->getMethod()) {
+            if ($this->methodRequest == $route->getMethod()) {
                 //get good route
                 $checkValidRoot = true;
                 $routeArray = explode("/", $route->getRoute());
@@ -88,10 +83,12 @@ class Router
                             break;
                         }
                         if ($value != $routeArray[$key]) {
-                            if (str_contains($routeArray[$key], "{") && str_contains(
+                            if (
+                                str_contains($routeArray[$key], "{") && str_contains(
                                     $routeArray[$key],
                                     "}"
-                                ) && $value != "") {
+                                ) && $value != ""
+                            ) {
                                 $var = str_replace("{", "", $routeArray[$key]);
                                 $var = str_replace("}", "", $var);
                                 $this->variables[$var] = $value;
@@ -106,19 +103,15 @@ class Router
                     $checkValidRoot = false;
                 }
                 if ($checkValidRoot) {
-                    $this->handler = $route->getHandler();
-                    $this->status_code = $route->getStatusCode();
+                    $this->routerResponse = new RouterResponse($route->getHandler(), $route->getStatusCode(), $this->variables);
                     break;
                 }
             }
         }
-        //if route doesn't exist, set handler to error page and status code to 404
-        if (!isset($this->handler)) {
-            $this->handler = "view/errors";
-            $this->status_code = 404;
+        if (!isset($this->routerResponse)) {
+            $this->routerResponse = new RouterResponse([ErrorController::class, "errors"], 404, $this->variables);
         }
     }
-
 
     /**
      * @return array
@@ -129,22 +122,6 @@ class Router
     }
 
     /**
-     * @return string
-     */
-    public function getHandler(): string
-    {
-        return $this->handler;
-    }
-
-    /**
-     * @return int
-     */
-    public function getStatusCode(): int
-    {
-        return $this->status_code;
-    }
-
-    /**
      * @return array
      */
     public function getVariables(): array
@@ -152,4 +129,8 @@ class Router
         return $this->variables;
     }
 
+    public function getRouterResponse(): RouterResponse
+    {
+        return $this->routerResponse;
+    }
 }

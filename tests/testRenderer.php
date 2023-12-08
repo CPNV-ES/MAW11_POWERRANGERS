@@ -1,24 +1,23 @@
 <?php
 
-use model\class\HandlerResponse;
-use model\class\Renderer;
+namespace Tests;
+
+define('BASE_DIR', dirname(__FILE__) . '/..');
+define('SOURCE_DIR', BASE_DIR . '/src');
+
+require_once '../vendor/autoload.php';
+
+use App\Controller\Controller;
+use App\HandlerResponse;
+use App\Renderer;
 use PHPUnit\Framework\TestCase;
-
-define('BASE_DIR', dirname( __FILE__ ).'/..');
-define('SOURCE_DIR', BASE_DIR.'/src');
-
-require_once SOURCE_DIR.'/Renderer.php';
-require_once BASE_DIR.'/vendor/autoload.php';
-require_once SOURCE_DIR.'/HandlerResponse.php';
 
 class TestRenderer extends TestCase
 {
     // attributes
-    private $render = "view/pages/home.php";
+    private $render = [Controller::class, "pages/home"];
     private $httpResponse = 200;
-
     private HandlerResponse $handlerResponse;
-
     protected function setUp(): void
     {
         $this->handlerResponse = new HandlerResponse($this->render, $this->httpResponse);

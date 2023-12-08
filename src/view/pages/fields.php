@@ -6,9 +6,8 @@
 $title = "Exercises";
 $navTitle = "New exercise";
 $navColor = "orange";
-$navTitle = "Exercise: " . "<strong>". $exercise["name"] . "</strong>";
+$navTitle = "Exercise: " . "<strong>" . $exercise["name"] . "</strong>";
 
-$styles = array("<link rel='stylesheet' href='/css/pages/exercise-new.css'>");
 ob_start();
 ?>
 <div class="container">
@@ -27,7 +26,7 @@ ob_start();
                 </thead>
 
                 <tbody>
-                <?php foreach ($fields as $field): ?>
+                <?php foreach ($fields as $field) : ?>
                     <tr>
                         <td class="align-middle"><?= $field->name; ?></td>
                         <td class="text-nowrap align-middle"><?= $field->type; ?></td>
@@ -36,7 +35,7 @@ ob_start();
                                title="Edit"
                                class="icon"
                                rel="nofollow"
-                               data-method="put"
+                               data-method="GET"
                                href="/exercises/<?= $this->variables['exerciseId']; ?>/fields/<?= $field->id ?>"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -60,7 +59,7 @@ ob_start();
                             </a>
                         </td>
                     </tr>
-                <?php
+                    <?php
                 endforeach; ?>
                 </tbody>
             </table>
@@ -104,7 +103,7 @@ ob_start();
                             name="fieldType"
                             class="form-control" <?= empty($error_select) ? "" : "class='error'" ?>
                     >
-                        <?php foreach ($fieldsTypes as $type): ?>
+                        <?php foreach ($fieldsTypes as $type) : ?>
                             <option value="<?= $type->id; ?>">
                                 <?= $type->name; ?>
                             </option>
