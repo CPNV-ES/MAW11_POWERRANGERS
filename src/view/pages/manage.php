@@ -19,29 +19,18 @@ ob_start();
                         <tr>
                             <th>Title</th>
                         </tr>
-                        <tr>
-                            <td class="text-section">Mon exo de fou malade c'est t asc  asd asd asd rop styasdasdle asdah askdj</td>
-                            <td class="icon-section">
+                        <?php
+                        foreach ($exercises_building as $exercise) : ?>
+                            <tr>
+                                <td class="text-section"><?= $exercise['name'] ?></td>
+                                <td class="icon-section">
                                     <i class="fa-solid fa-comment"></i>
                                     <i class="fa-solid fa-pen-to-square"></i>
                                     <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-section">Mon exo</td>
-                            <td class="icon-section">
-                                <i class="fa-solid fa-comment"></i>
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr><tr>
-                            <td class="text-section">Mon exo</td>
-                            <td class="icon-section">
-                                <i class="fa-solid fa-comment"></i>
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                            <?php
+                        endforeach; ?>
                     </table>
                 </div>
             </div>
@@ -53,26 +42,17 @@ ob_start();
                         <tr>
                             <th>Title</th>
                         </tr>
-                        <tr>
-                            <td class="text-section">Mon exo de fou malade c'est t asc  asd asd asd rop styasdasdle asdah askdj</td>
-                            <td class="icon-section">
-                                <i class="fa-solid fa-chart-column"></i>
-                                <i class="fa-solid fa-circle-minus"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-section">Mon exo</td>
-                            <td class="icon-section">
-                                <i class="fa-solid fa-chart-column"></i>
-                                <i class="fa-solid fa-circle-minus"></i>
-                            </td>
-                        </tr><tr>
-                            <td class="text-section">Mon exo</td>
-                            <td class="icon-section">
-                                <i class="fa-solid fa-chart-column"></i>
-                                <i class="fa-solid fa-circle-minus"></i>
-                            </td>
-                        </tr>
+                        <?php
+                        foreach ($exercises_answering as $exercise) : ?>
+                            <tr>
+                                <td class="text-section"><?= $exercise['name'] ?></td>
+                                <td class="icon-section">
+                                    <i class="fa-solid fa-chart-column"></i>
+                                    <i class="fa-solid fa-circle-minus"></i>
+                                </td>
+                            </tr>
+                            <?php
+                        endforeach; ?>
                     </table>
                 </div>
             </div>
@@ -84,26 +64,17 @@ ob_start();
                         <tr>
                             <th>Title</th>
                         </tr>
-                        <tr>
-                            <td class="text-section">Mon exo de fou malade c'est t asc  asd asd asd rop styasdasdle asdah askdj</td>
-                            <td class="icon-section">
-                                <i class="fa-solid fa-chart-column"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-section">Mon exo</td>
-                            <td class="icon-section">
-                                <i class="fa-solid fa-chart-column"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr><tr>
-                            <td class="text-section">Mon exo</td>
-                            <td class="icon-section">
-                                <i class="fa-solid fa-chart-column"></i>
-                                <i class="fa-solid fa-trash"></i>
-                            </td>
-                        </tr>
+                        <?php
+                        foreach ($exercises_closed as $exercise) : ?>
+                            <tr>
+                                <td class="text-section"><?= $exercise['name'] ?></td>
+                                <td class="icon-section">
+                                    <i class="fa-solid fa-chart-column"></i>
+                                    <i class="fa-solid fa-trash"></i>
+                                </td>
+                            </tr>
+                            <?php
+                        endforeach; ?>
                     </table>
                 </div>
             </div>

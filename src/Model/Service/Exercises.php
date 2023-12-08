@@ -22,7 +22,7 @@ class Exercises
     {
         $bd = self::DBConnection();
 
-        $query = "SELECT name, id FROM exercises ORDER BY id DESC;";
+        $query = "SELECT name, status, id FROM exercises ORDER BY id DESC;";
 
         //get all exercises
         $resultQuery = $bd->query($query);
@@ -34,7 +34,7 @@ class Exercises
 
         //refactor result for view
         foreach ($resultQuery as $exercise) {
-            $result[] = ['name' => $exercise->name, 'id' => $exercise->id];
+            $result[] = ['name' => $exercise->name, 'status' => $exercise->status, 'id' => $exercise->id];
         }
 
         return $result;
