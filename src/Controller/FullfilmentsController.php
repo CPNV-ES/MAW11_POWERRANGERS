@@ -4,12 +4,12 @@ namespace App\Controller;
 
 use App\Model\Service\Answers;
 use App\Model\Service\Exercises;
-use App\Model\Service\Fields;
 use App\Model\Service\Fulfillments;
+use Exception;
 
 class FullfilmentsController extends Controller
 {
-    public function create()
+    public function create() : void
     {
         $fulfillment = Fulfillments::createFulfillment();
         $exerciseId = $this->variables['exerciseId'];
@@ -21,7 +21,10 @@ class FullfilmentsController extends Controller
         header("Location: /exercises/" . $exerciseId . "/answer/" . $fulfillment . "/edit");
     }
 
-    public function show()
+    /**
+     * @throws Exception
+     */
+    public function show() : void
     {
         $fulfillmentId = $this->variables['fulfillmentsId'];
         $fulfillment = Fulfillments::getFulfillmentById($fulfillmentId);
