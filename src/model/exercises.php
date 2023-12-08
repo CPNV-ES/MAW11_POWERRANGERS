@@ -47,9 +47,8 @@ function createExercise($name): int
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "INSERT INTO exercises (name) values (?)";
-    $queryParams = [$name];
-
+    $query = "INSERT INTO exercises (name, status) values (:name, 'Building')";
+    $queryParams = ['name' => $name];
     return $bd->queryReturnId($query, $queryParams);
 }
 
@@ -68,7 +67,7 @@ function getExerciseById($id): array
         $_ENV['DATABASE_PASSWORD']
     );
 
-    $query = "SELECT * FROM exercises WHERE id = ". $id .";";
+    $query = "SELECT * FROM exercises WHERE id = " . $id . ";";
     $resultQuery = $bd->query($query);
 
     //check if result is empty
