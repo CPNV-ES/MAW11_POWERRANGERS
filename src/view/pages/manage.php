@@ -21,9 +21,16 @@ ob_start();
                         <?php
                         foreach ($exercises_building as $exercise) : ?>
                             <tr>
-                                <td class="text-section"><?= $exercise['name']?></td>
+                                <td class="text-section"><?= $exercise['name'] . $exercise['fieldsCount'] ?></td>
                                 <td class="icon-section">
-                                    <i class="fa-solid fa-comment"></i>
+
+                                    <?php
+                                    if ($exercise['fieldsCount'] > 0) : ?>
+                                        <a class="fa-solid fa-comment" title="Edit" rel="nofollow" data-method="PUT"
+                                           href="/exercises/<?= $exercise['id'] ?>/status?status=Answering"></a>
+                                        <?php
+                                    endif; ?>
+
                                     <i class="fa-solid fa-pen-to-square"></i>
                                     <i class="fa-solid fa-trash"></i>
                                 </td>

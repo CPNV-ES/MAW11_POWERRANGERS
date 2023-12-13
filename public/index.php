@@ -18,6 +18,7 @@ use App\Controller\FieldsController;
 use App\Controller\Controller;
 use App\Controller\FullfilmentsController;
 use App\Controller\ManageController;
+use App\Controller\ExercisesStatusController;
 use App\Handler;
 use App\Renderer;
 use App\Request;
@@ -32,6 +33,9 @@ $dotenv->load();
 $route = $_SERVER["REQUEST_URI"];
 if (!empty($_SERVER["QUERY_STRING"])) {
     $route = substr($route, 0, strlen($_SERVER["REQUEST_URI"]) - strlen($_SERVER["QUERY_STRING"]) - 1);
+}
+if (isset($_POST["_method"])) {
+    $_SERVER["REQUEST_METHOD"] = $_POST["_method"];
 }
 $method = $_SERVER["REQUEST_METHOD"];
 $request = new Request($route, $method);
@@ -70,6 +74,7 @@ $routes[] = new Route(
     [FieldsController::class, "update"]
 );
 $routes[] = new Route("/manage", "GET", [ManageController::class, "index"]);
+$routes[] = new Route("/exercises/{exerciseId}/status", "PUT", [ExercisesStatusController::class, "update"]);
 
 
 $router = new Router($request, $routes);

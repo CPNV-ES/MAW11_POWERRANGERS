@@ -29,6 +29,9 @@
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/4646eb0c04.js" crossorigin="anonymous"></script>
 
+
+    <script src="/assets/rails-ui.js"></script>
+
     <title><?= $title?></title>
 </head>
 

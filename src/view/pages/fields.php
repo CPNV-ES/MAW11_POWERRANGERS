@@ -35,7 +35,7 @@ ob_start();
                                title="Edit"
                                class="icon"
                                rel="nofollow"
-                               data-method="GET"
+                               data- ="GET"
                                href="/exercises/<?= $this->variables['exerciseId']; ?>/fields/<?= $field->id ?>"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

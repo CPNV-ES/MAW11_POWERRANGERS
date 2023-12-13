@@ -41,7 +41,7 @@ class ManageController extends Controller
         $result = [];
         foreach ($exercises as $exercise) {
             $fields = Fields::getFieldsByExercise($exercise['id']);
-            $exercise['fieldCount'] = count($fields);
+            $exercise['fieldsCount'] = count($fields);
             array_push($result, $exercise);
         }
         return $result;

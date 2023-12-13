@@ -80,4 +80,14 @@ class Exercises
 
         return $result;
     }
+
+    public static function updateExerciseStatus($id, $status): void
+    {
+        $bd = self::DBConnection();
+
+        $query = "UPDATE exercises SET status = :status WHERE id = :id";
+        $queryParams = ['status' => $status, 'id' => $id];
+
+        $bd->query($query, $queryParams);
+    }
 }
