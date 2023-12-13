@@ -21,7 +21,7 @@ ob_start();
                         <?php
                         foreach ($exercises_building as $exercise) : ?>
                             <tr>
-                                <td class="text-section"><?= $exercise['name'] . $exercise['fieldsCount'] ?></td>
+                                <td class="text-section"><?= $exercise['name'] ?></td>
                                 <td class="icon-section">
 
                                     <?php
@@ -54,7 +54,7 @@ ob_start();
                                 <td class="text-section"><?= $exercise['name'] ?></td>
                                 <td class="icon-section">
                                     <i class="fa-solid fa-chart-column"></i>
-                                    <i class="fa-solid fa-circle-minus"></i>
+                                    <a data-method="PUT" href="/exercises/<?= $exercise['id'] ?>/status?status=Closed"  class="fa-solid fa-circle-minus"></a>
                                 </td>
                             </tr>
                             <?php

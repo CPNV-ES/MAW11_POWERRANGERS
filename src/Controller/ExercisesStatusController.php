@@ -23,10 +23,10 @@ class ExercisesStatusController extends Controller
 
         $fieldsCount = count(Fields::getFieldsByExercise($exerciseId));
 
-        if ($status != 'Closed' && $status != 'Answering' || $fieldsCount == 0) {
-            throwException('You cannot update this exercise status.');
-        } else {
+        if ($status == 'Closed' || $status == 'Answering' && $fieldsCount > 0) {
             $newStatus = $status;
+        } else {
+            throwException('You cannot update this exercise status.');
         }
 
         Exercises::updateExerciseStatus($exerciseId, $newStatus);
