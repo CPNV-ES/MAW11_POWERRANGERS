@@ -26,7 +26,7 @@ ob_start();
 
                                     <?php
                                     if ($exercise['fieldsCount'] > 0) : ?>
-                                        <a class="fa-solid fa-comment" title="Edit" rel="nofollow" data-method="PUT"
+                                        <a class="fa-solid fa-comment" title="Be ready for answers" rel="nofollow" data-method="PUT"
                                            href="/exercises/<?= $exercise['id'] ?>/status?status=Answering"></a>
                                         <?php
                                     endif; ?>

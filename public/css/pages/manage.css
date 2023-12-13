@@ -18,6 +18,11 @@ a {
     color: var(--purple);
 }
 
+a:hover {
+    color: var(--gray);
+    text-decoration: none;
+}
+
 .icon-section {
     text-align: right;
     white-space: nowrap;
