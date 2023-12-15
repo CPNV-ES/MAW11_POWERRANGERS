@@ -13,7 +13,7 @@ class ResultController extends Controller
 {
     public function index() :void
     {
-        if (!is_int($this->variables['exerciseId'])){
+        if (!is_numeric($this->variables['exerciseId'])){
             throw new Exception("exerciseID should be an integer");
         }
 
@@ -24,7 +24,7 @@ class ResultController extends Controller
         }, $fulfillments);
         $exercise = Exercises::getExerciseById($this->variables['exerciseId']);
 
-        if (isEmpty($exercise)) {
+        if (empty($exercise)) {
             throw new Exception("Cannot found this exercise");
         }
 

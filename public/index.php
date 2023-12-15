@@ -77,5 +77,5 @@ $handler = new Handler($router->getRouterResponse());
 try {
     $renderer = new Renderer($handler->getHandlerResponse(), $router->getVariables());
 } catch (Exception $e) {
-    $renderer = new Renderer(new HandlerResponse([ErrorController::class, "index"], 500));
+    $renderer = new Renderer(new HandlerResponse([ErrorController::class, "index"], 400));
 }
