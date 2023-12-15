@@ -12,6 +12,7 @@ require_once '../vendor/autoload.php';
 
 use App\Controller\AnswersController;
 use App\Controller\ExercisesController;
+use App\Controller\FieldController;
 use App\Controller\FieldsController;
 use App\Controller\Controller;
 use App\Controller\FullfilmentsController;
@@ -43,6 +44,7 @@ $routes[] = new Route("/exercises/{exerciseId}/answer", "GET", [AnswersControlle
 $routes[] = new Route("/exercises/{exerciseId}/answer", "POST", [FullfilmentsController::class, "create"]);
 $routes[] = new Route("/exercises/{exerciseId}/fields", "POST", [FieldsController::class, "store"]);
 $routes[] = new Route("/exercises/{exerciseId}/fulfillments/{fulfillmentsId}", "GET", [FullfilmentsController::class, "show"]);
+$routes[] = new Route("/exercises/{exerciseId}/results/{fieldId}", "GET", [FieldController::class, "index"]);
 $routes[] = new Route(
     "/exercises/{exerciseId}/answer/{answerId}/edit",
     "GET",
