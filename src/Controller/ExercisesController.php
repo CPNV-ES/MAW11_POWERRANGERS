@@ -33,4 +33,11 @@ class ExercisesController extends Controller
             header("Location: /exercises/" . $exerciseId . "/fields");
         }
     }
+
+    public function destroy()
+    {
+
+        Exercises::deleteExercise(intval($this->variables['exerciseId']));
+        header("Location: /manage");
+    }
 }

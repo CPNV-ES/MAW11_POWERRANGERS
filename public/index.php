@@ -75,6 +75,7 @@ $routes[] = new Route(
 );
 $routes[] = new Route("/manage", "GET", [ManageController::class, "index"]);
 $routes[] = new Route("/exercises/{exerciseId}/status", "PUT", [ExercisesStatusController::class, "update"]);
+$routes[] = new Route("/exercises/{exerciseId}", "DELETE", [ExercisesController::class, "destroy"]);
 
 
 $router = new Router($request, $routes);

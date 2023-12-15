@@ -90,4 +90,18 @@ class Exercises
 
         $bd->query($query, $queryParams);
     }
+
+
+    public static function deleteExercise(int $id): void
+    {
+        $bd = self::DBConnection();
+
+        $query =
+            "
+            DELETE FROM Exercises 
+            WHERE id = :id
+        ";
+        $queryParams["id"] = $id;
+        $bd->Query($query, $queryParams);
+    }
 }
