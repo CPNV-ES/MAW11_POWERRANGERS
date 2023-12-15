@@ -34,7 +34,7 @@ class ResultController extends Controller
             foreach ($fields as $field) {
                 foreach ($answers as $answer){
                     foreach ($answer as $item){
-                        if ($item->fulfillment_id == $fulfillment->fulfillment_id && $item->fieldName == $field->name)
+                        if ($item->fulfillment_id == $fulfillment->fulfillment_id && $item->name == $field->name)
                             $formattedAnswers[$fulfillment->dateTime][$field->id] = $item->value;
                     }
                 }

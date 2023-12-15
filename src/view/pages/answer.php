@@ -13,7 +13,7 @@ ob_start();
     <form method="POST">
         <?php
         foreach ($fields as $field) : ?>
-            <label><?= $field->fieldName ?></label>
+            <label><?= $field->name ?></label>
 
             <?php
             switch ($field->length) {
