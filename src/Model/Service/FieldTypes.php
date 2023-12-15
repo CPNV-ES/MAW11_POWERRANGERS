@@ -27,7 +27,7 @@ class FieldTypes
         $bd = self::DBConnection();
 
         //get all exercises
-        $resultQuery = $bd->Query("SELECT * FROM fieldtypes");
+        $resultQuery = $bd->Query("SELECT * FROM fieldTypes");
         //check if result is empty
         if (!$resultQuery) {
             return [];

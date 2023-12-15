@@ -81,4 +81,13 @@ class Answers
         $queryParams = [$answerId];
         return $bd->query($query, $queryParams);
     }
+
+    public static function getAnswersByField(int $fieldId): array
+    {
+        $bd = self::DBConnection();
+
+        $query = "SELECT * FROM answers WHERE fields_id =(?);";
+        $queryParams = [$fieldId];
+        return $bd->query($query, $queryParams);
+    }
 }
