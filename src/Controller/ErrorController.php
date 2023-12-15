@@ -6,6 +6,6 @@ class ErrorController extends Controller
 {
     public function index(): void
     {
-        $this->view('errors/404');
+        $this->view("errors/".http_response_code());
     }
 }

@@ -35,6 +35,23 @@ class Fulfillments
         return $bd->queryReturnId($query, $queryParams);
     }
 
+    public static function getFulfillmentsByExerciseId($exerciseId) : array
+    {
+        $bd = self::DBConnection();
+
+        $query =
+            "
+            SELECT DISTINCT f.id AS fulfillment_id, f.dateTime
+                FROM `exercise-looper`.`fulfillments` AS f
+                JOIN `exercise-looper`.`answers` AS a ON f.id = a.fulfillments_id
+                JOIN `exercise-looper`.`fields` AS fld ON a.fields_id = fld.id
+                JOIN `exercise-looper`.`exercises` AS e ON fld.exercises_id = e.id
+                WHERE e.id = (?);
+            ";
+        $queryParams = [$exerciseId];
+        return $bd->query($query, $queryParams);
+    }
+  
     public static function getFulfillmentById(int $fulfillmentId): array
     {
         $bd = self::DBConnection();
