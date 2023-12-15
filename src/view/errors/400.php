@@ -1,6 +1,6 @@
 <?php
 
-$title = "404";
+$title = "400";
 $navColor = "red";
 //initialize page variables
 $styles = ["<link rel='stylesheet' href='/css/pages/error.css'>"];
