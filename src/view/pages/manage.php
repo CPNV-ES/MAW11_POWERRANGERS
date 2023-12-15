@@ -56,7 +56,9 @@ ob_start();
                             <tr>
                                 <td class="text-section"><?= $exercise['name'] ?></td>
                                 <td class="icon-section">
-                                    <i class="fa-solid fa-chart-column"></i>
+                                    <a title="Show results" href="/exercises/<?= $exercise['id'] ?>/results"
+                                       class="fa-solid fa-chart-column"></a>
+
                                     <a title="Close" data-method="PUT"
                                        href="/exercises/<?= $exercise['id'] ?>/status?status=Closed"
                                        class="fa-solid fa-circle-minus"></a>
@@ -80,7 +82,9 @@ ob_start();
                             <tr>
                                 <td class="text-section"><?= $exercise['name'] ?></td>
                                 <td class="icon-section">
-                                    <i class="fa-solid fa-chart-column"></i>
+                                    <a title="Show results" href="/exercises/<?= $exercise['id'] ?>/results"
+                                       class="fa-solid fa-chart-column"></a>
+                                    
                                     <a title="Destroy" class="fa-solid fa-trash" rel="nofollow" data-confirm="Are you sure?" data-method="DELETE"
                                        href="/exercises/<?= $exercise['id'] ?>"></a>
                                 </td>
