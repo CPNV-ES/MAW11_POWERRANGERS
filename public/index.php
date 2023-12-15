@@ -11,12 +11,14 @@ define('FIELD_LIST_OF_SINGLE_LINE', 128);
 require_once '../vendor/autoload.php';
 
 use App\Controller\AnswersController;
+use App\Controller\ErrorController;
 use App\Controller\ExercisesController;
 use App\Controller\FieldsController;
 use App\Controller\Controller;
 use App\Controller\FullfilmentsController;
 use App\Controller\ResultController;
 use App\Handler;
+use App\HandlerResponse;
 use App\Renderer;
 use App\Request;
 use App\Route;
@@ -72,4 +74,8 @@ $routes[] = new Route("/exercises/{exerciseId}/results", "GET", [ResultControlle
 
 $router = new Router($request, $routes);
 $handler = new Handler($router->getRouterResponse());
-$renderer = new Renderer($handler->getHandlerResponse(), $router->getVariables());
+try {
+    $renderer = new Renderer($handler->getHandlerResponse(), $router->getVariables());
+} catch (Exception $e) {
+    $renderer = new Renderer(new HandlerResponse([ErrorController::class, "index"], 500));
+}
