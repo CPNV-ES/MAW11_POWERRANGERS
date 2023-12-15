@@ -3,31 +3,31 @@ USE `exercise-looper` ;
 -- -----------------------------------------------------
 -- Table `exercise-looper`.`exercises`
 -- -----------------------------------------------------
-insert into exercises (id, name) values (1, 'Tax Accountant');
-insert into exercises (id, name) values (2, 'Safety Technician II');
-insert into exercises (id, name) values (3, 'Geologist I');
-insert into exercises (id, name) values (4, 'Structural Analysis Engineer');
-insert into exercises (id, name) values (5, 'Physical Therapy Assistant');
-insert into exercises (id, name) values (6, 'Web Designer III');
-insert into exercises (id, name) values (7, 'Teacher');
-insert into exercises (id, name) values (8, 'Quality Engineer');
-insert into exercises (id, name) values (9, 'Speech Pathologist');
-insert into exercises (id, name) values (10, 'Human Resources Assistant III');
-insert into exercises (id, name) values (11, 'Professor');
-insert into exercises (id, name) values (12, 'Analog Circuit Design manager');
-insert into exercises (id, name) values (13, 'Administrative Assistant III');
-insert into exercises (id, name) values (14, 'Payment Adjustment Coordinator');
-insert into exercises (id, name) values (15, 'Registered Nurse');
-insert into exercises (id, name) values (16, 'Data Coordinator');
-insert into exercises (id, name) values (17, 'Office Assistant II');
-insert into exercises (id, name) values (18, 'Nuclear Power Engineer');
-insert into exercises (id, name) values (19, 'Environmental Specialist');
-insert into exercises (id, name) values (20, 'Account Coordinator');
-insert into exercises (id, name) values (21, 'Budget/Accounting Analyst IV');
-insert into exercises (id, name) values (22, 'Project Manager');
-insert into exercises (id, name) values (23, 'Nuclear Power Engineer');
-insert into exercises (id, name) values (24, 'Geologist II');
-insert into exercises (id, name) values (25, 'Recruiter');
+insert into exercises (id, name, status) values (1, 'Tax Accountant', 'Building');
+insert into exercises (id, name, status) values (2, 'Safety Technician II', 'Building');
+insert into exercises (id, name, status) values (3, 'Geologist I', 'Building');
+insert into exercises (id, name, status) values (4, 'Structural Analysis Engineer', 'Answering');
+insert into exercises (id, name, status) values (5, 'Physical Therapy Assistant', 'Answering');
+insert into exercises (id, name, status) values (6, 'Web Designer III', 'Building');
+insert into exercises (id, name, status) values (7, 'Teacher', 'Building');
+insert into exercises (id, name, status) values (8, 'Quality Engineer', 'Building');
+insert into exercises (id, name, status) values (9, 'Speech Pathologist', 'Answering');
+insert into exercises (id, name, status) values (10, 'Human Resources Assistant III', 'Building');
+insert into exercises (id, name, status) values (11, 'Professor', 'Building');
+insert into exercises (id, name, status) values (12, 'Analog Circuit Design manager', 'Building');
+insert into exercises (id, name, status) values (13, 'Administrative Assistant III', 'Closed');
+insert into exercises (id, name, status) values (14, 'Payment Adjustment Coordinator', 'Building');
+insert into exercises (id, name, status) values (15, 'Registered Nurse', 'Closed');
+insert into exercises (id, name, status) values (16, 'Data Coordinator', 'Answering');
+insert into exercises (id, name, status) values (17, 'Office Assistant II', 'Building');
+insert into exercises (id, name, status) values (18, 'Nuclear Power Engineer', 'Closed');
+insert into exercises (id, name, status) values (19, 'Environmental Specialist', 'Building');
+insert into exercises (id, name, status) values (20, 'Account Coordinator', 'Building');
+insert into exercises (id, name, status) values (21, 'Budget/Accounting Analyst IV', 'Building');
+insert into exercises (id, name, status) values (22, 'Project Manager', 'Answering');
+insert into exercises (id, name, status) values (23, 'Nuclear Power Engineer', 'Building');
+insert into exercises (id, name, status) values (24, 'Geologist II', 'Closed');
+insert into exercises (id, name, status) values (25, 'Recruiter', 'Closed');
 
 
 -- -----------------------------------------------------

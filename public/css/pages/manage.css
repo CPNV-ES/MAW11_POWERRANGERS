@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+}
+
+tr {
+    border-bottom : 1px solid #ddd;
+}
+
+td, th {
+    padding: 0.7rem 0;
+}
+
+.col {
+    margin: 0 1rem;
+}
+
+a {
+    color: var(--purple);
+}
+
+a:hover {
+    color: var(--gray);
+    text-decoration: none;
+}
+
+.icon-section {
+    text-align: right;
+    white-space: nowrap;
+    padding: 0 10px;
+    color: var(--purple);
+}

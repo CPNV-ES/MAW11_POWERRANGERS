@@ -14,7 +14,7 @@ use Exception;
 class Handler
 {
     // attributes
-    
+
     private HandlerResponse $handlerResponse;
     /**
      * Handler constructor
@@ -29,7 +29,7 @@ class Handler
     /**
      * @throws Exception
      */
-    public function handle(int $statusCode, array $method) : void
+    public function handle(int $statusCode, array $method): void
     {
         //check if class exists
         if (class_exists($method[0])) {
@@ -45,12 +45,12 @@ class Handler
                 $this->handlerResponse = new HandlerResponse($method, $statusCode);
                 return;
             }
-
         }
         $this->handlerResponse = new HandlerResponse([ErrorController::class, "index"], 500);
     }
 
-    public function getHandlerResponse() :HandlerResponse {
+    public function getHandlerResponse(): HandlerResponse
+    {
         return $this->handlerResponse;
     }
 }

@@ -3,7 +3,7 @@
 $title = "500";
 $navColor = "red";
 //initialize page variables
-$styles = ["<link rel='stylesheet' href='".BASE_DIR."/public/css/pages/error.css'>"];
+$styles = ["<link rel='stylesheet' href='" . BASE_DIR . "/public/css/pages/error.css'>"];
 
 ob_start();
 ?>

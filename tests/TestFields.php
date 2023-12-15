@@ -3,7 +3,7 @@
 define('BASE_DIR', dirname(__FILE__) . '/..');
 define('SOURCE_DIR', BASE_DIR . '/src');
 
-require_once BASE_DIR.'/vendor/autoload.php';
+require_once BASE_DIR . '/vendor/autoload.php';
 
 use App\Controller\FieldsController;
 use App\HandlerResponse;

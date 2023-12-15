@@ -36,7 +36,6 @@ class Router
             $this->add($route->getRoute(), $route->getMethod(), $route->getHandler(), $route->getStatusCode());
         }
         $this->findRoute();
-
     }
 
     /**
@@ -46,7 +45,7 @@ class Router
      * @param int $status_code
      * @throws Exception
      */
-    private function add(string $route, string $method, array $handler, int $status_code = 200) : void
+    private function add(string $route, string $method, array $handler, int $status_code = 200): void
     {
         //set other variables for comprehension
         $routeRequest = $route;
@@ -65,7 +64,7 @@ class Router
     }
 
 
-    public function findRoute() : void
+    public function findRoute(): void
     {
         $this->variables = [];
         $routeRequestArray = explode("/", $this->routeRequest);
@@ -84,10 +83,12 @@ class Router
                             break;
                         }
                         if ($value != $routeArray[$key]) {
-                            if (str_contains($routeArray[$key], "{") && str_contains(
+                            if (
+                                str_contains($routeArray[$key], "{") && str_contains(
                                     $routeArray[$key],
                                     "}"
-                                ) && $value != "") {
+                                ) && $value != ""
+                            ) {
                                 $var = str_replace("{", "", $routeArray[$key]);
                                 $var = str_replace("}", "", $var);
                                 $this->variables[$var] = $value;
@@ -102,7 +103,7 @@ class Router
                     $checkValidRoot = false;
                 }
                 if ($checkValidRoot) {
-                    $this->routerResponse = new RouterResponse($route->getHandler(), $route->getStatusCode(),  $this->variables);
+                    $this->routerResponse = new RouterResponse($route->getHandler(), $route->getStatusCode(), $this->variables);
                     break;
                 }
             }
@@ -128,8 +129,8 @@ class Router
         return $this->variables;
     }
 
-    public function getRouterResponse() :RouterResponse {
+    public function getRouterResponse(): RouterResponse
+    {
         return $this->routerResponse;
     }
-
 }

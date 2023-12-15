@@ -6,14 +6,14 @@
 $title = "Exercises";
 $navTitle = "New exercise";
 $navColor = "orange";
-$navTitle = "Exercise: " . "<strong>". $exercise["name"] . "</strong>";
+$navTitle = "Exercise: " . "<strong>" . $exercise["name"] . "</strong>";
 
 ob_start();
 ?>
 <div class="container">
     <h1>Editing Field</h1>
 
-    <form action="/exercises/<?= $this->variables['exerciseId'] ."/fields/". $this->variables['fieldId'] ?>/edit" method="post">
+    <form action="/exercises/<?= $this->variables['exerciseId'] . "/fields/" . $this->variables['fieldId'] ?>/edit" method="post">
         <!-- Name of the field  -->
         <div class="field">
             <label for="name">Label</label><br>
@@ -39,11 +39,11 @@ ob_start();
                     <?= empty($error_select) ? "" : "class='error'" ?>
             >
 
-                <?php foreach ($fieldsTypes as $type): ?>
+                <?php foreach ($fieldsTypes as $type) : ?>
                     <option value="<?= $type->id; ?>"
                         <?php if ($type->name == $field["type"]) : ?>
                         selected="selected">
-                        <?php else: ?>
+                        <?php else : ?>
                             >
                         <?php endif;?>
                         <?= $type->name; ?>

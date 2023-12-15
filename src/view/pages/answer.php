@@ -12,7 +12,7 @@ ob_start();
 
     <form method="POST">
         <?php
-        foreach ($fields as $field): ?>
+        foreach ($fields as $field) : ?>
             <label><?= $field->name ?></label>
 
             <?php
@@ -26,7 +26,7 @@ ob_start();
                 case FIELD_MULTI_LINE:
                     echo '<textarea name=' . $field->id . '>' . $field->value . '</textarea>';
                     break;
-                default :
+                default:
                     echo '<input type="text" name=' . $field->id . ' value="' . $field->value . '">';
                     break;
             }
