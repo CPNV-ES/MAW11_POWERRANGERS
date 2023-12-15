@@ -33,7 +33,7 @@ ob_start();
                                     endif; ?>
 
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                    <a title="Destroy" class="fa-solid fa-trash" rel="nofollow" data-method="DELETE"
+                                    <a title="Destroy" class="fa-solid fa-trash" rel="nofollow" data-confirm="Are you sure?" data-method="DELETE"
                                        href="/exercises/<?= $exercise['id'] ?>"></a>
                                     <i></i>
                                 </td>
@@ -81,7 +81,7 @@ ob_start();
                                 <td class="text-section"><?= $exercise['name'] ?></td>
                                 <td class="icon-section">
                                     <i class="fa-solid fa-chart-column"></i>
-                                    <a title="Destroy" class="fa-solid fa-trash" rel="nofollow" data-method="DELETE"
+                                    <a title="Destroy" class="fa-solid fa-trash" rel="nofollow" data-confirm="Are you sure?" data-method="DELETE"
                                        href="/exercises/<?= $exercise['id'] ?>"></a>
                                 </td>
                             </tr>
