@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Service\Exercises;
+
 class ExercisesController extends Controller
 {
     public function __construct($variables = array())
@@ -11,7 +12,15 @@ class ExercisesController extends Controller
     }
     public function index()
     {
-        $exercises = Exercises::getAllExercises();
+
+        $exercises = [];
+
+        foreach (Exercises::getAllExercises() as $exercise) {
+            if ($exercise['status'] == 'Answering') {
+                array_push($exercises, $exercise);
+            }
+        }
+
         require_once SOURCE_DIR . "/view/pages/exercises.php";
     }
 
@@ -31,5 +40,12 @@ class ExercisesController extends Controller
             $exerciseId = Exercises::createExercise($name);
             header("Location: /exercises/" . $exerciseId . "/fields");
         }
+    }
+
+    public function destroy()
+    {
+
+        Exercises::deleteExercise(intval($this->variables['exerciseId']));
+        header("Location: /manage");
     }
 }

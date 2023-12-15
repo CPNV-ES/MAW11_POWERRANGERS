@@ -16,3 +16,4 @@ $content = ob_get_clean();
 
 //load layout
 require SOURCE_DIR . "/view/layout.php";
+

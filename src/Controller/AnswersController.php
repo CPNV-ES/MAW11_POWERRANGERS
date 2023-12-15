@@ -37,6 +37,5 @@ class AnswersController extends Controller
         $description = "If you'd like to come back later to finish, simply submit it with blanks";
 
         require_once SOURCE_DIR . "/view/pages/answer.php";
-
     }
 }

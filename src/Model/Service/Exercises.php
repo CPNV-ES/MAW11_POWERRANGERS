@@ -22,7 +22,7 @@ class Exercises
     {
         $bd = self::DBConnection();
 
-        $query = "SELECT name, id FROM exercises ORDER BY id DESC;";
+        $query = "SELECT name, status, id FROM exercises ORDER BY id DESC;";
 
         //get all exercises
         $resultQuery = $bd->query($query);
@@ -34,7 +34,7 @@ class Exercises
 
         //refactor result for view
         foreach ($resultQuery as $exercise) {
-            $result[] = ['name' => $exercise->name, 'id' => $exercise->id];
+            $result[] = ['name' => $exercise->name, 'status' => $exercise->status, 'id' => $exercise->id];
         }
 
         return $result;
@@ -49,8 +49,8 @@ class Exercises
     {
         $bd = self::DBConnection();
 
-        $query = "INSERT INTO exercises (name) values (?)";
-        $queryParams = [$name];
+        $query = "INSERT INTO exercises (name, status) values (:name, 'Building')";
+        $queryParams = ['name' => $name];
 
         return $bd->queryReturnId($query, $queryParams);
     }
@@ -79,5 +79,29 @@ class Exercises
         }
 
         return $result;
+    }
+
+    public static function updateExerciseStatus($id, $status): void
+    {
+        $bd = self::DBConnection();
+
+        $query = "UPDATE exercises SET status = :status WHERE id = :id";
+        $queryParams = ['status' => $status, 'id' => $id];
+
+        $bd->query($query, $queryParams);
+    }
+
+
+    public static function deleteExercise(int $id): void
+    {
+        $bd = self::DBConnection();
+
+        $query =
+            "
+            DELETE FROM Exercises 
+            WHERE id = :id
+        ";
+        $queryParams["id"] = $id;
+        $bd->Query($query, $queryParams);
     }
 }

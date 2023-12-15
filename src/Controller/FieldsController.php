@@ -6,7 +6,6 @@ use App\Model\Service\Exercises;
 use App\Model\Service\Fields;
 use App\Model\Service\FieldTypes;
 
-
 class FieldsController extends Controller
 {
     public function index()
@@ -36,14 +35,12 @@ class FieldsController extends Controller
             Fields::createField($fieldName, $fieldType, $fieldExercise);
             header("Location: /exercises/" . $this->variables['exerciseId'] . "/fields");
         }
-
     }
 
     public function destroy()
     {
         Fields::deleteField(intval($this->variables['fieldId']));
         header("Location: /exercises/" . $this->variables['exerciseId'] . "/fields");
-
     }
 
     public function edit()
@@ -74,6 +71,5 @@ class FieldsController extends Controller
             Fields::updateField($fieldName, $fieldType, $fieldId);
             header("Location: /exercises/" . $this->variables['exerciseId'] . "/fields");
         }
-
     }
 }

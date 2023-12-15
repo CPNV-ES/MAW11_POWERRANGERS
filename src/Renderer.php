@@ -38,7 +38,7 @@ class Renderer
         http_response_code($this->httpResponse);
         if ($this->render[0] == Controller::class) {
             require SOURCE_DIR . "/view/" . $this->render[1] . ".php";
-        }else{
+        } else {
             $class = $this->render[0];
             $method = $this->render[1];
             $result = new $class($this->variables);

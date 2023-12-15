@@ -70,6 +70,11 @@ nav span {
 }
 
 /* Buttons */
+
+a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+    color: white
+}
+
 .btn {
     color: white;
     font-weight: 700;
@@ -77,6 +82,7 @@ nav span {
     line-height: 1.5rem;
     letter-spacing: 0.1rem;
     text-transform: uppercase;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -160,4 +166,9 @@ input[type=submit] {
     .card {
         border-radius: 0;
     }
+}
+
+.col-header {
+    text-align: start;
+    font-size: 3rem;
 }

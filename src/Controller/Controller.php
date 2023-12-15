@@ -11,7 +11,7 @@ class Controller
         $this->variables = $variables;
     }
 
-    public function getVariables() : array
+    public function getVariables(): array
     {
         return $this->variables;
     }

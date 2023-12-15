@@ -27,7 +27,7 @@ HTML;
             Create an exercise
         </a>
 
-        <a href="/" class="btn bg-green">
+        <a href="/manage" class="btn bg-green">
             Manage an exercise
         </a>
 
