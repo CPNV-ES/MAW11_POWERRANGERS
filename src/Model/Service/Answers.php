@@ -74,7 +74,8 @@ class Answers
         $query =
             "SELECT 
             a.value AS value, 
-            f.name AS name, 
+            f.name AS name,
+            f.id AS field_id, 
             a.id AS id, 
             ft.name AS type, 
             ft.maxLength AS length,
