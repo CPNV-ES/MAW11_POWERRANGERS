@@ -25,9 +25,13 @@ class ExercisesStatusController extends Controller
 
         if ($status == 'Closed' || $status == 'Answering' && $fieldsCount > 0) {
             $newStatus = $status;
+        } elseif ($fieldsCount == 0) {
+            header("Location: /exercises/" . $exerciseId . "/fields");
         } else {
             throwException('You cannot update this exercise status.');
         }
+
+
 
         Exercises::updateExerciseStatus($exerciseId, $newStatus);
         header("Location: /manage");
