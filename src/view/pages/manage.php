@@ -32,7 +32,7 @@ ob_start();
                                         <?php
                                     endif; ?>
 
-                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <a title="Manage fields" class="fa-solid fa-pen-to-square" rel="nofollow" href="/exercises/<?= $exercise['id'] ?>/fields"></a>
                                     <a title="Destroy" class="fa-solid fa-trash" rel="nofollow" data-confirm="Are you sure?" data-method="DELETE"
                                        href="/exercises/<?= $exercise['id'] ?>"></a>
                                     <i></i>

@@ -31,7 +31,7 @@ ob_start();
                         <td class="align-middle"><?= $field->name; ?></td>
                         <td class="text-nowrap align-middle"><?= $field->type; ?></td>
                         <td class="align-middle">
-                            <a 
+                            <a
                                title="Edit"
                                class="icon fa-solid fa-pen-to-square"
                                rel="nofollow"
