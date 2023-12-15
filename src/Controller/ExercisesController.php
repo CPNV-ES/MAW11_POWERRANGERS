@@ -12,7 +12,15 @@ class ExercisesController extends Controller
     }
     public function index()
     {
-        $exercises = Exercises::getAllExercises();
+
+        $exercises = [];
+
+        foreach (Exercises::getAllExercises() as $exercise) {
+            if ($exercise['status'] == 'Answering') {
+                array_push($exercises, $exercise);
+            }
+        }
+
         require_once SOURCE_DIR . "/view/pages/exercises.php";
     }
 
