@@ -7,13 +7,14 @@ use App\Model\Service\Exercises;
 use App\Model\Service\Fields;
 use App\Model\Service\Fulfillments;
 use Exception;
+
 use function PHPUnit\Framework\isEmpty;
 
 class ResultController extends Controller
 {
-    public function index() :void
+    public function index(): void
     {
-        if (!is_numeric($this->variables['exerciseId'])){
+        if (!is_numeric($this->variables['exerciseId'])) {
             throw new Exception("exerciseID should be an integer");
         }
 
@@ -28,18 +29,17 @@ class ResultController extends Controller
             throw new Exception("Cannot found this exercise");
         }
 
-        $formattedAnswers = [];
+        //sort the array fields to desc order of id
+        usort($fields, function ($a, $b) {
+            return $a->fid <=> $b->field_id;
+        });
 
-        foreach ($fulfillments as $fulfillment) {
-            foreach ($fields as $field) {
-                foreach ($answers as $answer){
-                    foreach ($answer as $item){
-                        if ($item->fulfillment_id == $fulfillment->fulfillment_id && $item->name == $field->name)
-                            $formattedAnswers[$fulfillment->dateTime][$field->id] = $item->value;
-                    }
-                }
-            }
-        }
+        //sort the array answers to desc order of id
+        array_map(function ($answer) {
+            return usort($answer, function ($a, $b) {
+                return $a->id <=> $b->id;
+            });
+        }, $answers);
 
         require_once SOURCE_DIR . "/view/pages/results.php";
     }
