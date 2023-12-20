@@ -12,7 +12,7 @@ ob_start();
         <dl>
             <?php foreach ($answers as $answer) : ?>
                 <dt><?= htmlspecialchars($answer->name, ENT_QUOTES, 'UTF-8') ?></dt>
-                <dd><?= htmlspecialchars($answer->value, ENT_QUOTES, 'UTF-8') ?></dd>
+                <dd><?= htmlspecialchars($answer->value, ENT_QUOTES, 'UTF-8')?></dd>
             <?php endforeach; ?>
         </dl>
     </div>

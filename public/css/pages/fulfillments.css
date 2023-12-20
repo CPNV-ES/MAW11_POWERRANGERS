@@ -5,7 +5,10 @@ dd, dt {
 
 dd {
     margin-left: 40px;
+    word-wrap: break-word;
 }
+
+
 
 .table thead td, .table th {
     border-color: transparent;
