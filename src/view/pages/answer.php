@@ -2,7 +2,7 @@
 
 //initialize page variables
 $title = "Answer an exercise";
-$navTitle = "Exercise: <b>" . $exercise['name'] . "</b>";
+$navTitle = "Exercise: <b>" . htmlspecialchars($exercise['name'], ENT_QUOTES, 'UTF-8') . "</b>";
 $navColor = "purple";
 
 ob_start();

@@ -84,7 +84,7 @@ ob_start();
                                 <td class="icon-section">
                                     <a title="Show results" href="/exercises/<?= $exercise['id'] ?>/results"
                                        class="fa-solid fa-chart-column"></a>
-                                    
+
                                     <a title="Destroy" class="fa-solid fa-trash" rel="nofollow" data-confirm="Are you sure?" data-method="DELETE"
                                        href="/exercises/<?= $exercise['id'] ?>"></a>
                                 </td>
