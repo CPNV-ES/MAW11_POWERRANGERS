@@ -7,7 +7,7 @@ $title = "Exercises";
 $navTitle = "New exercise";
 $navColor = "orange";
 $navTitle = "Exercise: " . "<strong>" . $exercise["name"] . "</strong>";
-
+$styles = array("<link rel='stylesheet' href='/css/pages/fields.css'>");
 ob_start();
 ?>
 <div class="container">
@@ -28,7 +28,7 @@ ob_start();
                 <tbody>
                 <?php foreach ($fields as $field) : ?>
                     <tr>
-                        <td class="align-middle"><?= $field->name; ?></td>
+                        <td class="fieldsTitle align-middle"><?= $field->name; ?></td>
                         <td class="text-nowrap align-middle"><?= $field->type; ?></td>
                         <td class="align-middle">
                             <a
