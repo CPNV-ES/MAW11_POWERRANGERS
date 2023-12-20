@@ -28,7 +28,7 @@ ob_start();
                 <tbody>
                 <?php foreach ($fields as $field) : ?>
                     <tr>
-                        <td class="align-middle"><?= $field->name; ?></td>
+                        <td class="align-middle"><?= htmlspecialchars($field->name, ENT_QUOTES, 'UTF-8') ?></td>
                         <td class="text-nowrap align-middle"><?= $field->type; ?></td>
                         <td class="align-middle">
                             <a
