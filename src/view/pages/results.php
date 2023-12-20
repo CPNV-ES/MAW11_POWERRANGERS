@@ -4,6 +4,7 @@
 $title = "Results";
 $navTitle = "Exercise: <b>" . htmlspecialchars($exercise['name'], ENT_QUOTES, 'UTF-8') . "</b>";
 $navColor = "green";
+$styles = ["<link rel='stylesheet' href='/css/pages/fulfillments.css'>"];
 
 ob_start();
 ?>
@@ -21,7 +22,6 @@ ob_start();
         <?php foreach ($fulfillments as $fulfillment) : ?>
         <tr>
 
-            <td><a class="icon text-decoration-none" href="/exercises/29/fulfillments/376"><?= $key ?></a></td>
                 <?php foreach ($formattedAnswer as $item) :?>
                     <?php if (strlen($item) == 0) : ?>
                     <td class="svg" class="icon" >
