@@ -21,7 +21,7 @@ ob_start();
                         <?php
                         foreach ($exercises_building as $exercise) : ?>
                             <tr>
-                                <td class="text-section"><?= $exercise['name'] ?></td>
+                                <td class="text-section"><?= htmlspecialchars($exercise['name'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td class="icon-section">
 
                                     <?php
@@ -54,7 +54,7 @@ ob_start();
                         <?php
                         foreach ($exercises_answering as $exercise) : ?>
                             <tr>
-                                <td class="text-section"><?= $exercise['name'] ?></td>
+                                <td class="text-section"><?= htmlspecialchars($exercise['name'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td class="icon-section">
                                     <a title="Show results" href="/exercises/<?= $exercise['id'] ?>/results"
                                        class="fa-solid fa-chart-column"></a>
@@ -80,7 +80,7 @@ ob_start();
                         <?php
                         foreach ($exercises_closed as $exercise) : ?>
                             <tr>
-                                <td class="text-section"><?= $exercise['name'] ?></td>
+                                <td class="text-section"><?= htmlspecialchars($exercise['name'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td class="icon-section">
                                     <a title="Show results" href="/exercises/<?= $exercise['id'] ?>/results"
                                        class="fa-solid fa-chart-column"></a>
