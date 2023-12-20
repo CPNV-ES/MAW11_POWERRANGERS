@@ -13,7 +13,7 @@ ob_start();
     <form method="POST">
         <?php
         foreach ($fields as $field) : ?>
-            <label><?= $field->name ?></label>
+            <label><?= htmlspecialchars($field->name, ENT_QUOTES, 'UTF-8')  ?></label>
 
             <?php
             switch ($field->length) {
