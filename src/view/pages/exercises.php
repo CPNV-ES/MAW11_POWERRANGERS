@@ -12,7 +12,7 @@ ob_start();
         <?php
         foreach ($exercises as $exercise) : ?>
             <li class='card'>
-                <span class='card-title'><?= $exercise['name'] ?></span>
+                <span class='card-title'><?= htmlspecialchars($exercise['name'], ENT_QUOTES, 'UTF-8') ?></span>
                 <a href="/exercises/<?= $exercise['id'] ?>/answer" class='btn bg-purple'>take it</a>
             </li>
             <?php

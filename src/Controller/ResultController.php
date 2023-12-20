@@ -7,13 +7,14 @@ use App\Model\Service\Exercises;
 use App\Model\Service\Fields;
 use App\Model\Service\Fulfillments;
 use Exception;
+
 use function PHPUnit\Framework\isEmpty;
 
 class ResultController extends Controller
 {
-    public function index() :void
+    public function index(): void
     {
-        if (!is_numeric($this->variables['exerciseId'])){
+        if (!is_numeric($this->variables['exerciseId'])) {
             throw new Exception("exerciseID should be an integer");
         }
 
