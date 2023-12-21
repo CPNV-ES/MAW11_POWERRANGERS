@@ -3,10 +3,11 @@
 <?php
 
 //initialize page variables
-$title = "Exercises";
+$title = "Fields";
 $navTitle = "New exercise";
 $navColor = "orange";
-$navTitle = "Exercise: " . "<strong>" . $exercise["name"] . "</strong>";
+$navTitle = "Exercise: " . "<strong>" . htmlspecialchars($exercise['name'], ENT_QUOTES, 'UTF-8') . "</strong>";
+$styles = array("<link rel='stylesheet' href='/css/pages/fields.css'>");
 
 ob_start();
 ?>
@@ -28,7 +29,7 @@ ob_start();
                 <tbody>
                 <?php foreach ($fields as $field) : ?>
                     <tr>
-                        <td class="align-middle"><?= $field->name; ?></td>
+                        <td class="fieldsTitle align-middle"><?= htmlspecialchars($field->name, ENT_QUOTES, 'UTF-8') ?></td>
                         <td class="text-nowrap align-middle"><?= $field->type; ?></td>
                         <td class="align-middle">
                             <a

@@ -5,4 +5,20 @@ dd, dt {
 
 dd {
     margin-left: 40px;
+    word-wrap: break-word;
+}
+
+
+
+.table thead td, .table th {
+    border-color: transparent;
+}
+
+a {
+    color: var(--purple);
+}
+
+a:hover {
+    color: var(--gray);
+    text-decoration: none;
 }
