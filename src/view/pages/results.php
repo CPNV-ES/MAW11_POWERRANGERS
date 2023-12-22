@@ -13,7 +13,7 @@ ob_start();
         <tr>
             <th scope="col" >Take</th>
             <?php foreach ($fields as $field) : ?>
-                <th scope="col"><a class="icon text-decoration-none " href="/exercises/<?= $this->variables['exerciseId'] ?>/results/<?= $field->id ?>"><?= $field->name ?></a></th>
+                <th scope="col"><a class="icon text-decoration-none " href="/exercises/<?= $this->variables['exerciseId'] ?>/results/<?= $field->id ?>"><?= htmlspecialchars($field->name, ENT_QUOTES, 'UTF-8') ?></a></th>
             <?php endforeach; ?>
         </tr>
         </thead>
