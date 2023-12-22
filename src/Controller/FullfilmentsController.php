@@ -13,6 +13,10 @@ class FullfilmentsController extends Controller
 {
     public function create(): void
     {
+        if (!is_numeric($this->variables['exerciseId'])) {
+            throw new Exception("exerciseID should be an integer", 400);
+        }
+
         $exerciseId = $this->variables['exerciseId'];
 
         foreach ($_POST as $field => $value) {
@@ -28,6 +32,10 @@ class FullfilmentsController extends Controller
             Answers::createAnswer($value, $fulfillment, $field);
         }
 
+        if (empty($fulfillment)) {
+            throw new Exception("Cannot found this exercise", 404);
+        }
+
         header("Location: /exercises/" . $exerciseId . "/answer/" . $fulfillment . "/edit");
     }
 
@@ -36,11 +44,20 @@ class FullfilmentsController extends Controller
      */
     public function show(): void
     {
+        if (!is_numeric($this->variables['fulfillmentsId']) || !is_numeric($this->variables['exerciseId'])) {
+            throw new Exception("exerciseID should be an integer", 400);
+        }
+
         $fulfillmentId = $this->variables['fulfillmentsId'];
         $fulfillment = Fulfillments::getFulfillmentById($fulfillmentId);
         $exerciseId = $this->variables['exerciseId'];
         $exercise = Exercises::getExerciseById($exerciseId);
         $answers = Answers::getAnswersByFulfillment($fulfillmentId);
+
+        if (empty($fulfillment) || empty($exercise)) {
+            throw new Exception("Cannot found this exercise", 404);
+        }
+
         require_once SOURCE_DIR . "/view/pages/fulfillments.php";
     }
 }
