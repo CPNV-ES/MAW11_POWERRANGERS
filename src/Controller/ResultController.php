@@ -15,7 +15,7 @@ class ResultController extends Controller
     public function index(): void
     {
         if (!is_numeric($this->variables['exerciseId'])) {
-            throw new Exception("exerciseID should be an integer");
+            throw new Exception("exerciseID should be an integer", 400);
         }
 
         $fulfillments = Fulfillments::getFulfillmentsByExerciseId($this->variables['exerciseId']);
@@ -26,7 +26,7 @@ class ResultController extends Controller
         $exercise = Exercises::getExerciseById($this->variables['exerciseId']);
 
         if (empty($exercise)) {
-            throw new Exception("Cannot found this exercise");
+            throw new Exception("Cannot found this exercise", 404);
         }
 
         //sort the array fields to desc order of id

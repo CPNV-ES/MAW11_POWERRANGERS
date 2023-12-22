@@ -1,6 +1,6 @@
 <?php
 
-$title = "400";
+$title = http_response_code();
 $navColor = "red";
 //initialize page variables
 $styles = ["<link rel='stylesheet' href='/css/pages/error.css'>"];
@@ -8,8 +8,8 @@ $styles = ["<link rel='stylesheet' href='/css/pages/error.css'>"];
 ob_start();
 ?>
 
-    <h1>400</h1>
-    <span>Oops! It looks like the request parameters isn't right.</span>
+    <h1><?=http_response_code() ?></h1>
+    <span><?=$this->variables["errorMessage"] ?></span>
 
 <?php
 $content = ob_get_clean();

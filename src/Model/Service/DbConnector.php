@@ -2,6 +2,7 @@
 
 namespace App\Model\Service;
 
+use Exception;
 use PDO;
 
 /**
@@ -43,9 +44,16 @@ class DbConnector
      */
     public function query(string $request, array $values = []): false|array
     {
-        $sth = $this->db->prepare($request);
-        $sth->execute($values);
-        return $sth->fetchAll(PDO::FETCH_CLASS);
+        try
+        {
+            $sth = $this->db->prepare($request);
+            $sth->execute($values);
+            return $sth->fetchAll(PDO::FETCH_CLASS);
+        }catch (Exception)
+        {
+            throw new Exception("We have a error with a database.", 500);
+        }
+
     }
 
     /**
@@ -57,8 +65,15 @@ class DbConnector
      */
     public function queryReturnId(string $request, array $values = []): int
     {
-        $sth = $this->db->prepare($request);
-        $sth->execute($values);
-        return $this->db->lastInsertId();
+        try
+        {
+            $sth = $this->db->prepare($request);
+            $sth->execute($values);
+            return $this->db->lastInsertId();
+        } catch (Exception)
+        {
+            throw new Exception("We have a error with a database.", 500);
+        }
+
     }
 }
