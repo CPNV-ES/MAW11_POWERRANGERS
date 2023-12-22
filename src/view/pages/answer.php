@@ -19,13 +19,13 @@ ob_start();
                 <?php
                 switch ($field->length) {
                     case FIELD_SINGLE_LINE:
-                        echo '<input type="text" name=' . $field->id . ' value="' . $field->value . '">';
+                        echo '<input maxlength="255" type="text" name=' . $field->id . ' value="' . $field->value . '">';
                         break;
                     case FIELD_LIST_OF_SINGLE_LINE:
-                        echo '<textarea name=' . $field->id . '>' . $field->value . '</textarea>';
+                        echo '<textarea maxlength="255" name=' . $field->id . '>' . $field->value . '</textarea>';
                         break;
                     case FIELD_MULTI_LINE:
-                        echo '<textarea name=' . $field->id . '>' . $field->value . '</textarea>';
+                        echo '<textarea maxlength="255" name=' . $field->id . '>' . $field->value . '</textarea>';
                         break;
                     default:
                         echo '<input type="text" name=' . $field->id . ' value="' . $field->value . '">';

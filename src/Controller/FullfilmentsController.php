@@ -7,12 +7,22 @@ use App\Model\Service\Exercises;
 use App\Model\Service\Fulfillments;
 use Exception;
 
+use function PHPUnit\Framework\isEmpty;
+
 class FullfilmentsController extends Controller
 {
-    public function create() : void
+    public function create(): void
     {
-        $fulfillment = Fulfillments::createFulfillment();
         $exerciseId = $this->variables['exerciseId'];
+
+        foreach ($_POST as $field => $value) {
+            if (strlen($value) > 255) {
+                header("Location: /exercises/" . $exerciseId . "/answer");
+                return;
+            }
+        }
+
+        $fulfillment = Fulfillments::createFulfillment();
 
         foreach ($_POST as $field => $value) {
             Answers::createAnswer($value, $fulfillment, $field);
@@ -24,7 +34,7 @@ class FullfilmentsController extends Controller
     /**
      * @throws Exception
      */
-    public function show() : void
+    public function show(): void
     {
         $fulfillmentId = $this->variables['fulfillmentsId'];
         $fulfillment = Fulfillments::getFulfillmentById($fulfillmentId);
@@ -33,5 +43,4 @@ class FullfilmentsController extends Controller
         $answers = Answers::getAnswersByFulfillment($fulfillmentId);
         require_once SOURCE_DIR . "/view/pages/fulfillments.php";
     }
-
 }
