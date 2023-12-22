@@ -6,6 +6,6 @@ class ErrorController extends Controller
 {
     public function index(): void
     {
-        $this->view("errors/".http_response_code());
+        require_once SOURCE_DIR . "/view/pages/error.php";
     }
 }

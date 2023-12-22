@@ -4,8 +4,7 @@ namespace App\controller;
 
 use App\Model\Service\Exercises;
 use App\Model\Service\Fields;
-
-use function PHPUnit\Framework\throwException;
+use Exception;
 
 class ExercisesStatusController extends Controller
 {
@@ -16,6 +15,9 @@ class ExercisesStatusController extends Controller
         parent::__construct($variables);
     }
 
+    /**
+     * @throws Exception
+     */
     public function update()
     {
         $exerciseId = $this->variables['exerciseId'];
@@ -28,7 +30,7 @@ class ExercisesStatusController extends Controller
         } elseif ($fieldsCount == 0) {
             header("Location: /exercises/" . $exerciseId . "/fields");
         } else {
-            throwException('You cannot update this exercise status.');
+            throw new Exception('You cannot update this exercise status', 403);
         }
 
 

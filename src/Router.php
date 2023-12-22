@@ -55,7 +55,7 @@ class Router
         foreach ($this->routes as $route) {
             if ($route->getRoute() == $routeRequest && $route->getMethod() == $methodRequest) {
                 //if route exists, throw exception
-                throw new Exception("Route already exists");
+                throw new Exception("Route already exists", 409);
             }
         }
         //if route doesn't exist, create new route object and add to routes array
