@@ -1,6 +1,6 @@
 <?php
 
-namespace App\controller;
+namespace App\Controller;
 
 use App\Model\Service\Exercises;
 use App\Model\Service\Fields;
@@ -10,16 +10,25 @@ class ExercisesStatusController extends Controller
 {
     protected array $variables;
 
+    /**
+     *
+     * @param $variables
+     */
     public function __construct($variables = array())
     {
         parent::__construct($variables);
     }
 
     /**
+     * Update an exercise status
      * @throws Exception
      */
-    public function update()
+    public function update(): void
     {
+        if (!is_numeric($this->variables['exerciseId'])) {
+            throw new Exception("exerciseID should be an integer", 400);
+        }
+
         $exerciseId = $this->variables['exerciseId'];
         $status = $_REQUEST['status'];
 
@@ -32,8 +41,6 @@ class ExercisesStatusController extends Controller
         } else {
             throw new Exception('You cannot update this exercise status', 403);
         }
-
-
 
         Exercises::updateExerciseStatus($exerciseId, $newStatus);
         header("Location: /manage");

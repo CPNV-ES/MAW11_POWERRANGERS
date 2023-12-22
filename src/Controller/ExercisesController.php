@@ -3,16 +3,26 @@
 namespace App\Controller;
 
 use App\Model\Service\Exercises;
+use Exception;
 
 class ExercisesController extends Controller
 {
+    /**
+     * Constructor of the ExeciseControler class
+     * @param $variables - all variables passes through URL array
+     */
     public function __construct($variables = array())
     {
         parent::__construct($variables);
     }
-    public function index()
-    {
 
+    /**
+     * Show the exercise page by getting all exercises
+     * @return void
+     * @throws Exception
+     */
+    public function index(): void
+    {
         $exercises = [];
 
         foreach (Exercises::getAllExercises() as $exercise) {
@@ -24,7 +34,12 @@ class ExercisesController extends Controller
         require_once SOURCE_DIR . "/view/pages/exercises.php";
     }
 
-    public function store()
+    /**
+     * Store a new exercise
+     * @return void
+     * @throws Exception
+     */
+    public function store(): void
     {
         $name = $_POST["ex-name"];
 
@@ -42,8 +57,16 @@ class ExercisesController extends Controller
         }
     }
 
-    public function destroy()
+    /**
+     * Destroy an exercise
+     * @return void
+     * @throws Exception
+     */
+    public function destroy(): void
     {
+        if (!is_numeric($this->variables['exerciseId'])) {
+            throw new Exception("exerciseID should be an integer", 400);
+        }
 
         Exercises::deleteExercise(intval($this->variables['exerciseId']));
         header("Location: /manage");

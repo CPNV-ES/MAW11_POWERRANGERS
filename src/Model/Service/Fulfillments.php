@@ -2,6 +2,8 @@
 
 namespace App\Model\Service;
 
+use Exception;
+
 class Fulfillments
 {
     /**
@@ -10,7 +12,7 @@ class Fulfillments
      */
     private static function DBConnection(): DbConnector
     {
-        return $bd = new DbConnector(
+        return new DbConnector(
             $_ENV['DATABASE_HOST'],
             $_ENV['DATABASE_NAME'],
             $_ENV['DATABASE_USERNAME'],
@@ -21,6 +23,7 @@ class Fulfillments
     /**
      * Used to create a fulfillment
      * @return int - the created id item
+     * @throws Exception
      */
     public static function createFulfillment(): int
     {
@@ -35,7 +38,13 @@ class Fulfillments
         return $bd->queryReturnId($query, $queryParams);
     }
 
-    public static function getFulfillmentsByExerciseId($exerciseId) : array
+    /**
+     * Used to get fulillments by exercise id
+     * @param int $exerciseId
+     * @return array
+     * @throws Exception
+     */
+    public static function getFulfillmentsByExerciseId(int $exerciseId): array
     {
         $bd = self::DBConnection();
 
@@ -51,7 +60,13 @@ class Fulfillments
         $queryParams = [$exerciseId];
         return $bd->query($query, $queryParams);
     }
-  
+
+    /**
+     * Used to get fulliments by id
+     * @param int $fulfillmentId
+     * @return array
+     * @throws Exception
+     */
     public static function getFulfillmentById(int $fulfillmentId): array
     {
         $bd = self::DBConnection();

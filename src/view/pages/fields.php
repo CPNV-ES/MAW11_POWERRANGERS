@@ -36,7 +36,7 @@ ob_start();
                                title="Edit"
                                class="icon fa-solid fa-pen-to-square"
                                rel="nofollow"
-                               data- ="GET"
+                               data-method ="PUT"
                                href="/exercises/<?= $this->variables['exerciseId']; ?>/fields/<?= $field->id ?>"
                             >
 
@@ -46,7 +46,7 @@ ob_start();
                                title="Destroy"
                                class="icon"
                                rel="nofollow"
-                               data-method="delete"
+                               data-method="DELETE"
                                href="/exercises/<?= $this->variables['exerciseId']; ?>/fields/<?= $field->id ?>/delete"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-trash-fill" viewBox="0 0 16 16" fill="currentColor">

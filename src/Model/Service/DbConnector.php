@@ -36,24 +36,21 @@ class DbConnector
     }
 
     /**
-     * Prepare and execute a query
-     *
+     * * Prepare and execute a query
      * @param string $request requests to execute without values
      * @param array $values values of the insertion default value []
      * @return false|array
+     * @throws Exception
      */
     public function query(string $request, array $values = []): false|array
     {
-        try
-        {
+        try {
             $sth = $this->db->prepare($request);
             $sth->execute($values);
             return $sth->fetchAll(PDO::FETCH_CLASS);
-        }catch (Exception)
-        {
+        } catch (Exception) {
             throw new Exception("An error has occurred on our side. Please check your request or try later.", 500);
         }
-
     }
 
     /**
@@ -62,16 +59,15 @@ class DbConnector
      * @param string $request requests to execute without values
      * @param array $values values of the insertion default value []
      * @return int value of the query return
+     * @throws Exception
      */
     public function queryReturnId(string $request, array $values = []): int
     {
-        try
-        {
+        try {
             $sth = $this->db->prepare($request);
             $sth->execute($values);
             return $this->db->lastInsertId();
-        } catch (Exception)
-        {
+        } catch (Exception) {
             throw new Exception("An error has occurred on our side. Please check your request or try later.", 500);
         }
     }

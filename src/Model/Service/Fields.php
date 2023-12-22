@@ -2,6 +2,8 @@
 
 namespace App\Model\Service;
 
+use Exception;
+
 class Fields
 {
     /**
@@ -10,7 +12,7 @@ class Fields
      */
     private static function DBConnection(): DbConnector
     {
-        return $bd = new DbConnector(
+        return new DbConnector(
             $_ENV['DATABASE_HOST'],
             $_ENV['DATABASE_NAME'],
             $_ENV['DATABASE_USERNAME'],
@@ -22,6 +24,7 @@ class Fields
      * Get fields by exercise
      * @param int $exerciseId
      * @return array - array of fields
+     * @throws Exception
      */
     public static function getFieldsByExercise(int $exerciseId): array
     {
@@ -53,8 +56,9 @@ class Fields
 
     /**
      * Get fields by exercise
-     * @param int $exerciseId
+     * @param int $fieldId
      * @return array - array of fields
+     * @throws Exception
      */
     public static function getFieldsById(int $fieldId): array
     {
@@ -93,6 +97,7 @@ class Fields
      * @param $fieldTypeId int type id associated
      * @param $exerciseId int exercise id associated
      * @return int associated
+     * @throws Exception
      */
     public static function createField(string $fieldName, int $fieldTypeId, int $exerciseId): int
     {
@@ -114,8 +119,11 @@ class Fields
 
     /**
      * Used to delete a field
-     * @param $id int
-     * @return void
+     * @param string $fieldName
+     * @param int $fieldTypeId
+     * @param int $fieldId
+     * @return int
+     * @throws Exception
      */
     public static function updateField(string $fieldName, int $fieldTypeId, int $fieldId): int
     {
@@ -136,16 +144,13 @@ class Fields
      * Used to delete a field
      * @param $id int
      * @return void
+     * @throws Exception
      */
     public static function deleteField(int $id): void
     {
         $bd = self::DBConnection();
 
-        $query =
-            "
-            DELETE FROM fields 
-            WHERE id = :id
-        ";
+        $query = "DELETE FROM fields WHERE id = :id";
         $queryParams["id"] = $id;
         $bd->Query($query, $queryParams);
     }

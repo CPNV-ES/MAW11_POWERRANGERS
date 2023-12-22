@@ -66,12 +66,12 @@ $routes[] = new Route(
 );
 $routes[] = new Route(
     "/exercises/{exerciseId}/fields/{fieldId}/delete",
-    "GET",
+    "DELETE",
     [FieldsController::class, "destroy"]
 );
 $routes[] = new Route(
     "/exercises/{exerciseId}/fields/{fieldId}",
-    "GET",
+    "PUT",
     [FieldsController::class, "edit"]
 );
 $routes[] = new Route(
@@ -90,5 +90,5 @@ try {
     $renderer = new Renderer($handler->getHandlerResponse(), $router->getVariables());
 } catch (Exception $e) {
     $variables["errorMessage"] = $e->getMessage();
-    $renderer = new Renderer(new HandlerResponse([ErrorController::class, "index"],$e->getCode()), $variables);
+    $renderer = new Renderer(new HandlerResponse([ErrorController::class, "index"], $e->getCode()), $variables);
 }

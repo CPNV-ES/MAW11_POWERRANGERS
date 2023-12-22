@@ -9,6 +9,11 @@ use Exception;
 
 class FieldsController extends Controller
 {
+    /**
+     * Show the filed page by getting all fields information
+     * @return void
+     * @throws Exception
+     */
     public function index()
     {
         if (!is_numeric($this->variables['exerciseId'])) {
@@ -26,7 +31,12 @@ class FieldsController extends Controller
         require_once SOURCE_DIR . "/view/pages/fields.php";
     }
 
-    public function store()
+    /**
+     * Creating a new field
+     * @return void
+     * @throws Exception
+     */
+    public function store(): void
     {
         if (!is_numeric($this->variables['exerciseId'])) {
             throw new Exception("exerciseID should be an integer", 400);
@@ -50,13 +60,23 @@ class FieldsController extends Controller
         }
     }
 
-    public function destroy()
+    /**
+     * Destroy a field
+     * @return void
+     * @throws Exception
+     */
+    public function destroy(): void
     {
         Fields::deleteField(intval($this->variables['fieldId']));
         header("Location: /exercises/" . $this->variables['exerciseId'] . "/fields");
     }
 
-    public function edit()
+    /**
+     * Edit a field
+     * @return void
+     * @throws Exception
+     */
+    public function edit(): void
     {
         if (!is_numeric($this->variables['exerciseId']) || !is_numeric($this->variables['fieldId'])) {
             throw new Exception("exerciseID should be an integer", 400);
@@ -73,8 +93,17 @@ class FieldsController extends Controller
         require_once SOURCE_DIR . "/view/pages/fieldsUpdate.php";
     }
 
-    public function update()
+    /**
+     * Update a field
+     * @return void
+     * @throws Exception
+     */
+    public function update(): void
     {
+        if (!is_numeric($this->variables['exerciseId']) || !is_numeric($this->variables['fieldId'])) {
+            throw new Exception("exerciseID should be an integer", 400);
+        }
+
         $fieldName = $_POST["name"];
         $fieldType = $_POST["fieldType"];
         $fieldExercise = $this->variables['exerciseId'];

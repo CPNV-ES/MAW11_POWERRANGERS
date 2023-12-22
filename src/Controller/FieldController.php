@@ -5,13 +5,16 @@ namespace App\Controller;
 use App\Model\Service\Answers;
 use App\Model\Service\Exercises;
 use App\Model\Service\Fields;
-use App\Model\Service\FieldTypes;
 use App\Model\Service\Fulfillments;
 use Exception;
 
-
 class FieldController extends Controller
 {
+    /**
+     * Show the fields results of an answer
+     * @return void
+     * @throws Exception
+     */
     public function index(): void
     {
         if (!is_numeric($this->variables['fieldId'])) {
@@ -35,5 +38,4 @@ class FieldController extends Controller
         $fulfillments = $result;
         require_once SOURCE_DIR . "/view/pages/fieldsResult.php";
     }
-
 }

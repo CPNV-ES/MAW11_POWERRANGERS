@@ -8,10 +8,13 @@ use App\Model\Service\Fields;
 use App\Model\Service\Fulfillments;
 use Exception;
 
-use function PHPUnit\Framework\isEmpty;
-
 class ResultController extends Controller
 {
+    /**
+     * Show the result page with filtered variables
+     * @return void
+     * @throws Exception
+     */
     public function index(): void
     {
         if (!is_numeric($this->variables['exerciseId'])) {

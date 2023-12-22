@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\Service\Exercises;
 use App\Model\Service\Fields;
+use Exception;
 
 class ManageController extends Controller
 {
@@ -14,7 +15,12 @@ class ManageController extends Controller
         parent::__construct($variables);
     }
 
-    public function index()
+    /**
+     * Show the manage page with all necessary variables
+     * @return void
+     * @throws Exception
+     */
+    public function index(): void
     {
         $exercises = $this->addFieldCountOnExercises(Exercises::getAllExercises());
 
@@ -25,7 +31,13 @@ class ManageController extends Controller
         require_once SOURCE_DIR . "/view/pages/manage.php";
     }
 
-    private function filterExercises($exercises, $status)
+    /**
+     * Filtering Exercise by status
+     * @param array $exercises
+     * @param string $status
+     * @return array
+     */
+    private function filterExercises(array $exercises, string $status): array
     {
         $exercises_filtered = [];
         foreach ($exercises as $exercise) {
@@ -36,7 +48,13 @@ class ManageController extends Controller
         return $exercises_filtered;
     }
 
-    private function addFieldCountOnExercises($exercises)
+    /**
+     * Adding field count on exercise
+     * @param $exercises
+     * @return array
+     * @throws Exception
+     */
+    private function addFieldCountOnExercises($exercises): array
     {
         $result = [];
         foreach ($exercises as $exercise) {

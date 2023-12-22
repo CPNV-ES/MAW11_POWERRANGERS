@@ -7,10 +7,13 @@ use App\Model\Service\Exercises;
 use App\Model\Service\Fulfillments;
 use Exception;
 
-use function PHPUnit\Framework\isEmpty;
-
 class FullfilmentsController extends Controller
 {
+    /**
+     * Create a fulfillment
+     * @return void
+     * @throws Exception
+     */
     public function create(): void
     {
         if (!is_numeric($this->variables['exerciseId'])) {
@@ -40,6 +43,7 @@ class FullfilmentsController extends Controller
     }
 
     /**
+     * Show a fulfillment
      * @throws Exception
      */
     public function show(): void

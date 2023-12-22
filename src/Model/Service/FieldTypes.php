@@ -2,6 +2,8 @@
 
 namespace App\Model\Service;
 
+use Exception;
+
 class FieldTypes
 {
     /**
@@ -10,7 +12,7 @@ class FieldTypes
      */
     private static function DBConnection(): DbConnector
     {
-        return $bd = new DbConnector(
+        return new DbConnector(
             $_ENV['DATABASE_HOST'],
             $_ENV['DATABASE_NAME'],
             $_ENV['DATABASE_USERNAME'],
@@ -21,6 +23,7 @@ class FieldTypes
     /**
      * Used to get fields types
      * @return array
+     * @throws Exception
      */
     public static function getFieldsTypes(): array
     {

@@ -9,7 +9,12 @@ use Exception;
 
 class AnswersController extends Controller
 {
-    public function edit()
+    /**
+     * Edit an answer
+     * @return void
+     * @throws Exception
+     */
+    public function edit(): void
     {
         if (!is_numeric($this->variables['exerciseId'])) {
             throw new Exception("exerciseID should be an integer", 400);
@@ -26,8 +31,17 @@ class AnswersController extends Controller
         require_once SOURCE_DIR . "/view/pages/answer.php";
     }
 
-    public function update()
+    /**
+     * Update an answer
+     * @return void
+     * @throws Exception
+     */
+    public function update(): void
     {
+        if (!is_numeric($this->variables['exerciseId'])) {
+            throw new Exception("exerciseID should be an integer", 400);
+        }
+
         $exerciseId = $this->variables['exerciseId'];
         $answerId = $this->variables['answerId'];
 
@@ -37,11 +51,16 @@ class AnswersController extends Controller
             }
         }
 
-// load view for answers
+        // load view for answers
         header("Location: /exercises/" . $exerciseId . "/answer/" . $answerId . "/edit");
     }
 
-    public function create()
+    /**
+     * Create a new answer
+     * @return void
+     * @throws Exception
+     */
+    public function create(): void
     {
         if (!is_numeric($this->variables['exerciseId'])) {
             throw new Exception("exerciseID should be an integer", 400);

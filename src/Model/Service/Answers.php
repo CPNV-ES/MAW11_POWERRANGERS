@@ -2,6 +2,8 @@
 
 namespace App\Model\Service;
 
+use Exception;
+
 class Answers
 {
     /**
@@ -10,7 +12,7 @@ class Answers
      */
     private static function DBConnection(): DbConnector
     {
-        return $bd = new DbConnector(
+        return new DbConnector(
             $_ENV['DATABASE_HOST'],
             $_ENV['DATABASE_NAME'],
             $_ENV['DATABASE_USERNAME'],
@@ -19,11 +21,12 @@ class Answers
     }
 
     /**
-     * Used to create an answer
-     * @param $value
-     * @param $fulfillment
-     * @param $field
+     * Used to create answer
+     * @param string $value
+     * @param int $fulfillment
+     * @param int $field
      * @return void
+     * @throws Exception
      */
     public static function createAnswer(string $value, int $fulfillment, int $field): void
     {
@@ -44,10 +47,11 @@ class Answers
     }
 
     /**
-     * Used to update answer
-     * @param $value
-     * @param $fieldId
+     * Used to update an answer
+     * @param string $value
+     * @param int $fieldId
      * @return void
+     * @throws Exception
      */
     public static function updateAnswer(string $value, int $fieldId): void
     {
@@ -63,9 +67,10 @@ class Answers
     }
 
     /**
-     * Used to get all answer by fulfillment id
+     * Used to get answer by fulfillment
      * @param int $answerId
      * @return array
+     * @throws Exception
      */
     public static function getAnswersByFulfillment(int $answerId): array
     {
@@ -92,6 +97,10 @@ class Answers
         return $bd->query($query, $queryParams);
     }
 
+    /**
+     * Use dto get Answers by fields
+     * @throws Exception
+     */
     public static function getAnswersByField(int $fieldId): array
     {
         $bd = self::DBConnection();
