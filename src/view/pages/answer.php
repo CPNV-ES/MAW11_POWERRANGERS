@@ -14,7 +14,7 @@ ob_start();
         <form method="POST">
             <?php
             foreach ($fields as $field) : ?>
-                <label><?= htmlspecialchars($field->name, ENT_QUOTES, 'UTF-8') ?></label>
+                <label class="question"><?= htmlspecialchars($field->name, ENT_QUOTES, 'UTF-8') ?></label>
 
                 <?php
                 switch ($field->length) {

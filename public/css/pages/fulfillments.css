@@ -9,6 +9,7 @@ dd {
 }
 
 th{
+    max-width: 600px;
     word-wrap: break-word
 }
 

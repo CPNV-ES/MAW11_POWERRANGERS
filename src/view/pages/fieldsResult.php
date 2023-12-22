@@ -12,7 +12,7 @@ $styles = ["<link rel='stylesheet' href='/css/pages/fieldsresult.css'>"];
 ob_start();
 ?>
 <div class="container">
-    <h1><?= htmlspecialchars($fields["name"], ENT_QUOTES, 'UTF-8') ?></h1>
+    <h1 class="question"><?= htmlspecialchars($fields["name"], ENT_QUOTES, 'UTF-8') ?></h1>
 
     <table>
         <tr>
