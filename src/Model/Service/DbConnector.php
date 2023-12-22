@@ -51,7 +51,7 @@ class DbConnector
             return $sth->fetchAll(PDO::FETCH_CLASS);
         }catch (Exception)
         {
-            throw new Exception("We have a error with a database.", 500);
+            throw new Exception("An error has occurred on our side. Please check your request or try later.", 500);
         }
 
     }
@@ -72,8 +72,7 @@ class DbConnector
             return $this->db->lastInsertId();
         } catch (Exception)
         {
-            throw new Exception("We have a error with a database.", 500);
+            throw new Exception("An error has occurred on our side. Please check your request or try later.", 500);
         }
-
     }
 }
