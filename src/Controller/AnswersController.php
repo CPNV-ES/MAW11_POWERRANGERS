@@ -23,7 +23,9 @@ class AnswersController extends Controller
         $answerId = $this->variables['answerId'];
 
         foreach ($_POST as $field => $value) {
-            Answers::updateAnswer($value, $field);
+            if (strlen($value) <= 255) {
+                Answers::updateAnswer($value, $field);
+            }
         }
 
 // load view for answers
