@@ -109,7 +109,7 @@ class Router
             }
         }
         if (!isset($this->routerResponse)) {
-            $this->routerResponse = new RouterResponse([ErrorController::class, "errors"], 404, $this->variables);
+            $this->routerResponse = new RouterResponse([ErrorController::class, "index"], 404, $this->variables);
         }
     }
 
