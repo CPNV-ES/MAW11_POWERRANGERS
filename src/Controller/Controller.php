@@ -10,7 +10,7 @@ class Controller
      * Constructor of the Controller class
      * @param array $variables
      */
-    public function __construct(array $variables = array())
+    public function __construct(array $variables = [])
     {
         $this->variables = $variables;
     }

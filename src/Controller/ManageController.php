@@ -10,7 +10,7 @@ class ManageController extends Controller
 {
     protected array $variables;
 
-    public function __construct($variables = array())
+    public function __construct($variables = [])
     {
         parent::__construct($variables);
     }

@@ -11,7 +11,7 @@ class ExercisesController extends Controller
      * Constructor of the ExeciseControler class
      * @param $variables - all variables passes through URL array
      */
-    public function __construct($variables = array())
+    public function __construct($variables = [])
     {
         parent::__construct($variables);
     }

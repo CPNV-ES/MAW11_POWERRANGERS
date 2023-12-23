@@ -3,7 +3,7 @@
 //initialize page variables
 $title = "Manage exercises";
 $navColor = "green";
-$styles = array("<link rel='stylesheet' href='/css/pages/manage.css'>");
+$styles = ["<link rel='stylesheet' href='/css/pages/manage.css'>"];
 
 ob_start();
 ?>
