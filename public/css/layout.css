@@ -1,0 +1,183 @@
+:root {
+    --purple: #9b4dca;
+    --orange: #e0a458;
+    --green: #419d78;
+    --gray: #606c76;
+
+    --screen-lg: 1100px;
+}
+
+body {
+    color: #606c76;
+    font-family: sans-serif;
+}
+
+ul,
+li {
+    all: unset;
+}
+
+/* Background sets */
+.bg-purple {
+    background-color: var(--purple);
+}
+
+.bg-orange {
+    background-color: var(--orange);
+}
+
+.bg-green {
+    background-color: var(--green);
+}
+
+.bg-red {
+    background-color: red;
+}
+
+/* Default spacings */
+nav div,
+.page-container {
+    width: var(--screen-lg);
+}
+
+nav div {
+    padding: 0 10px;
+}
+
+nav span {
+    color: white;
+    padding-left: 15.5px;
+    vertical-align: middle;
+    letter-spacing: 0.18px;
+}
+
+.pt-nav {
+    padding-top: 70px;
+}
+
+/* Icons */
+#logo {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.icon, .icon:visited {
+    color: var(--purple);
+}
+
+.icon:hover, .icon:focus {
+    color: var(--gray);
+}
+
+/* Buttons */
+
+a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+    color: white
+}
+
+.btn {
+    color: white;
+    font-weight: 700;
+    font-size: 0.675rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: white;
+    background-color: var(--gray);
+}
+
+.btn:focus {
+    box-shadow: none;
+    background-color: var(--gray);
+}
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+input[type=text], textarea {
+    border-radius: 5px;
+    height: 2.2rem;
+    padding-left: 1rem;
+    border: 1px solid #d1d1d1;
+}
+
+textarea {
+    height: 4.4rem;
+}
+
+input[type=text]:focus, textarea:focus, .form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: var(--purple);
+}
+
+input[type=submit] {
+    margin-top: 1.5rem;
+    width: 12rem;
+}
+
+/* Cards */
+.card-title {
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 23.6px;
+    letter-spacing: 0.2px;
+}
+
+.card {
+    background-color: #eeeeee;
+    border: none;
+    padding: 10px;
+    margin-bottom: 1.25rem;
+}
+
+/* Errors */
+.error-msg {
+    color: red;
+}
+
+.error {
+    outline: 1px solid red;
+}
+
+/* Mobile view */
+@media (max-width: 1100px) {
+    nav div,
+    .page-container {
+        width: 100%;
+    }
+
+    input[type=submit] {
+        width: 100%;
+    }
+
+    .card {
+        border-radius: 0;
+    }
+}
+
+.col-header {
+    text-align: start;
+    font-size: 3rem;
+}
+
+.nav-title a {
+    color: white;
+    text-decoration: none;
+}
+
+.question {
+    word-wrap: break-word;
+}

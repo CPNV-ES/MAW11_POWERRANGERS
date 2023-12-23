@@ -1,0 +1,44 @@
+.take {
+    width: 20%;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.content {
+    max-width: 700px;
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+tbody{
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+a {
+    color: var(--purple);
+    );
+}
+
+a:hover {
+    color: var(--gray);
+    text-decoration: none;
+}
+
+tr {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--gray);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
